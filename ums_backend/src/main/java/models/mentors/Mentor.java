@@ -2,7 +2,7 @@ package models.mentors;
 
 public class Mentor
 {
-    private long id;
+    private Integer id;
     private String name;
     private String surname;
     private String gender;

@@ -2,7 +2,7 @@ package models.interns;
 
 public class Intern
 {
-    private long id;
+    private Integer id;
     private String name;
     private String surname;
     private String gender;
