@@ -17,4 +17,8 @@ public class Intern
     private String gender;
     private String fieldOfWork;
     private Integer cellphoneNumber;
+
+    public Integer getId() {
+        return id;
+    }
 }

@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MentorRepository extends JpaRepository<Mentor, Integer>
 {
+    public Mentor getMentorById(Integer id);
 }

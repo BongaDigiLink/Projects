@@ -2,6 +2,8 @@ package Controllers;
 
 import models.interns.Intern;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import services.InternService;
 
@@ -19,23 +21,26 @@ public class InternController
         this.internService = internService;
     }
 
-    // -------- Get Paths ---
-    @GetMapping("/all-interns/")
-    List<Intern> getAllInterns()
-    {
-        return internService.getAllInterns();
-    }
-
+    // -------------------------------------------- Intern/User Routes ---------------------------------
     @GetMapping(path = "{internId}")
-    public Intern getIntern(@PathVariable("internId") Integer id)
+    public ResponseEntity<Intern> getIntern(@PathVariable("internId") Integer id)
     {
-        return internService.getInternById(id);
+        Intern user = internService.getInternById(id);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    // -------- Post Path ---
     @PostMapping
     public void registerIntern(Intern intern)
     {
         internService.registerIntern(intern);
     }
+
+    @PutMapping("/update-user")
+    public ResponseEntity<Intern> updateIntern(@RequestBody Intern intern)
+    {
+        Intern intern1 = internService.updateIntern(intern);
+
+        return new ResponseEntity<>(intern1, HttpStatus.OK);
+    }
+
 }
