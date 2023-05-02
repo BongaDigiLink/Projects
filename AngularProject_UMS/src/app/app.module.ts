@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
-import { LandingComponent } from './landing/landing.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { HomeComponent } from './home/home.component';
 
@@ -17,7 +16,6 @@ import { HomeComponent } from './home/home.component';
     AppComponent,
     SignInComponent,
     SignUpComponent,
-    LandingComponent,
     UserDetailsComponent,
     HomeComponent
   ],
@@ -29,7 +27,6 @@ import { HomeComponent } from './home/home.component';
       {path: 'signin', component: SignInComponent},
       {path: 'signup', component: SignUpComponent},
       {path: 'user-details', component: UserDetailsComponent},
-      {path: 'landing', component: LandingComponent},
       {path: 'home', component: HomeComponent}
     ])
   ],
