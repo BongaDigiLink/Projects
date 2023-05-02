@@ -1,0 +1,13 @@
+.centered{
+    margin:auto;
+    margin-top: 260px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.redirect-text{
+    font-size: 12px;
+    margin-left: 6px;
+    text-align: center;
+    color: blue;
+}
