@@ -11,7 +11,12 @@ export class UserViewComponent
 
   onClickEdit()
   {
+    if(this.edit === false)
+    {
     this.edit = true;
+    }else{
+      this.edit = false;
+    }
   }
 
 }
