@@ -3,6 +3,7 @@ package za.co.ums_api.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import za.co.ums_api.models.Mentor;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface MentorRepository extends JpaRepository<Mentor, Long>
@@ -14,4 +15,5 @@ public interface MentorRepository extends JpaRepository<Mentor, Long>
 
         return new Mentor();
     }
+
 }

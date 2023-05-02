@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import za.co.ums_api.models.Mentor;
 import za.co.ums_api.repository.MentorRepository;
 
+import java.util.List;
+
 @Service
 public class MentorService {
     private final MentorRepository mentorRepository;
@@ -16,5 +18,15 @@ public class MentorService {
     public Mentor getMentor(Long id)
     {
         return mentorRepository.getMentor(id);
+    }
+
+    public List<Mentor> getMentors()
+    {
+        return mentorRepository.findAll();
+    }
+
+    public List<String> skills()
+    {
+         return "";
     }
 }
