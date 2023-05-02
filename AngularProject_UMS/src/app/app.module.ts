@@ -8,6 +8,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { HomeComponent } from './home/home.component';
+import { UserViewComponent } from './user-view/user-view.component';
 
 @NgModule(
   {
@@ -17,7 +18,8 @@ import { HomeComponent } from './home/home.component';
     SignInComponent,
     SignUpComponent,
     UserDetailsComponent,
-    HomeComponent
+    HomeComponent,
+    UserViewComponent
   ],
   imports: 
   [
@@ -27,7 +29,8 @@ import { HomeComponent } from './home/home.component';
       {path: 'signin', component: SignInComponent},
       {path: 'signup', component: SignUpComponent},
       {path: 'user-details', component: UserDetailsComponent},
-      {path: 'home', component: HomeComponent}
+      {path: 'home', component: HomeComponent},
+      {path: 'user', component: UserViewComponent}
     ])
   ],
   providers: [],

@@ -1,0 +1,11 @@
+.card-user{
+    margin-left: 10px;
+    margin-top: 10px;
+    text-align: left;
+    color: black;
+}
+
+.card-details{
+    font-size: 14px;
+    color: rgb(51, 50, 50);
+}
