@@ -1,4 +1,14 @@
-export class Intern{
+export class Intern
+{
+    username='';
+    name='';
+    surname='';
+    email='';
+    phone='';
+    password='';
+
+
+
     constructor(
         username:string,
         email:string,

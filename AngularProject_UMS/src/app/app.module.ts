@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { UserViewComponent } from './user-view/user-view.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule(
   {
@@ -27,6 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
   imports: 
   [
     HttpClientModule,
+    FormsModule,
     BrowserModule,
     RouterModule.forRoot([
       {path: '', redirectTo : 'home', pathMatch: 'full'},

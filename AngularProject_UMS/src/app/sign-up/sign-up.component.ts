@@ -19,7 +19,7 @@ export class SignUpComponent
   public registerIntern()
   {
     
-    let response = this.registrationService.registration(Intern);
+    let response = this.registrationService.registration(new Intern("@newUser","bonga@mail.com","Bonga","Gougota",56664,"NewPassword0"));
     //response.subscribe((data)=>this.message=data);
   }
 }
