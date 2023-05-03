@@ -12,6 +12,7 @@ public class Intern
     @Id
     @GeneratedValue
     private Long id;
+    private String username;
     private String email;
     private String name;
     private String surname;
@@ -29,8 +30,27 @@ public class Intern
     {
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    //For verification. Only Store Hashed String and Return Hashed string
+    public String getPassword() {
+        return password;
+    }
+
+    //For changing password. Hashed string only.
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     //Default Registration Constructor
-    public Intern(String email, String name, String surname, Integer phone, String password) {
+    public Intern(String username,String email, String name, String surname, Integer phone, String password) {
+        this.username = username;
         this.email = email;
         this.name = name;
         this.surname = surname;

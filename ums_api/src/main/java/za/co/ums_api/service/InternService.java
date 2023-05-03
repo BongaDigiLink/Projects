@@ -15,6 +15,20 @@ public class InternService {
         this.internRepository = internRepository;
     }
 
+    public boolean registerIntern(Intern intern)
+    {
+        Intern user = internRepository.findByUsername(intern.getUsername());
+        if(user != null)
+        {
+            return false;
+
+        }else
+        {
+            internRepository.save(intern);
+            return true;
+        }
+    }
+
     public List<Intern> getInterns()
     {
         return internRepository.findAll();
