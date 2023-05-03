@@ -13,7 +13,7 @@ export class SignUpComponent
     private registrationService:RegistrationService
   ){}
 
-  intern: Intern = new Intern("bonga@mail.com","Bonga","Gougota",56664,"NewPassword0");
+  intern: Intern = new Intern("@newUser","bonga@mail.com","Bonga","Gougota",56664,"NewPassword0");
   message:any;
 
   public registerIntern()

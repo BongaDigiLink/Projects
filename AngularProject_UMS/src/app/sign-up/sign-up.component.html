@@ -3,13 +3,19 @@
         <div class="col-lg-4">
             <form action="">
                 <label for="">Create Username</label>
-                <input type="text" class="form-control">
+                <input [(ngModel)]="intern.usermame" type="text" class="form-control">
 
                 <label for="">Your Email</label>
-                <input type="text" class="form-control">
+                <input [(ngModel)]="intern.email" type="text" class="form-control">
+
+                <label for="">Your Name</label>
+                <input [(ngModel)]="intern.name" type="text" class="form-control">
+
+                <label for="">Your Surname</label>
+                <input [(ngModel)]="intern.surname" type="text" class="form-control">
 
                 <label for="">Create Password</label>
-                <input type="password" class="form-control">
+                <input [(ngModel)]="intern.password" type="password" class="form-control">
 
                 <label for="">Confirm Password</label>
                 <input type="password" class="form-control">
