@@ -18,6 +18,7 @@ export class SignUpComponent
 
   public registerIntern()
   {
+    console.log("Btn clicked")
     
     let response = this.registrationService.registration(new Intern("@newUser","bonga@mail.com","Bonga","Gougota",56664,"NewPassword0"));
     //response.subscribe((data)=>this.message=data);

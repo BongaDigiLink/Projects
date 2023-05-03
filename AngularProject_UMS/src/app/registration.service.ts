@@ -13,7 +13,7 @@ export class RegistrationService
 
   public registration(intern: Intern)
   {
-    this.registrationService.post("http://localhost:8080/ums/signup",
+    this.registrationService.post("http://localhost:8080/intern/register",
     intern,
     {responseType:'text' as 'json'});
   }
