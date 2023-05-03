@@ -1,5 +1,6 @@
 package Controllers;
 
+import lombok.RequiredArgsConstructor;
 import models.interns.Intern;
 import models.mentors.Mentor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path="/ums")
+//@RequiredArgsConstructor
 public class MentorController
 {
     private final MentorService mentorService;
@@ -42,10 +44,12 @@ public class MentorController
     }
 
     @GetMapping("/all-interns")
-    ResponseEntity<List<Intern>> getAllInterns()
+    public ResponseEntity<List<Intern>> getAllInterns()
     {
-        List<Intern> interns = internService.getAllInterns();
-        return new ResponseEntity<>(interns, HttpStatus.OK);
+        return new ResponseEntity<>(internService.getAllInterns(), HttpStatus.OK);
+//        List<Intern> interns = internService.getAllInterns();
+//        System.out.println("intern: " + interns);
+//        return new ResponseEntity<>(interns, HttpStatus.OK);
     }
 
     @GetMapping("/all-colleagues")

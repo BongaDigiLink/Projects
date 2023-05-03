@@ -3,11 +3,12 @@ package services;
 import models.mentors.Mentor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import repository.MentorRepository;
 
 import java.util.List;
 
-@Component
+@Service
 public class MentorService
 {
     private final MentorRepository mentorRepository;
