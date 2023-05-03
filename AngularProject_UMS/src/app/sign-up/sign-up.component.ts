@@ -21,5 +21,6 @@ export class SignUpComponent
     
     let response = this.registrationService.registration(new Intern("@newUser","bonga@mail.com","Bonga","Gougota",56664,"NewPassword0"));
     //response.subscribe((data)=>this.message=data);
+    //let response = this.registrationService.registration(intern)
   }
 }

@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row justify-content-center centered">
-        <div class="col-lg-4">
+        <div class="col-sm-8 col-md-9 col-lg-4">
             <form action="">
                 <label for="">Create Username</label>
                 <input [(ngModel)]="intern.username" type="text" class="form-control">
@@ -25,7 +25,7 @@
             <div class="row txt-center redirect-text">
                 
                 <div class="row txt-center">
-                    <button class="btn btn-primary my-2">Sign Up</button>
+                    <button (click)="registerIntern()" class="btn btn-primary my-2">Sign Up</button>
                     <a href="/signin">Already have an account? 
                         Click here to login.</a>
                 </div>

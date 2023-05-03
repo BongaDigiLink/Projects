@@ -1,7 +1,17 @@
 package za.co.ums_api.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="Skills")
 public class LearningSkill
 {
+    @Id
+    @GeneratedValue
+    private Integer id;
     private String name;
     private String description;
     private Integer programmeDuration;
