@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import za.co.ums_api.models.Intern;
+import za.co.ums_api.models.LearningSkill;
 import za.co.ums_api.models.Mentor;
 import za.co.ums_api.service.InternService;
 import za.co.ums_api.service.MentorService;
@@ -38,12 +40,27 @@ public class MentorController
     public ResponseEntity<List<Intern>> getInterns()
     {
         List<Intern> list = internService.getInterns();
-        return new ResponseEntity<List<Intern>>(list,HttpStatus.OK);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping(path="/mentors")
     public ResponseEntity<List<Mentor>> getMentors()
     {
         return new ResponseEntity<>(mentorService.getMentors(), HttpStatus.OK);
+    }
+
+    //Routes for Training Skills Management
+
+    @PostMapping(path = "/create-skill-programme")
+    public ResponseEntity<Boolean> createProgramme(LearningSkill newskill)
+    {
+        mentorService.createSkill(newskill);
+        return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/all-skills-training")
+    public ResponseEntity<List<LearningSkill>> getAllSkills()
+    {
+        return new ResponseEntity<>(mentorService.skills(), HttpStatus.OK);
     }
 }
