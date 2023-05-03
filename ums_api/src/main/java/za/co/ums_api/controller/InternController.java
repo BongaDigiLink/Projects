@@ -24,7 +24,6 @@ public class InternController
     @PostMapping(path = "/register/")
     public ResponseEntity<Boolean> registerIntern(Intern intern)
     {
-        System.out.println("Debdug Inside "+intern.getName()+"Username "+intern.getUsername());
         Boolean bool = internService.registerIntern(intern);
         return new ResponseEntity(bool, HttpStatus.OK);
     }

@@ -20,10 +20,12 @@ public class InternService {
         Intern user = internRepository.findByUsername(intern.getUsername());
         if(user != null)
         {
+            System.out.println("User already exists.");
             return false;
 
         }else
         {
+            System.out.println("Debug Inside "+intern.getName()+" Username: "+intern.getUsername());
             internRepository.save(intern);
             return true;
         }
