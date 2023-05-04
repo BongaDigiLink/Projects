@@ -36,4 +36,17 @@ public class InternService {
         return internRepository.findAll();
     }
 
+    public Intern updateIntern(Intern intern)
+    {
+        Intern intern_edit = internRepository.findByUsername(intern.getUsername());
+
+        if(intern_edit == null)
+        {
+            return intern;
+        }
+        else
+        {
+            return intern_edit;
+        }
+    }
 }
