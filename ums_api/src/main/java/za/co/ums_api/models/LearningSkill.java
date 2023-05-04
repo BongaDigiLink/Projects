@@ -54,4 +54,5 @@ public class LearningSkill
     public void setProgrammeDuration(Integer programmeDuration) {
         this.programmeDuration = programmeDuration;
     }
+
 }
