@@ -3,10 +3,7 @@ package za.co.ums_api.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import za.co.ums_api.models.Intern;
 import za.co.ums_api.models.LearningSkill;
 import za.co.ums_api.models.Mentor;
@@ -36,11 +33,44 @@ public class MentorController
         return mentor;
     }
 
+    @PostMapping(path="/registration")
+    public ResponseEntity<Boolean> register(Mentor mentor)
+    {
+        return new ResponseEntity<>(mentorService.registerMentor(mentor), HttpStatus.OK);
+    }
+
     @GetMapping(path = "/all-interns")
     public ResponseEntity<List<Intern>> getInterns()
     {
         List<Intern> list = internService.getInterns();
         return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/skills-offered")
+    public ResponseEntity<List<LearningSkill>> getAllSkills()
+    {
+        return new ResponseEntity<>(mentorService.skills(), HttpStatus.OK);
+    }
+
+    @PostMapping(path = "/add-skill")
+    public ResponseEntity<Boolean> createProgramme(LearningSkill newskill)
+    {
+        mentorService.createSkill(newskill);
+        return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+    }
+
+    @PutMapping(path="/update-skill")
+    public ResponseEntity<LearningSkill> updateSkill(LearningSkill skill)
+    {
+        LearningSkill updated = mentorService.updateSkill(skill);
+        return  new ResponseEntity<LearningSkill>(updated, HttpStatus.OK);
+    }
+
+    @PutMapping(path = "/edit-intern")
+    public ResponseEntity<Intern> updateIntern(Intern intern)
+    {
+        Intern intern_ = internService.updateIntern(intern);
+        return new ResponseEntity<Intern>(intern_, HttpStatus.OK);
     }
 
     @GetMapping(path="/mentors")
@@ -49,18 +79,14 @@ public class MentorController
         return new ResponseEntity<>(mentorService.getMentors(), HttpStatus.OK);
     }
 
+    @DeleteMapping(path = "/remove-skill")
+    public Boolean removeSkill()
+    {
+
+        return false;
+    }
+
     //Routes for Training Skills Management
 
-    @PostMapping(path = "/create-skill-programme")
-    public ResponseEntity<Boolean> createProgramme(LearningSkill newskill)
-    {
-        mentorService.createSkill(newskill);
-        return new ResponseEntity<Boolean>(true, HttpStatus.OK);
-    }
 
-    @GetMapping(path = "/all-skills-training")
-    public ResponseEntity<List<LearningSkill>> getAllSkills()
-    {
-        return new ResponseEntity<>(mentorService.skills(), HttpStatus.OK);
-    }
 }
