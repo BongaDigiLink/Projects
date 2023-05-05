@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Intern } from '../models/intern';
-import { RegistrationService } from '../registration.service';
+//import { RegistrationService } from '../registration.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,7 +10,7 @@ import { RegistrationService } from '../registration.service';
 export class SignUpComponent 
 {
   constructor(
-    private registrationService:RegistrationService
+    //private registrationService:RegistrationService
   ){}
 
   intern: Intern = new Intern("@newUser","bonga@mail.com","Bonga","Gougota",56664,"NewPassword0");
@@ -20,7 +20,7 @@ export class SignUpComponent
   {
     console.log("Btn clicked")
     
-    let response = this.registrationService.registration(new Intern("@newUser","bonga@mail.com","Bonga","Gougota",56664,"NewPassword0"));
+    //let response = this.registrationService.registration(new Intern("@newUser","bonga@mail.com","Bonga","Gougota",56664,"NewPassword0"));
     //response.subscribe((data)=>this.message=data);
     //let response = this.registrationService.registration(intern)
   }
