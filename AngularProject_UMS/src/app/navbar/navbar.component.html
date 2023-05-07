@@ -1,56 +1,25 @@
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <!-- Container wrapper -->
-    <div class="container-fluid">
-      <!-- Navbar brand -->
-      <a class="navbar-brand" 
-      [routerLink]="['/home']">UMS</a>
-  
-      <!-- Toggle button -->
-      <button
-        class="navbar-toggler"
-        type="button"
-        
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <i class="fas fa-bars"></i>
-      </button>
-  
-      <!-- Collapsible wrapper -->
-      <div
-        class="collapse navbar-collapse"
-        id="navbarSupportedContent"
-        mdbCollapse
-        
-      >
-        <!-- Left links -->
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" 
-            [routerLink]="['/home']">Mentors</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" 
-            [routerLink]="['/users-details']">Interns</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" 
-            [routerLink]="['/users-details']">Skill Fields</a>
-          </li>
-        </ul>
-        <!-- Left links -->
-  
-        <!-- Search form -->
-        <form class="d-flex input-group w-auto">
-          <button class="btn btn-danger" type="button"
-          [routerLink]="['/signin']">
-            Logout
-          </button>
-        </form>
+<section class="menu-section">
+  <div class="container">
+      <div class="row ">
+          <div class="col-md-12">
+              <div class="navbar-collapse collapse ">
+                  <ul id="menu-top" class="nav navbar-nav navbar-right">
+                      <li><a href="index.html" class="menu-top-active">DASHBOARD</a></li>
+                     
+                      <li><a href="form.html">FORMS</a></li>
+                      <li>
+                          <a href="#" class="dropdown-toggle" id="ddlmenuItem" data-toggle="dropdown">UI ELEMENTS <i class="fa fa-angle-down"></i></a>
+                          <ul class="dropdown-menu" role="menu" aria-labelledby="ddlmenuItem">
+                              <li role="presentation"><a role="menuitem" tabindex="-1" href="ui.html">UI ELEMENTS</a></li>
+                               <li role="presentation"><a role="menuitem" tabindex="-1" href="#">EXAMPLE LINK</a></li>
+                          </ul>
+                      </li>
+                      <li><a href="tab.html">TABS & PANELS</a></li>
+                       <li><a href="table.html">TABLES</a></li>
+                      <li><a href="blank.html">BLANK PAGE</a></li>
+                  </ul>
+              </div>
+          </div>
       </div>
-      <!-- Collapsible wrapper -->
-    </div>
-    <!-- Container wrapper -->
-  </nav>
-  <!-- Navbar -->
+  </div>
+</section>
