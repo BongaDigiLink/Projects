@@ -1,1 +1,120 @@
-<p>main works!</p>
+<app-navbar></app-navbar>
+<!--If user role is admin - display-->
+    <div class="row">
+        <div class="container" style="margin-top: 100px;">
+
+            <div class="col-md-3 col-lg-3 col-sm-3 col-xs-6">
+                <div class="alert alert-info back-widget-set text-center"
+                routerLink="/user-details">
+                        <i class="fa fa-history fa-5x"></i>
+                        <h3>500+&nbsp; <i class="fa fa-dollar"></i></h3>
+                    Amount Pending For Approval
+                </div>
+            </div>
+
+            <div class="col-md-3 col-lg-3 col-sm-3 col-xs-6">
+                <div class="alert alert-success back-widget-set text-center"
+                routerLink="/user-details">
+                    <i class="fa fa-bars fa-5x"></i>
+                    <h3>300+ Tasks</h3>
+                    Pending For New Events
+                </div>
+            </div>
+
+            <div class="col-md-3 col-lg-3 col-sm-3 col-xs-6">
+                <div class="alert alert-warning back-widget-set text-center"
+                routerLink="/user-details">
+                    <i class="fa fa-recycle fa-5x"></i>
+                    <h3>56+ Calls</h3>
+                To Be Made For New Orders
+                </div>
+            </div>
+
+            <div class="col-md-3 col-lg-3 col-sm-3 col-xs-6">
+                <div class="alert alert-danger back-widget-set text-center"
+                routerLink="/user-details">
+                    <i class="fa fa-briefcase fa-5x"></i>
+                    <h3>30+ Issues </h3>
+                    That Should Be Resolved Now
+                </div>
+            </div>
+
+        </div>   
+    </div>
+
+    <div class="row" style="margin-top: 10px;">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+            <div class="container bootstrap snippets bootdey">
+                <div class="row">
+                    <h2 class="text-muted">Deliverables</h2>
+                    <hr>
+                </div>
+                <div class="row">
+                    <!-- view allocated tasks [admin], due submissions[intern] etc -->
+                    <div class="col-md-12 col-lg-12 col-sm-4">
+                        <div class="panel blog-container">
+                            <div class="panel-body">
+                                <div class="image-wrapper">
+                                <a class="image-wrapper image-zoom cboxElement" href="#">
+                                    
+                                    <div class="image-overlay"></div> 
+                                </a>
+                                </div>
+                                
+                                <h4>Bootstrap 3.0</h4>
+                                <small class="text-muted">By <a href="#"><strong> John Doe</strong></a> |  Post on Jan 8, 2013  | 58 comments</small>
+                                
+                                <p class="m-top-sm m-bottom-sm">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eros nibh, viverra a dui a, gravida varius velit. Nunc vel tempor nisi. Aenean id pellentesque mi, non placerat mi. Integer luctus accumsan tellus. Vivamus quis elit sit amet nibh lacinia suscipit eu quis purus. Vivamus tristique est non ipsum dapibus lacinia sed nec metus.
+                                </p>
+                                <a href="single_post.html"><i class="fa fa-angle-double-right"></i> Continue reading</a>
+                                <span class="post-like text-muted tooltip-test" data-toggle="tooltip" data-original-title="I like this post!">
+                                <i class="fa fa-heart"></i> <span class="like-count">25</span>
+                                </span>
+                            </div>
+                        </div> 
+
+                        <div class="panel blog-container">
+                            <div class="panel-body">
+                                <div class="image-wrapper">
+                                <a class="image-wrapper image-zoom cboxElement" href="#">
+                                    
+                                    <div class="image-overlay"></div> 
+                                </a>
+                                </div>
+                                
+                                <h4>Bootstrap 3.0</h4>
+                                <small class="text-muted">By <a href="#"><strong> John Doe</strong></a> |  Post on Jan 8, 2013  | 58 comments</small>
+                                
+                                <p class="m-top-sm m-bottom-sm">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eros nibh, viverra a dui a, gravida varius velit. Nunc vel tempor nisi. Aenean id pellentesque mi, non placerat mi. Integer luctus accumsan tellus. Vivamus quis elit sit amet nibh lacinia suscipit eu quis purus. Vivamus tristique est non ipsum dapibus lacinia sed nec metus.
+                                </p>
+                                <a href="single_post.html"><i class="fa fa-angle-double-right"></i> Continue reading</a>
+                                <span class="post-like text-muted tooltip-test" data-toggle="tooltip" data-original-title="I like this post!">
+                                <i class="fa fa-heart"></i> <span class="like-count">25</span>
+                                </span>
+                            </div>
+                        </div>          
+                    </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h1>Jumbotron</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing.</p>
+                <p>
+                    <a class="btn btn-primary btn-lg" role="button">Learn more</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+<!--If user role is mentor - display-->
+
+<!---If user role is intern - display-->
+
+<app-footer></app-footer>
