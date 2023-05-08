@@ -1,6 +1,7 @@
 package za.co.ums_api.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import za.co.ums_api.models.Intern;
 import za.co.ums_api.models.Mentor;
 
 import java.util.List;
@@ -16,4 +17,5 @@ public interface MentorRepository extends JpaRepository<Mentor, Long>
         return new Mentor();
     }
 
+    Mentor findByEmail(String email);
 }

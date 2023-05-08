@@ -15,9 +15,38 @@ public class InternService {
         this.internRepository = internRepository;
     }
 
+    public boolean registerIntern(Intern intern)
+    {
+        Intern user = internRepository.findByUsername(intern.getUsername());
+        if(user != null)
+        {
+            System.out.println("User already exists.");
+            return false;
+
+        }else
+        {
+            System.out.println("Debug Inside "+intern.getName()+" Username: "+intern.getUsername());
+            internRepository.save(intern);
+            return true;
+        }
+    }
+
     public List<Intern> getInterns()
     {
         return internRepository.findAll();
     }
 
+    public Intern updateIntern(Intern intern)
+    {
+        Intern intern_edit = internRepository.findByUsername(intern.getUsername());
+
+        if(intern_edit == null)
+        {
+            return intern;
+        }
+        else
+        {
+            return intern_edit;
+        }
+    }
 }

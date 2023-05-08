@@ -1,0 +1,8 @@
+registration api rw --- status : progress
+login api rw --- status : incomplete
+edituser api rw --- status : incomplete
+createuser api rw --- status : incomplete
+deactivateuser api rw --- status : incomplete
+addTrainingBranch api rw --- status : incomplete
+updateTrainingBranch api rw --- status : incomplete
+

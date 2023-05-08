@@ -3,3 +3,80 @@
     font-size: 21px;
     font-weight: 200;
 }
+
+.img-display{
+    width: 90%;
+    height: 300px;
+    margin-top:300px;
+    position: relative;
+    background-color:#888;
+  }
+
+  .banner_section {
+    width: 100%;
+    float: left;
+    padding: 90px 0px 100px 0px;
+}
+
+.layout_padding{
+    padding-top: 100px;
+    padding-bottom: 0px;
+}
+
+.carousel-inner{
+
+}
+
+.carousel-item{
+
+}
+
+.active{
+
+}
+
+.banner_taital_main {
+    width: 100%;
+    float: left;
+    padding-top: 80px;
+}
+
+.banner_taital {
+    width: 100%;
+    font-size: 90px;
+    color: #252525;
+    font-weight: 800;
+}
+
+.btn_main{
+    width: 100%;
+    float: left;
+    padding-top: 40%;
+}
+
+.about_bt{
+    width: 175px;
+    float: left;
+}
+
+.banner_text{
+    width: 100%;
+    float: left;
+    font-size: 16px;
+    color: antiquewhite;
+    margin: 0px;
+}
+
+.tasty_text {
+    width: 100%;
+    float: left;
+    font-size: 24px;
+    color: #1976d2;
+    font-weight: bold;
+}
+
+.banner_img {
+    width: 100%;
+    float: left;
+    text-align: center;
+}
