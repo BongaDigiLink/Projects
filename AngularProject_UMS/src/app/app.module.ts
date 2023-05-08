@@ -13,7 +13,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { MainComponent } from './main/main.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @NgModule(
   {
@@ -34,7 +34,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     BrowserModule,
-    ReactiveFormsModule,
     RouterModule.forRoot([
       {path: '', redirectTo : 'home', pathMatch: 'full'},
       {path: 'signin', component: SignInComponent},

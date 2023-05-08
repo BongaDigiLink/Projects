@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Intern } from '../models/intern';
 import { InternService } from '../service/intern.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -10,20 +10,12 @@ import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css']
 })
-export class SignUpComponent implements OnInit
+export class SignUpComponent
 {
-
-  signupForm?:FormGroup
 
   constructor(
     private service: InternService,
-    private fb:FormBuilder
   ){}
-
-  
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
 
   message:any;
 
@@ -41,17 +33,4 @@ export class SignUpComponent implements OnInit
     )
   }
 
-  // public registerIntern()
-  // {
-  //   console.log("Form inputs : "+addEmployee.value)
-  //   this.service.register(addEmployee.value).subscribe(
-  //     (response: any) => {
-  //       console.log("Response from api : "+response)
-  //     }, 
-  //     (error: HttpErrorResponse) =>
-  //     {
-  //       alert(error.message);
-  //     }
-  //   )
-  // }
 }

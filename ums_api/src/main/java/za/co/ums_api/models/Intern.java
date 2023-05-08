@@ -12,40 +12,28 @@ public class Intern
     @Id
     @GeneratedValue
     private Long id;
-    private String username;
     private String email;
     private String name;
     private String surname;
-    private Integer phone;
 
     private String role;
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 
     private String trainingField;
     private String password;
 
-    public String getEmail() {
-        return email;
-    }
 
     //No args Constructor
     public Intern()
     {
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
+    //Default Registration Constructor
+    public Intern(String email, String name, String surname, String password) {
+        this.email = email;
+        this.name = name;
+        this.surname = surname;
+        this.password = password;
+        this.role ="intern";
     }
 
     //For verification. Only Store Hashed String and Return Hashed string
@@ -56,17 +44,6 @@ public class Intern
     //For changing password. Hashed string only.
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    //Default Registration Constructor
-    public Intern(String username,String email, String name, String surname, Integer phone, String password) {
-        this.username = username;
-        this.email = email;
-        this.name = name;
-        this.surname = surname;
-        this.phone = phone;
-        this.password = password;
-        this.role ="intern";
     }
 
     public String getTrainingField() {
@@ -85,6 +62,14 @@ public class Intern
         return name;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -97,11 +82,8 @@ public class Intern
         this.surname = surname;
     }
 
-    public Integer getPhone() {
-        return phone;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPhone(Integer phone) {
-        this.phone = phone;
-    }
 }

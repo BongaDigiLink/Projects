@@ -4,7 +4,7 @@
             <form #addEmployee="ngForm" (ngSubmit)="addEmployee">
 
                 <label for="">Your Email</label>
-                <input type="text" ngModel email="email" class="form-control">
+                <input type="email" ngModel email="email" class="form-control">
 
                 <label for="">Your Name</label>
                 <input type="text" ngModel name="name" class="form-control">
@@ -29,6 +29,7 @@
 
                 <div class="row txt-center">
                     <button
+                    (click)="registerIntern(addEmployee)"
                     type="submit"
                      class="btn btn-primary my-2" 
                     style="width: 100px; margin: auto;">Sign Up</button>

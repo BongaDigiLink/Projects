@@ -20,12 +20,15 @@ public class InternService {
         Intern user = internRepository.findByEmail(intern.getEmail());
         if(user != null)
         {
-            System.out.println("User already exists.");
+            System.out.println("User already exists. "+intern.getEmail()+" User name: "+intern.getName());
             return false;
 
         }else
         {
-            System.out.println("Debug Inside "+intern.getName()+" Username: "+intern.getUsername());
+            System.out.println("User name "+intern.getName()
+                    +" User email: "+intern.getEmail()
+                    +" Password: "+intern.getPassword()+
+                    " Surname: "+intern.getSurname());
             internRepository.save(intern);
             return true;
         }
@@ -38,7 +41,7 @@ public class InternService {
 
     public Intern updateIntern(Intern intern)
     {
-        Intern intern_edit = internRepository.findByUsername(intern.getUsername());
+        Intern intern_edit = internRepository.findByEmail(intern.getEmail());
 
         if(intern_edit == null)
         {

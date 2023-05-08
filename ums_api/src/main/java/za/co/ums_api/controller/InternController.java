@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import za.co.ums_api.models.Intern;
@@ -21,8 +22,8 @@ public class InternController
         this.internService = internService;
     }
 
-    @PostMapping(path = "/register/")
-    public ResponseEntity<Boolean> registerIntern(Intern intern)
+    @PostMapping("/register/")
+    public ResponseEntity<Boolean> registerIntern(@RequestBody Intern intern)
     {
         System.out.println("Inputs from front end : "+intern.toString());
         Boolean bool = internService.registerIntern(intern);
