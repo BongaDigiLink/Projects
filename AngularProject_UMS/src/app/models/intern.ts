@@ -1,20 +1,14 @@
 export class Intern
 {
-    username='';
-    name='';
-    surname='';
-    email='';
-    phone='';
-    password='';
-
-
+    // name='';
+    // surname='';
+    // email='';
+    // password='';
 
     constructor(
-        username:string,
         email:string,
         name:string,
         surname:string,
-        phone:number,
         password:string
     ){}
 

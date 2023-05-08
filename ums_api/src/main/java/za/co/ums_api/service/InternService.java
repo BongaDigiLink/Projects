@@ -17,7 +17,7 @@ public class InternService {
 
     public boolean registerIntern(Intern intern)
     {
-        Intern user = internRepository.findByUsername(intern.getUsername());
+        Intern user = internRepository.findByEmail(intern.getEmail());
         if(user != null)
         {
             System.out.println("User already exists.");

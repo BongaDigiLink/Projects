@@ -17,7 +17,17 @@ public class Intern
     private String name;
     private String surname;
     private Integer phone;
-    private String about;
+
+    private String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     private String trainingField;
     private String password;
 
@@ -56,14 +66,7 @@ public class Intern
         this.surname = surname;
         this.phone = phone;
         this.password = password;
-    }
-
-    public String getAbout() {
-        return about;
-    }
-
-    public void setAbout(String about) {
-        this.about = about;
+        this.role ="intern";
     }
 
     public String getTrainingField() {

@@ -6,4 +6,6 @@ import za.co.ums_api.models.Intern;
 public interface InternRepository extends JpaRepository<Intern, Long> {
 
     public Intern findByUsername(String username);
+
+    Intern findByEmail(String email);
 }

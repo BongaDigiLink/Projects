@@ -16,8 +16,17 @@ public class Mentor
     private String name;
     private String surname;
     private Integer phone;
-    private String about;
     private String trainingField;
+    private String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     private String password;
 
     public String getEmail() {
@@ -36,15 +45,9 @@ public class Mentor
         this.surname = surname;
         this.phone = phone;
         this.password = password;
+        this.role = "mentor";
     }
 
-    public String getAbout() {
-        return about;
-    }
-
-    public void setAbout(String about) {
-        this.about = about;
-    }
 
     public String getTrainingField() {
         return trainingField;

@@ -1,27 +1,57 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Intern } from '../models/intern';
-//import { RegistrationService } from '../registration.service';
+import { InternService } from '../service/intern.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css']
 })
-export class SignUpComponent 
+export class SignUpComponent implements OnInit
 {
+
+  signupForm?:FormGroup
+
   constructor(
-    //private registrationService:RegistrationService
+    private service: InternService,
+    private fb:FormBuilder
   ){}
 
-  intern: Intern = new Intern("@newUser","bonga@mail.com","Bonga","Gougota",56664,"NewPassword0");
+  
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
+
   message:any;
 
-  public registerIntern()
+  public registerIntern(addEmployee: NgForm): void
   {
-    console.log("Btn clicked")
-    
-    //let response = this.registrationService.registration(new Intern("@newUser","bonga@mail.com","Bonga","Gougota",56664,"NewPassword0"));
-    //response.subscribe((data)=>this.message=data);
-    //let response = this.registrationService.registration(intern)
+    console.log("Form inputs : "+addEmployee.value)
+    this.service.register(addEmployee.value).subscribe(
+      (response: any) => {
+        console.log("Response from api : "+response)
+      }, 
+      (error: HttpErrorResponse) =>
+      {
+        alert(error.message);
+      }
+    )
   }
+
+  // public registerIntern()
+  // {
+  //   console.log("Form inputs : "+addEmployee.value)
+  //   this.service.register(addEmployee.value).subscribe(
+  //     (response: any) => {
+  //       console.log("Response from api : "+response)
+  //     }, 
+  //     (error: HttpErrorResponse) =>
+  //     {
+  //       alert(error.message);
+  //     }
+  //   )
+  // }
 }

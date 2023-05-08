@@ -86,7 +86,13 @@ public class MentorController
         return false;
     }
 
-    //Routes for Training Skills Management
+    //Create and Update, Routes for Training Skills Management
+    @PostMapping(path="/create-course")
+    public ResponseEntity<LearningSkill> createProgramme()
+    {
+
+        return  new ResponseEntity<>(HttpStatus.OK);
+    }
 
 
 }
