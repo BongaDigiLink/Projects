@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { UserViewComponent } from './user-view/user-view.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
+import { MainComponent } from './main/main.component';
 
 @NgModule(
   {
@@ -23,7 +24,8 @@ import { FooterComponent } from './footer/footer.component';
     HomeComponent,
     UserViewComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    MainComponent
   ],
   imports: 
   [
@@ -33,8 +35,9 @@ import { FooterComponent } from './footer/footer.component';
       {path: 'signin', component: SignInComponent},
       {path: 'signup', component: SignUpComponent},
       {path: 'user-details', component: UserDetailsComponent},
+      {path: 'user', component: UserViewComponent},
       {path: 'home', component: HomeComponent},
-      {path: 'user', component: UserViewComponent}
+      {path: 'dashboard', component: MainComponent}
     ])
   ],
   providers: [],
