@@ -3,3 +3,48 @@
     border-bottom:5px solid #9170E4;
     width:100%
 }
+
+.navbar-brand {
+  letter-spacing: 3px;
+  color: #c24244;
+}
+
+.navbar-brand:hover {
+	color: #c24244;
+}
+
+.navbar-scroll .nav-link,
+.navbar-scroll .fa-bars {
+  color: white;
+}
+
+.navbar-scrolled .nav-link,
+.navbar-scrolled .fa-bars {
+  color: #7f4722;
+}
+
+.navbar-scrolled {
+  background-color: #ffede7;
+}
+
+.right-div {
+    float: right; 
+    padding: 20px;
+    width: 40px;
+    height: 30px;
+}
+
+.content-wrapper {
+    margin-top: 40px;
+    min-height:800px;
+    padding-bottom:90px;
+}
+
+.header-line {
+    color: white;
+    font-weight:900;
+    padding-bottom:25px;
+    border-bottom:1px solid #eeeeee;
+    text-transform:uppercase;
+}
+

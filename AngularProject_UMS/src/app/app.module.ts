@@ -10,6 +10,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { HomeComponent } from './home/home.component';
 import { UserViewComponent } from './user-view/user-view.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule(
   {
@@ -21,7 +22,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     UserDetailsComponent,
     HomeComponent,
     UserViewComponent,
-    NavbarComponent
+    NavbarComponent,
+    FooterComponent
   ],
   imports: 
   [
