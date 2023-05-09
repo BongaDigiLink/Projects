@@ -35,9 +35,9 @@ export class InternService
    * @param intern 
    * @returns 
    */
-  public register(intern: Intern): Observable<Intern>
+  public register(intern: any): Observable<any>
   {
-    return this.http.post(`${this.apiURL}/register/`, {intern: JSON.stringify(intern)});
+    return this.http.post(`${this.apiURL}/register/`,intern);
   }
 
   /**
