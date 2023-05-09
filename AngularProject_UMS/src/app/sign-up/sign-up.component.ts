@@ -49,6 +49,7 @@ export class SignUpComponent
       email: this.form.value.email,
       name: this.form.value.name,
       surname: this.form.value.surname,
+      trainingField: this.form.value.trainingField,
       password: this.form.value.password};
 
     console.log("Form inputs : "+ body)

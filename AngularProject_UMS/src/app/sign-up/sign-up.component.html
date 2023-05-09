@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row justify-content-center centered">
         <div class="col-sm-8 col-md-9 col-lg-4">
-            <form  [formGroup]="form" (ngSubmit)="registerIntern()">
+            <form [formGroup]="form" (ngSubmit)="registerIntern()">
 
                 <label for="">Your Email</label>
                 <input type="email" formControlName="email" class="form-control">
@@ -14,7 +14,7 @@
 
                 <div class="form-group">
                     <label>Skills Programme</label>
-                    <select multiple="" formControlName="trainingField" class="form-control" >
+                    <select formControlName="trainingField" class="form-control" >
                         <option>Data Analytics</option>
                         <option>Full Stack Software Developer</option>
                         <option>Software Tester</option>
