@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+//import javax.persistence.*;
 
 @Entity
 @Table(name="Interns")
@@ -21,18 +22,18 @@ public class Intern
     private String trainingField;
     private String password;
 
-
     //No args Constructor
     public Intern()
     {
     }
 
     //Default Registration Constructor
-    public Intern(String email, String name, String surname, String password) {
+    public Intern(String email, String name, String surname, String trainingField, String password) {
         this.email = email;
         this.name = name;
         this.surname = surname;
         this.password = password;
+        this.trainingField = trainingField;
         this.role ="intern";
     }
 
@@ -84,6 +85,16 @@ public class Intern
 
     public String getEmail() {
         return email;
+    }
+
+
+    public String toString()
+    {
+        return " "+this.email+
+                " "+this.name+
+                " "+this.surname+
+                " "+this.role+
+                " "+this.password;
     }
 
 }

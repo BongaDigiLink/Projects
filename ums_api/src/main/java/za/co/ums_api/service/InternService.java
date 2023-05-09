@@ -34,6 +34,20 @@ public class InternService {
         }
     }
 
+    public Intern login(Intern intern)
+    {
+        Intern foundUser = this.internRepository.findByEmail(intern.getEmail());
+
+        if(foundUser != null)
+        {
+            return  foundUser;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public List<Intern> getInterns()
     {
         return internRepository.findAll();
