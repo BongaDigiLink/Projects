@@ -14,7 +14,7 @@
 
                 <div class="form-group">
                     <label>Skills Programme</label>
-                    <select multiple="" class="form-control" >
+                    <select multiple="" formControlName="trainingField" class="form-control" >
                         <option>Data Analytics</option>
                         <option>Full Stack Software Developer</option>
                         <option>Software Tester</option>
@@ -44,7 +44,7 @@
 
             <pre>
                 {{form.valid}}
-                {{form.value.name | json}}
+                {{form.value | json}}
             </pre>
             
             <div class="row txt-center redirect-text">

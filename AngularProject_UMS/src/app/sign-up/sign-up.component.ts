@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Intern } from '../models/intern';
+import { Component } from '@angular/core';
 import { InternService } from '../service/intern.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms';
 
 
 @Component({
@@ -12,17 +11,12 @@ import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 })
 export class SignUpComponent
 {
-  addIntern: Intern = {
-    name: '',
-    email: '',
-    surname: '',
-    password: ''
-  };
 
   form = this.fb.group({
-    name: ['', Validators.required],
     email: ['', Validators.required],
+    name: ['', Validators.required],
     surname: ['', Validators.required],
+    trainingField: ['', Validators.required],
     password: ['', Validators.required],
     confirmPassword: ['', Validators.required]
   })
@@ -31,19 +25,19 @@ export class SignUpComponent
     private fb : FormBuilder,
     private service: InternService
   ){}
-
-  message:any;
   
     initForm(): FormGroup {
       let form =  this.fb.group({
-        name: ['', Validators.required],
         email: ['', Validators.required],
+        name: ['', Validators.required],
         surname: ['', Validators.required],
+        trainingField: ['', Validators.required],
         password: ['', Validators.required],
         confirmPassword: ['', Validators.required]
       })
       //form.addValidators()
       //add validation to compare passwords
+      //form.addValidators(this.matchValidator(form.get('password').value, form.get('confirmPassword').value));
 
       //If valid return form.
       return form;
@@ -51,7 +45,6 @@ export class SignUpComponent
 
   public registerIntern(): void
   {
-
     const body = {
       email: this.form.value.email,
       name: this.form.value.name,
@@ -68,6 +61,17 @@ export class SignUpComponent
         alert(error.message);
       }
     )
+  }
+
+  matchValidator(
+    passwordOne: string | null,
+    passwordTwo: string | null
+  ): ValidatorFn {
+    return () => {
+      if (passwordOne?.valueOf !== passwordTwo?.valueOf)
+        return { match_error: 'Passwords do not match' };
+      return null;
+    };
   }
 
 }

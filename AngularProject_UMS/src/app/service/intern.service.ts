@@ -25,7 +25,7 @@ export class InternService
    * 
    * @returns 
    */
-  public loginIntern(): Observable<Intern>
+  public loginIntern(intern: any): Observable<any>
   {
     return this.http.get<Intern>(`${this.apiURL}/login/`)
   }
