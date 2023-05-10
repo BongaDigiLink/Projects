@@ -9,6 +9,4 @@ public interface InternRepository extends JpaRepository<Intern, Long> {
 
     Intern findByEmail(String email);
 
-    void delete(Optional<Intern> remove);
-    //Intern findById(Long id);
 }

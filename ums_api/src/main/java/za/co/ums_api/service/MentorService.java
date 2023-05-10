@@ -59,7 +59,7 @@ public class MentorService {
 
         }
         else {
-            internRepository.delete(remove);
+            internRepository.deleteById(id);
             return remove;
         }
         return remove;
@@ -69,7 +69,7 @@ public class MentorService {
     {
         Optional<Intern> deactivated = this.internRepository.findById(id);
         deactivated.get().setRole("offline");
-        
+
         return  deactivated;
     }
 
