@@ -1,20 +1,30 @@
 package za.co.ums_api.service;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import za.co.ums_api.models.Intern;
 import za.co.ums_api.models.LearningSkill;
 import za.co.ums_api.models.Mentor;
+import za.co.ums_api.repository.InternRepository;
 import za.co.ums_api.repository.LearningSkillRepository;
 import za.co.ums_api.repository.MentorRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MentorService {
     private final MentorRepository mentorRepository;
     private final LearningSkillRepository learningSkillRepository;
+    private final InternRepository internRepository;
+
+    public MentorService(MentorRepository mentorRepository, LearningSkillRepository learningSkillRepository, InternRepository internRepository)
+    {
+        this.mentorRepository = mentorRepository;
+        this.learningSkillRepository = learningSkillRepository;
+        this.internRepository = internRepository;
+    }
+
+    //------------------------------------Intern Auth Management Functions
 
     public Boolean registerMentor(Mentor mentor)
     {
@@ -32,16 +42,35 @@ public class MentorService {
         }
     }
 
-
-    public MentorService(MentorRepository mentorRepository, LearningSkillRepository learningSkillRepository)
-    {
-        this.mentorRepository = mentorRepository;
-        this.learningSkillRepository = learningSkillRepository;
-    }
+    //------------------------------------Intern Management Functions
 
     public Mentor getMentor(Long id)
     {
         return mentorRepository.getMentor(id);
+    }
+
+
+    public Optional<Intern> deleteIntern(Long id)
+    {
+        Optional<Intern> remove = this.internRepository.findById(id);
+
+        if(remove != null)
+        {
+
+        }
+        else {
+            internRepository.delete(remove);
+            return remove;
+        }
+        return remove;
+    }
+
+    public Optional<Intern> deactivateIntern(Long id)
+    {
+        Optional<Intern> deactivated = this.internRepository.findById(id);
+        deactivated.get().setRole("offline");
+        
+        return  deactivated;
     }
 
     public List<Mentor> getMentors()
@@ -49,7 +78,7 @@ public class MentorService {
         return mentorRepository.findAll();
     }
 
-    //Service calls for Training Skills Management
+    //--------------------------------------Skills Management Functions
 
     public Boolean createSkill(LearningSkill learningSkill)
     {
@@ -64,6 +93,15 @@ public class MentorService {
             learningSkillRepository.save(learningSkill);
             return true;
         }
+    }
+
+    public LearningSkill createTask(LearningSkill task)
+    {
+        LearningSkill createTask = this.learningSkillRepository.save(
+                new LearningSkill(task.getName(), task.getDescription())
+        );
+
+        return createTask;
     }
 
     public LearningSkill updateSkill(LearningSkill skill)
@@ -85,8 +123,5 @@ public class MentorService {
          return learningSkillRepository.findAll();
     }
 
-    /**
-     * Create and update skills programmer
-     */
 
 }

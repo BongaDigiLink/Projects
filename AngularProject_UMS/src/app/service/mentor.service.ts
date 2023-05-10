@@ -45,7 +45,7 @@ export class MentorService
     return this.http.put<any>(`${this.apiURL}/deactivate/{id}`, intern);
   }
 
-  public removeIntern(id: any): Observable<void>
+  public removeIntern(id: any): Observable<any>
   {
     return this.http.delete<any>(`${this.apiURL}/delete-account/{id}`)
   }
@@ -60,6 +60,11 @@ export class MentorService
   public addSkill(skill: any): Observable<any>
   {
     return this.http.post<any>(`${this.apiURL}/add-skill`, skill);
+  }
+
+  public createTask(skill: any): Observable<any>
+  {
+    return this.http.post<any>(`${this.apiURL}/create-task`, skill);
   }
 
   public updateSkill(id: any, skill: any): Observable<any>

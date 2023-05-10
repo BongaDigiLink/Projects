@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Intern } from '../models/intern';
+import { Skills } from '../models/skills';
 
 @Injectable({
   providedIn: 'root'
@@ -62,9 +63,9 @@ export class InternService
    * register from. Used in Sign Up
    * @returns 
    */
-  public getSkills(): Observable<any>
+  public getSkills(): Observable<Skills[]>
   {
-    return this.http.get<any>(`${this.apiURL}/skills/`);
+    return this.http.get<Skills[]>(`${this.apiURL}/skills/`);
   }
 
   /**
@@ -72,9 +73,9 @@ export class InternService
    * @param id of a skill to query [01 - Data, 24 -AI, ...]
    * @returns  a list of tasks from a specific training programme
    */
-  public getSkillsTasks(name: any)
+  public getSkillsTasks(name: any): Observable<Skills[]>
   {
-    return this.http.get<any>(`${this.apiURL}/skills-tasks/{name}`)
+    return this.http.get<Skills[]>(`${this.apiURL}/skills-tasks/{name}`)
   }
 
 

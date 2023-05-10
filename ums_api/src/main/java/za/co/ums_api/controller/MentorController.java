@@ -11,6 +11,7 @@ import za.co.ums_api.service.InternService;
 import za.co.ums_api.service.MentorService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/mentor")
@@ -26,6 +27,8 @@ public class MentorController
         this.internService = internService;
     }
 
+
+    //-------------------------------------Mentor Login (Auth)
     @GetMapping(path = "/login")
     public Mentor login(long id)
     {
@@ -39,13 +42,44 @@ public class MentorController
         return new ResponseEntity<>(mentorService.registerMentor(mentor), HttpStatus.OK);
     }
 
+    //------------------------------------Intern Management Controllers
+
     @GetMapping(path = "/all-interns")
     public ResponseEntity<List<Intern>> getInterns()
     {
-        List<Intern> list = internService.getInterns();
+        List<Intern> list = this.internService.getInterns();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
+    @PutMapping(path = "/edit-intern/{id}")
+    public ResponseEntity<Intern> updateIntern(@PathVariable("id") Long id, @RequestBody Intern intern)
+    {
+        Intern intern_ = internService.updateIntern(intern);
+        return new ResponseEntity<Intern>(intern_, HttpStatus.OK);
+    }
+
+    @DeleteMapping (path = "/deactivate/{id}")
+    public ResponseEntity<Intern> deleteIntern(@PathVariable("id") Long id)
+    {
+        Optional<Intern> intern_ = mentorService.deactivateIntern(id);
+        return new ResponseEntity<Intern>(HttpStatus.OK);
+    }
+
+    @PutMapping(path = "/delete-account/{id}")
+    public ResponseEntity<Intern> updateIntern(@PathVariable("id") Long id)
+    {
+        Optional<Intern> intern_ = mentorService.deleteIntern(id);
+        return new ResponseEntity<Intern>(HttpStatus.OK);
+    }
+
+    @GetMapping(path="/mentors")
+    public ResponseEntity<List<Mentor>> getMentors()
+    {
+        return new ResponseEntity<>(mentorService.getMentors(), HttpStatus.OK);
+    }
+
+
+    //--------------------------------------Skills Controllers.
     @GetMapping(path = "/skills-offered")
     public ResponseEntity<List<LearningSkill>> getAllSkills()
     {
@@ -53,30 +87,17 @@ public class MentorController
     }
 
     @PostMapping(path = "/add-skill")
-    public ResponseEntity<Boolean> createProgramme(LearningSkill newskill)
+    public ResponseEntity<Boolean> createProgramme(@RequestBody LearningSkill newskill)
     {
         mentorService.createSkill(newskill);
         return new ResponseEntity<Boolean>(true, HttpStatus.OK);
     }
 
     @PutMapping(path="/update-skill")
-    public ResponseEntity<LearningSkill> updateSkill(LearningSkill skill)
+    public ResponseEntity<LearningSkill> updateSkill(@RequestBody LearningSkill skill)
     {
         LearningSkill updated = mentorService.updateSkill(skill);
         return  new ResponseEntity<LearningSkill>(updated, HttpStatus.OK);
-    }
-
-    @PutMapping(path = "/edit-intern")
-    public ResponseEntity<Intern> updateIntern(Intern intern)
-    {
-        Intern intern_ = internService.updateIntern(intern);
-        return new ResponseEntity<Intern>(intern_, HttpStatus.OK);
-    }
-
-    @GetMapping(path="/mentors")
-    public ResponseEntity<List<Mentor>> getMentors()
-    {
-        return new ResponseEntity<>(mentorService.getMentors(), HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/remove-skill")
@@ -87,11 +108,11 @@ public class MentorController
     }
 
     //Create and Update, Routes for Training Skills Management
-    @PostMapping(path="/create-course")
-    public ResponseEntity<LearningSkill> createProgramme()
+    @PostMapping(path="/create-task")
+    public ResponseEntity<LearningSkill> createTask(@RequestBody LearningSkill task)
     {
-
-        return  new ResponseEntity<>(HttpStatus.OK);
+        LearningSkill createdTask = this.mentorService.createTask(task);
+        return  new ResponseEntity<>(createdTask, HttpStatus.OK);
     }
 
 

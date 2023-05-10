@@ -91,6 +91,11 @@ public class InternService
 
     //------------------------------------Get routes
 
+    public List<Intern> getInterns()
+    {
+        return this.internRepository.findAll();
+    }
+
     public List<LearningSkill> getAllSkills()
     {
         return this.learningSkillRepository.findAll();

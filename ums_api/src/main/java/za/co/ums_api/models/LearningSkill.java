@@ -27,6 +27,12 @@ public class LearningSkill
         count +=1;
     }
 
+    public LearningSkill(String name, String description)
+    {
+        this.name = name;
+        this.description = description;
+    }
+
     public LearningSkill()
     {
     }
