@@ -16,44 +16,60 @@ export class MentorService
 
   private readonly apiURL = 'http://localhost:8080/mentor'
 
+  //-------------------------------------Mentor Login (Auth)
+
   public login(): Observable<Mentor>
   {
     return this.http.get<Mentor>(`${this.apiURL}/login`);
   }
 
-  public registerMentor(mentor: Mentor): Observable<Mentor>
+  public registerMentor(mentor: any): Observable<any>
   {
-    return this.http.post<Mentor>(`${this.apiURL}/registration`, mentor);
+    return this.http.post<any>(`${this.apiURL}/registration`, mentor);
   }
+
+   //------------------------------------Intern Management Routes
 
   public getAllInterns(): Observable<Intern[]>
   {
     return this.http.get<Intern[]>(`${this.apiURL}/all-interns`);
   }
 
-  public getAllSkills(): Observable<any>
+  public updateInternDetails(intern: any): Observable<any>
   {
-    return this.http.get<any>(`${this.apiURL}/skills-offered`);
+    return this.http.put<any>(`${this.apiURL}/edit-intern/{id}`, intern);
   }
 
-  public addSkill(skill: Skills): Observable<any>
+  public deactivateIntern(id: any, intern: any): Observable<any>
+  {
+    return this.http.put<any>(`${this.apiURL}/deactivate/{id}`, intern);
+  }
+
+  public removeIntern(id: any): Observable<void>
+  {
+    return this.http.delete<any>(`${this.apiURL}/delete-account/{id}`)
+  }
+
+  //--------------------------------------Skills Management Routes.
+
+  public getAllSkills(): Observable<Skills[]>
+  {
+    return this.http.get<Skills[]>(`${this.apiURL}/skills-offered`);
+  }
+
+  public addSkill(skill: any): Observable<any>
   {
     return this.http.post<any>(`${this.apiURL}/add-skill`, skill);
   }
 
-  public updateSkill(skill: Skills): Observable<Skills>
+  public updateSkill(id: any, skill: any): Observable<any>
   {
-    return this.http.put<Skills>(`${this.apiURL}/update-skill`, skill);
+    return this.http.put<any>(`${this.apiURL}/update-skill/{id}`, skill);
   }
 
-  public updateInternDetails(intern: Intern): Observable<Intern>
+  public removeSkill(id: any): Observable<void>
   {
-    return this.http.put<Intern>(`${this.apiURL}/edit-intern`, intern);
-  }
-
-  public removeSkill(): Observable<void>
-  {
-    return this.http.delete<any>(`${this.apiURL}/remove-skill`)
+    return this.http.delete<any>(`${this.apiURL}/remove-skill/{id}`)
   }
 
 }
