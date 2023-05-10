@@ -2,19 +2,26 @@ package za.co.ums_api.service;
 
 import org.springframework.stereotype.Service;
 import za.co.ums_api.models.Intern;
+import za.co.ums_api.models.LearningSkill;
 import za.co.ums_api.repository.InternRepository;
+import za.co.ums_api.repository.LearningSkillRepository;
 
 import java.util.List;
 
 @Service
-public class InternService {
+public class InternService
+{
 
     private final InternRepository internRepository;
+    private final LearningSkillRepository learningSkillRepository;
 
-    public InternService(InternRepository internRepository) {
+    public InternService(InternRepository internRepository, LearningSkillRepository learningSkillRepository)
+    {
         this.internRepository = internRepository;
+        this.learningSkillRepository = learningSkillRepository;
     }
 
+    //------------------------------------Intern auth (login/reg)
     public boolean registerIntern(Intern intern)
     {
         Intern user = internRepository.findByEmail(intern.getEmail());
@@ -48,22 +55,57 @@ public class InternService {
         }
     }
 
-    public List<Intern> getInterns()
-    {
-        return internRepository.findAll();
-    }
+    //------------------------------------Edit, PUT
 
     public Intern updateIntern(Intern intern)
     {
-        Intern intern_edit = internRepository.findByEmail(intern.getEmail());
+        Intern user = this.internRepository.findByEmail(intern.getEmail());
 
-        if(intern_edit == null)
+        user.setName(intern.getName());
+        user.setSurname(intern.getSurname());
+        user.setTrainingField(intern.getTrainingField());
+
+        if (user.getEmail().equals(intern.getEmail()))
         {
-            return intern;
-        }
-        else
+            //email not changed. Do nothing.
+        } else
         {
-            return intern_edit;
+            intern.setEmail(" ");//null this email first.
+            Intern o = this.internRepository.findByEmail(intern.getEmail());
+            if (o == null)
+            {
+                //Change email
+                user.setEmail(intern.getEmail());
+            } else
+            {
+                return user;
+            }
         }
+        return user;
+    }
+
+    public void deactivateIntern(Intern user)
+    {
+
+    }
+
+    //------------------------------------Get routes
+
+    public List<LearningSkill> getAllSkills()
+    {
+        return this.learningSkillRepository.findAll();
+    }
+
+    public List<LearningSkill> getTasks(List<LearningSkill> all, String name)
+    {
+        List<LearningSkill> myTasks = null;
+        for(LearningSkill task: all)
+        {
+            if(task.getName().equals(name))
+            {
+                myTasks.add(task);
+            }
+        }
+        return myTasks;
     }
 }

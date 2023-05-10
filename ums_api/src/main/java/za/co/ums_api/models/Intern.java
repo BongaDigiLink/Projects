@@ -37,6 +37,7 @@ public class Intern
         this.role ="intern";
     }
 
+
     //For verification. Only Store Hashed String and Return Hashed string
     public String getPassword() {
         return password;

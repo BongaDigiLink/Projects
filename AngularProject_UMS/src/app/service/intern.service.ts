@@ -10,7 +10,6 @@ export class InternService
 {
   constructor(private http: HttpClient) { }
 
-  //------------------------------------Intern Login/Reg (Auth)
 
   private apiURL = 'http://localhost:8080/intern'
 
@@ -73,9 +72,9 @@ export class InternService
    * @param id of a skill to query [01 - Data, 24 -AI, ...]
    * @returns  a list of tasks from a specific training programme
    */
-  public getSkillsTasks(id: any)
+  public getSkillsTasks(name: any)
   {
-    return this.http.get<any>(`${this.apiURL}/skills/{id}`)
+    return this.http.get<any>(`${this.apiURL}/skills-tasks/{name}`)
   }
 
 
