@@ -58,9 +58,14 @@ export class MentorService
     return this.http.get<Intern>(`${this.apiURL}/intern/{email}`);
   }
 
+  /**
+   * 
+   * @param id of intern to display details
+   * @returns Intern object, details populated to the view page.
+   */
   public getInternDetailsById(id: any): Observable<Intern>
   {
-    return this.http.get<Intern>(`${this.apiURL}/intern-user/{id}`);
+    return this.http.get<Intern>(`${this.apiURL}/intern-user/`+id);
   }
 
 
@@ -71,7 +76,7 @@ export class MentorService
 
   public removeIntern(id: any): Observable<any>
   {
-    return this.http.delete<any>(`${this.apiURL}/delete-account/{id}`)
+    return this.http.delete<any>(`${this.apiURL}/delete-account/`+id)
   }
 
   //--------------------------------------Skills Management Routes.
@@ -93,12 +98,12 @@ export class MentorService
 
   public updateSkill(id: any, skill: any): Observable<any>
   {
-    return this.http.put<any>(`${this.apiURL}/update-skill/{id}`, skill);
+    return this.http.put<any>(`${this.apiURL}/update-skill/`+id, skill);
   }
 
   public removeSkill(id: any): Observable<void>
   {
-    return this.http.delete<any>(`${this.apiURL}/remove-skill/{id}`)
+    return this.http.delete<any>(`${this.apiURL}/remove-skill/`+id)
   }
 
 }

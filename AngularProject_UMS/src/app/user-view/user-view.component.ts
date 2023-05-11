@@ -14,18 +14,28 @@ export class UserViewComponent implements OnInit
 {
   public edit = false;
   public userView: Intern = new Intern;
+  public userId!: Number;
 
 
   constructor(
     private fb : FormBuilder,
     private mentorService: MentorService,
+    private router: ActivatedRoute
   ){}
 
 
   ngOnInit(): void {
+    this.router.params.subscribe( params => {
+      this.userId = params['id'];
+    });
 
-    throw new Error('Method not implemented.');
-    //this.mentorService.getInternDetails(id).subscribe(user =>)
+    this.mentorService.getInternDetailsById(this.userId).subscribe( data => 
+      {
+        console.log("Data (user) from API "+data);
+        this.userView = data;
+      }, (err: any) => {
+        console.log('Could not retrieve this user '+ this.userId)
+      })
   }
 
   onClickEdit()

@@ -72,18 +72,18 @@ public class MentorController
         return new ResponseEntity<>(this.mentorService.getUserByEmail(email), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/intern-user/{id}")
-    public ResponseEntity<Intern> getInternById(@PathVariable("id") Integer id)
+    @GetMapping("/intern-user/{email}")
+    public ResponseEntity<Intern> getInternById(@PathVariable("email") @RequestBody Integer email)
     {
-        if(this.internService.getInternById(id) == null)
+        if(this.mentorService.getUserById(email) == null)
         {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(this.mentorService.getUserById(id), HttpStatus.OK);
+        return new ResponseEntity<>(this.mentorService.getUserById(email), HttpStatus.OK);
     }
 
     @DeleteMapping (path = "/deactivate/{id}")
-    public ResponseEntity<Intern> deleteIntern(@PathVariable("id") Integer id)
+    public ResponseEntity<Intern> deleteIntern(@PathVariable("id") @RequestBody Integer id)
     {
         Optional<Intern> intern_ = mentorService.deactivateIntern(id);
         return new ResponseEntity<Intern>(HttpStatus.OK);
