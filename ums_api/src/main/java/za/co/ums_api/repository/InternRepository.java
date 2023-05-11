@@ -10,4 +10,11 @@ public interface InternRepository extends JpaRepository<Intern, Long> {
     Intern findByEmail(String email);
 
     Boolean existsByEmail(String email);
+
+    boolean existsById(Integer email);
+
+    Optional<Intern> findById(Integer id);
+
+    Intern getInternById(Integer integer);
+    void deleteById(Integer id);
 }

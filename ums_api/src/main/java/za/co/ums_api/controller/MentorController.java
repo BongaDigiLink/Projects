@@ -30,7 +30,7 @@ public class MentorController
 
     //-------------------------------------Mentor Login (Auth)
     @GetMapping(path = "/login")
-    public Mentor login(long id)
+    public Mentor login(Integer id)
     {
         Mentor mentor = mentorService.getMentor(id);
         return mentor;
@@ -52,7 +52,7 @@ public class MentorController
     }
 
     @PutMapping(path = "/edit-intern/{id}")
-    public ResponseEntity<Intern> updateIntern(@PathVariable("id") Long id)
+    public ResponseEntity<Intern> updateIntern(@PathVariable("id") Integer id)
     {
         Intern user = this.mentorService.getUserById(id);
         if(user == null)
@@ -72,8 +72,18 @@ public class MentorController
         return new ResponseEntity<>(this.mentorService.getUserByEmail(email), HttpStatus.OK);
     }
 
+    @GetMapping(path = "/intern-user/{id}")
+    public ResponseEntity<Intern> getInternById(@PathVariable("id") Integer id)
+    {
+        if(this.internService.getInternById(id) == null)
+        {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(this.mentorService.getUserById(id), HttpStatus.OK);
+    }
+
     @DeleteMapping (path = "/deactivate/{id}")
-    public ResponseEntity<Intern> deleteIntern(@PathVariable("id") Long id)
+    public ResponseEntity<Intern> deleteIntern(@PathVariable("id") Integer id)
     {
         Optional<Intern> intern_ = mentorService.deactivateIntern(id);
         return new ResponseEntity<Intern>(HttpStatus.OK);

@@ -44,13 +44,13 @@ public class MentorService {
 
     //------------------------------------Intern Management Functions
 
-    public Mentor getMentor(Long id)
+    public Mentor getMentor(Integer id)
     {
         return mentorRepository.getMentor(id);
     }
 
 
-    public Optional<Intern> deleteIntern(Long id)
+    public Optional<Intern> deleteIntern(Integer id)
     {
         Optional<Intern> remove = this.internRepository.findById(id);
 
@@ -65,7 +65,7 @@ public class MentorService {
         return remove;
     }
 
-    public Optional<Intern> deactivateIntern(Long id)
+    public Optional<Intern> deactivateIntern(Integer id)
     {
         Optional<Intern> deactivated = this.internRepository.findById(id);
         deactivated.get().setRole("offline");
@@ -73,7 +73,7 @@ public class MentorService {
         return  deactivated;
     }
 
-    public Intern getUserById(Long id) {
+    public Intern getUserById(Integer id) {
         Optional<Intern> user = this.internRepository.findById(id);
 
         if(user.isPresent())

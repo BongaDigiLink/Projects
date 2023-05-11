@@ -113,4 +113,13 @@ public class InternService
         }
         return myTasks;
     }
+
+    public Intern getInternById(Integer email) {
+        if(this.internRepository.existsById(email))
+        {
+            Intern intern = this.internRepository.getInternById(email);
+            return intern;
+        }
+        return null;
+    }
 }

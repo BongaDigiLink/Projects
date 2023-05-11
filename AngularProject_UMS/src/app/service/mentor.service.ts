@@ -58,6 +58,12 @@ export class MentorService
     return this.http.get<Intern>(`${this.apiURL}/intern/{email}`);
   }
 
+  public getInternDetailsById(id: any): Observable<Intern>
+  {
+    return this.http.get<Intern>(`${this.apiURL}/intern-user/{id}`);
+  }
+
+
   public deactivateIntern(id: any): Observable<any>
   {
     return this.http.put<any>(`${this.apiURL}/deactivate/`, id);

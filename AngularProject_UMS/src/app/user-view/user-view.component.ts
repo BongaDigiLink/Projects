@@ -1,20 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MentorService } from '../service/mentor.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
+import { Intern } from '../models/intern';
 
 @Component({
   selector: 'app-user-view',
   templateUrl: './user-view.component.html',
   styleUrls: ['./user-view.component.css']
 })
-export class UserViewComponent 
+export class UserViewComponent implements OnInit
 {
   public edit = false;
+  public userView: Intern = new Intern;
+
+
   constructor(
     private fb : FormBuilder,
-    private mentorService: MentorService
+    private mentorService: MentorService,
   ){}
+
+
+  ngOnInit(): void {
+
+    throw new Error('Method not implemented.');
+    //this.mentorService.getInternDetails(id).subscribe(user =>)
+  }
 
   onClickEdit()
   {
@@ -70,8 +82,6 @@ export class UserViewComponent
       }
     )
   }
-
-  public upDate(id: any): void{}
 
 
 }

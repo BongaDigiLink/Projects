@@ -40,7 +40,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       {path: 'signin', component: SignInComponent},
       {path: 'signup', component: SignUpComponent},
       {path: 'user-details', component: UserDetailsComponent},
-      {path: 'user', component: UserViewComponent},
+      {path: 'user/:id', component: UserViewComponent},
       {path: 'home', component: HomeComponent},
       {path: 'dashboard', component: MainComponent}
     ])

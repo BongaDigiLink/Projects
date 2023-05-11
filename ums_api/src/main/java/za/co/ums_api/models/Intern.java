@@ -10,9 +10,9 @@ import jakarta.persistence.Table;
 @Table(name="Interns")
 public class Intern
 {
-    @Id
+
     @GeneratedValue
-    private Long id;
+    private Integer id;
     private String email;
     private String name;
     private String surname;
@@ -37,6 +37,15 @@ public class Intern
         this.role ="intern";
     }
 
+    @Id
+    @GeneratedValue
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     //For verification. Only Store Hashed String and Return Hashed string
     public String getPassword() {

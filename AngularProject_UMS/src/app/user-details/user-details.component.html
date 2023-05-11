@@ -12,14 +12,14 @@
           <p class="card-text">Surname: {{ user.surname }}</p>
           <p class="card-text">Email: {{ user.email }}</p>
           <p class="card-text">Training Field: {{ user.trainingField }}</p>
-          <a class="btn btn-primary" 
+          <!-- <a class="btn btn-primary" 
       
-          (click)="getIntern(user.email)">View User</a>
+          (click)="getIntern(user.email)">View User</a> -->
+          <a class="btn btn-primary" (click)="viewUser(user.id)">View User</a>
         </div>
-    </div>
+      </div>
 
   </div>
 
 </div>
-
 <app-footer></app-footer>
