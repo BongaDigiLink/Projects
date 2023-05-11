@@ -19,7 +19,7 @@ export class InternService
    * Send email/username and passworod
    * @returns user object(Intern) and true, when account exists and credentials match.
    */
-    public loginIntern(intern: any): Observable<any>
+    public loginIntern(intern: any): Observable<Intern>
     {
       return this.http.get<Intern>(`${this.apiURL}/login/`)
     }

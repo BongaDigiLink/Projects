@@ -73,6 +73,27 @@ public class MentorService {
         return  deactivated;
     }
 
+    public Intern getUserById(Long id) {
+        Optional<Intern> user = this.internRepository.findById(id);
+
+        if(user.isPresent())
+        {
+            return user.get();
+        }
+
+        return null;
+    }
+
+    public Intern getUserByEmail(String email)
+    {
+        if(this.internRepository.existsByEmail(email))
+        {
+            return internRepository.findByEmail(email);
+        }
+
+        return null;
+    }
+
     public List<Mentor> getMentors()
     {
         return mentorRepository.findAll();

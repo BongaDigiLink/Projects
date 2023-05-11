@@ -18,31 +18,49 @@ export class MentorService
 
   //-------------------------------------Mentor Login (Auth)
 
-  public login(): Observable<Mentor>
+  public login(user: any): Observable<Mentor>
   {
-    return this.http.get<Mentor>(`${this.apiURL}/login`);
+    return this.http.post<Mentor>(`${this.apiURL}/login`, user);
   }
 
-  public registerMentor(mentor: any): Observable<any>
+  /**
+   * Create new mentor user to manage tasks and interns.
+   * @param mentor user form inputs
+   * @returns Mentor user. Store in session object.
+   */
+  public registerMentor(mentor: any): Observable<Mentor>
   {
-    return this.http.post<any>(`${this.apiURL}/registration`, mentor);
+    return this.http.post<Mentor>(`${this.apiURL}/registration`, mentor);
   }
 
    //------------------------------------Intern Management Routes
 
+   /**
+    * @returns list of all interns
+    */
   public getAllInterns(): Observable<Intern[]>
   {
     return this.http.get<Intern[]>(`${this.apiURL}/all-interns`);
   }
 
-  public updateInternDetails(intern: any): Observable<any>
+  /**
+   * @param id of intern to update
+   * @param intern object to change.
+   * @returns HttpResponse
+   */
+  public updateInternDetails(id: any, intern: any): Observable<any>
   {
     return this.http.put<any>(`${this.apiURL}/edit-intern/{id}`, intern);
   }
 
-  public deactivateIntern(id: any, intern: any): Observable<any>
+  public getInternDetails(email: any): Observable<Intern>
   {
-    return this.http.put<any>(`${this.apiURL}/deactivate/{id}`, intern);
+    return this.http.get<Intern>(`${this.apiURL}/intern/{email}`);
+  }
+
+  public deactivateIntern(id: any): Observable<any>
+  {
+    return this.http.put<any>(`${this.apiURL}/deactivate/`, id);
   }
 
   public removeIntern(id: any): Observable<any>

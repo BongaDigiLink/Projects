@@ -9,4 +9,5 @@ public interface InternRepository extends JpaRepository<Intern, Long> {
 
     Intern findByEmail(String email);
 
+    Boolean existsByEmail(String email);
 }

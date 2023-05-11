@@ -53,23 +53,21 @@ public class InternController
     @PostMapping("/Login/")
     public ResponseEntity<Intern> login(@RequestBody Intern intern)
     {
-        Intern foundUser = this.internService.login(intern);
-
-        if( foundUser != null)
+        if(this.internRepository.existsByEmail(intern.getEmail()))
         {
-            String password = foundUser.getPassword();
-
-            if(password.equals(intern.getPassword()))
+            Intern user = this.internRepository.findByEmail(intern.getEmail());
+            if(user.getPassword().equals(intern.getPassword()))
             {
-                return new ResponseEntity<Intern>(foundUser,HttpStatus.OK);
+                return new ResponseEntity<>(user, HttpStatus.OK);
             }
+            else {
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            }
+        }
+        else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
 
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
-        else
-        {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
     }
 
     //------------------------------------Intern PUT update routes
