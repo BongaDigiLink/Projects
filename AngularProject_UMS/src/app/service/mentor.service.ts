@@ -48,9 +48,9 @@ export class MentorService
    * @param intern object to change.
    * @returns HttpResponse
    */
-  public updateInternDetails(id: any, intern: any): Observable<any>
+  public updateInternDetails(id: any, intern: any): Observable<Intern>
   {
-    return this.http.put<any>(`${this.apiURL}/edit-intern/{id}`, intern);
+    return this.http.put<Intern>(`${this.apiURL}/edit-intern/`+id, intern);
   }
 
   public getInternDetails(email: any): Observable<Intern>

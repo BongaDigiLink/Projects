@@ -52,13 +52,18 @@ public class MentorController
     }
 
     @PutMapping(path = "/edit-intern/{id}")
-    public ResponseEntity<Intern> updateIntern(@PathVariable("id") Integer id)
+    public ResponseEntity<Intern> updateIntern(@PathVariable("id") Integer id, @RequestBody Intern intern)
     {
+        System.out.println("New details from front end "+intern.toString());
         Intern user = this.mentorService.getUserById(id);
         if(user == null)
         {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
+        user.setEmail(intern.getEmail());
+        user.setSurname(intern.getSurname());
+        user.setName(intern.getName());
+
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 

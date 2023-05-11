@@ -78,7 +78,7 @@ export class UserViewComponent implements OnInit
       email: this.form.value.email,
       name: this.form.value.name,
       surname: this.form.value.surname,
-      trainingField: this.form.value.trainingField
+      //trainingField: this.form.value.trainingField
     }
 
     console.log("Form inputs : "+ body)
