@@ -1,16 +1,18 @@
 <div class="container">
     <div class="row justify-content-center centered">
         <div class="col-lg-4">
-            <form action="">
-                <label for="">Username</label>
-                <input type="text" class="form-control">
-                <label for="">Username</label>
-                <input type="password" class="form-control">
+            <form [formGroup]="form" (ngSubmit)="login()">
+                <label for="">Email</label>
+                <input type="text" class="form-control" formControlName="email">
+                <label for="">Password</label>
+                <input type="password" class="form-control" formControlName="email">
                 
             </form>
 
             <div class="row txt-center">
-                <button routerLink="/dashboard" class="btn btn-primary my-2" 
+                <button routerLink="/dashboard"
+                 class="btn btn-primary my-2"
+                 type="submit" 
                 style="width: 100px; margin: auto;">Sign In</button>
             </div>
             

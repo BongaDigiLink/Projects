@@ -2,51 +2,124 @@ package za.co.ums_api.service;
 
 import org.springframework.stereotype.Service;
 import za.co.ums_api.models.Intern;
+import za.co.ums_api.models.LearningSkill;
 import za.co.ums_api.repository.InternRepository;
+import za.co.ums_api.repository.LearningSkillRepository;
 
 import java.util.List;
 
 @Service
-public class InternService {
+public class InternService
+{
 
     private final InternRepository internRepository;
+    private final LearningSkillRepository learningSkillRepository;
 
-    public InternService(InternRepository internRepository) {
+    public InternService(InternRepository internRepository, LearningSkillRepository learningSkillRepository)
+    {
         this.internRepository = internRepository;
+        this.learningSkillRepository = learningSkillRepository;
     }
 
+    //------------------------------------Intern auth (login/reg)
     public boolean registerIntern(Intern intern)
     {
-        Intern user = internRepository.findByUsername(intern.getUsername());
+        Intern user = internRepository.findByEmail(intern.getEmail());
         if(user != null)
         {
-            System.out.println("User already exists.");
+            System.out.println("User already exists. "+intern.getEmail()+" User name: "+intern.getName());
             return false;
 
         }else
         {
-            System.out.println("Debug Inside "+intern.getName()+" Username: "+intern.getUsername());
+            System.out.println("User name "+intern.getName()
+                    +" User email: "+intern.getEmail()
+                    +" Password: "+intern.getPassword()+
+                    " Surname: "+intern.getSurname());
             internRepository.save(intern);
             return true;
         }
     }
 
-    public List<Intern> getInterns()
+    public Intern login(Intern intern)
     {
-        return internRepository.findAll();
-    }
+        Intern foundUser = this.internRepository.findByEmail(intern.getEmail());
 
-    public Intern updateIntern(Intern intern)
-    {
-        Intern intern_edit = internRepository.findByUsername(intern.getUsername());
-
-        if(intern_edit == null)
+        if(foundUser != null)
         {
-            return intern;
+            return  foundUser;
         }
         else
         {
-            return intern_edit;
+            return null;
         }
+    }
+
+    //------------------------------------Edit, PUT
+
+    public Intern updateIntern(Intern intern)
+    {
+        Intern user = this.internRepository.findByEmail(intern.getEmail());
+
+        user.setName(intern.getName());
+        user.setSurname(intern.getSurname());
+        user.setTrainingField(intern.getTrainingField());
+
+        if (user.getEmail().equals(intern.getEmail()))
+        {
+            //email not changed. Do nothing.
+        } else
+        {
+            intern.setEmail(" ");//null this email first.
+            Intern o = this.internRepository.findByEmail(intern.getEmail());
+            if (o == null)
+            {
+                //Change email
+                user.setEmail(intern.getEmail());
+            } else
+            {
+                return user;
+            }
+        }
+        return user;
+    }
+
+    public void deactivateIntern(Intern user)
+    {
+
+    }
+
+    //------------------------------------Get routes
+
+    public List<Intern> getInterns()
+    {
+        return this.internRepository.findAll();
+    }
+
+    public List<LearningSkill> getAllSkills()
+    {
+        return this.learningSkillRepository.findAll();
+    }
+
+    public List<LearningSkill> getTasks(List<LearningSkill> all, String name)
+    {
+        List<LearningSkill> myTasks = null;
+        for(LearningSkill task: all)
+        {
+            if(task.getName().equals(name))
+            {
+                myTasks.add(task);
+            }
+        }
+        return myTasks;
+    }
+
+    public Intern getInternById(Integer email) {
+        if(this.internRepository.existsById(email))
+        {
+            Intern intern = this.internRepository.getInternById(email);
+            return intern;
+        }
+        return null;
     }
 }

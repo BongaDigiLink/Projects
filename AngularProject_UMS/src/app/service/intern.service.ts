@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Intern } from '../models/intern';
+import { Skills } from '../models/skills';
 
 @Injectable({
   providedIn: 'root'
@@ -10,54 +11,71 @@ export class InternService
 {
   constructor(private http: HttpClient) { }
 
+
   private apiURL = 'http://localhost:8080/intern'
 
-  /**
-   * 
-   * @returns 
+    /**
+     * Credentials
+   * Send email/username and passworod
+   * @returns user object(Intern) and true, when account exists and credentials match.
    */
-  public getSkills(): Observable<any>
-  {
-    return this.http.get<any>(`${this.apiURL}/skills/`);
-  }
+    public loginIntern(intern: any): Observable<Intern>
+    {
+      return this.http.get<Intern>(`${this.apiURL}/login/`)
+    }
+  
+    /**
+     * Capture details and submit to api->db.
+     * @param intern 
+     * @returns true, account created. user redirected to login page.
+     */
+    public register(intern: any): Observable<any>
+    {
+      return this.http.post(`${this.apiURL}/register/`,intern);
+    }
 
+
+  //------------------------------------Intern PUT update routes
   /**
-   * 
-   * @returns 
+   * Update user account details
+   * @param intern 
+   * @returns true when updated.
    */
-  public loginIntern(): Observable<Intern>
+  public updateIntern(id: any, intern: any): Observable<any>
   {
-    return this.http.get<Intern>(`${this.apiURL}/login/`)
+    return this.http.put<any>(`${this.apiURL}/update/{id}`, intern);
   }
 
   /**
    * 
    * @param intern 
+   * @returns true when account deactivated.
+   */
+  public deactivateIntern(id: any, intern: any): Observable<any>
+  {
+    return this.http.put<any>(`${this.apiURL}/deactivate/{id}`, intern);
+  }
+
+
+  //------------------------------------Intern skills routes
+  /**
+   * For select statement. See list of all possible course to
+   * register from. Used in Sign Up
    * @returns 
    */
-  public register(intern: Intern): Observable<Intern>
+  public getSkills(): Observable<Skills[]>
   {
-    return this.http.post<Intern>(`${this.apiURL}/register/`, intern);
+    return this.http.get<Skills[]>(`${this.apiURL}/skills/`);
   }
 
   /**
-   * 
-   * @param intern 
-   * @returns 
+   * See all tasks from this [skills programme] programee
+   * @param id of a skill to query [01 - Data, 24 -AI, ...]
+   * @returns  a list of tasks from a specific training programme
    */
-  public updateIntern(intern: Intern): Observable<Intern>
+  public getSkillsTasks(name: any): Observable<Skills[]>
   {
-    return this.http.put<Intern>(`${this.apiURL}/update/`, intern);
-  }
-
-  /**
-   * 
-   * @param intern 
-   * @returns 
-   */
-  public deactivateIntern(intern: Intern): Observable<Intern>
-  {
-    return this.http.put<Intern>(`${this.apiURL}/deactivate/`, intern);
+    return this.http.get<Skills[]>(`${this.apiURL}/skills-tasks/{name}`)
   }
 
 

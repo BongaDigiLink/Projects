@@ -13,7 +13,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { MainComponent } from './main/main.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CreateTaskComponent } from './create-task/create-task.component';
 
 @NgModule(
   {
@@ -27,21 +28,25 @@ import { FormsModule } from '@angular/forms';
     UserViewComponent,
     NavbarComponent,
     FooterComponent,
-    MainComponent
+    MainComponent,
+    CreateTaskComponent
   ],
   imports: 
   [
     HttpClientModule,
-    FormsModule,
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       {path: '', redirectTo : 'home', pathMatch: 'full'},
-      {path: 'signin', component: SignInComponent},
-      {path: 'signup', component: SignUpComponent},
-      {path: 'user-details', component: UserDetailsComponent},
-      {path: 'user', component: UserViewComponent},
       {path: 'home', component: HomeComponent},
-      {path: 'dashboard', component: MainComponent}
+      {path: 'signup', component: SignUpComponent},
+      {path: 'signin', component: SignInComponent},
+      {path: 'dashboard', component: MainComponent},
+      {path: 'user-details', component: UserDetailsComponent},
+      {path: 'user/:id', component: UserViewComponent},
+      {path: 'create-task', component: CreateTaskComponent},
+      
     ])
   ],
   providers: [],

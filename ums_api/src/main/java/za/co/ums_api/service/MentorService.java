@@ -1,20 +1,34 @@
 package za.co.ums_api.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import za.co.ums_api.models.Intern;
 import za.co.ums_api.models.LearningSkill;
 import za.co.ums_api.models.Mentor;
+import za.co.ums_api.repository.InternRepository;
 import za.co.ums_api.repository.LearningSkillRepository;
 import za.co.ums_api.repository.MentorRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@Transactional
 public class MentorService {
     private final MentorRepository mentorRepository;
     private final LearningSkillRepository learningSkillRepository;
+    private final InternRepository internRepository;
+
+    public MentorService(MentorRepository mentorRepository, LearningSkillRepository learningSkillRepository, InternRepository internRepository)
+    {
+        this.mentorRepository = mentorRepository;
+        this.learningSkillRepository = learningSkillRepository;
+        this.internRepository = internRepository;
+    }
+
+    //------------------------------------Intern Auth Management Functions
 
     public Boolean registerMentor(Mentor mentor)
     {
@@ -32,16 +46,56 @@ public class MentorService {
         }
     }
 
+    //------------------------------------Intern Management Functions
 
-    public MentorService(MentorRepository mentorRepository, LearningSkillRepository learningSkillRepository)
-    {
-        this.mentorRepository = mentorRepository;
-        this.learningSkillRepository = learningSkillRepository;
-    }
-
-    public Mentor getMentor(Long id)
+    public Mentor getMentor(Integer id)
     {
         return mentorRepository.getMentor(id);
+    }
+
+
+    public Boolean deleteIntern(Integer id)
+    {
+       Boolean deletedDefault = false;
+
+       if(this.internRepository.existsById(id))
+       {
+           internRepository.deleteById(id);
+           return true;
+       }
+       else
+       {
+           return deletedDefault;
+       }
+    }
+
+    public Optional<Intern> deactivateIntern(Integer id)
+    {
+        Optional<Intern> deactivated = this.internRepository.findById(id);
+        deactivated.get().setRole("offline");
+
+        return  deactivated;
+    }
+
+    public Intern getUserById(Integer id) {
+        Optional<Intern> user = this.internRepository.findById(id);
+
+        if(user.isPresent())
+        {
+            return user.get();
+        }
+
+        return null;
+    }
+
+    public Intern getUserByEmail(String email)
+    {
+        if(this.internRepository.existsByEmail(email))
+        {
+            return internRepository.findByEmail(email);
+        }
+
+        return null;
     }
 
     public List<Mentor> getMentors()
@@ -49,21 +103,24 @@ public class MentorService {
         return mentorRepository.findAll();
     }
 
-    //Service calls for Training Skills Management
+    //--------------------------------------Skills Management Functions
 
-    public Boolean createSkill(LearningSkill learningSkill)
+    public Boolean createSkill(LearningSkill task)
     {
-        LearningSkill check = learningSkillRepository.findByName(learningSkill.getName());
+        learningSkillRepository.save(new LearningSkill(task.getName(), task.getDescription()));
+        return true;
+    }
 
-        if(check != null)
-        {
-            return false;
-        }
-        else
-        {
-            learningSkillRepository.save(learningSkill);
-            return true;
-        }
+    public LearningSkill createTask(LearningSkill task)
+    {
+        LearningSkill createTask = this.learningSkillRepository.save(
+                new LearningSkill(task.getName(),
+                        task.getFieldTraining(),
+                        task.getDueDate(),
+                        task.getDescription())
+        );
+
+        return createTask;
     }
 
     public LearningSkill updateSkill(LearningSkill skill)
@@ -83,5 +140,33 @@ public class MentorService {
     public List<LearningSkill> skills()
     {
          return learningSkillRepository.findAll();
+    }
+
+
+    public boolean checkUser(Integer id)
+    {
+        return this.internRepository.existsById(id);
+    }
+
+    /**
+     *
+     * @param id of intern to update.
+     * @param intern data from the client
+     * @return the changed object.
+     */
+    public Intern updateIntern(Integer id, Intern intern)
+    {
+        Optional<Intern> user = this.internRepository.findById(id);
+
+        Intern update = user.get();
+
+        update.setName(intern.getName());
+        update.setSurname(intern.getSurname());
+        update.setEmail(intern.getEmail());
+        update.setActiveStatus(intern.getActiveStatus());
+        update.setTrainingField(intern.getTrainingField());
+
+        return this.internRepository.save(update);
+
     }
 }

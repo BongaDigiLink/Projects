@@ -16,44 +16,94 @@ export class MentorService
 
   private readonly apiURL = 'http://localhost:8080/mentor'
 
-  public login(): Observable<Mentor>
+  //-------------------------------------Mentor Login (Auth)
+
+  public login(user: any): Observable<Mentor>
   {
-    return this.http.get<Mentor>(`${this.apiURL}/login`);
+    return this.http.post<Mentor>(`${this.apiURL}/login`, user);
   }
 
-  public registerMentor(mentor: Mentor): Observable<Mentor>
+  /**
+   * Create new mentor user to manage tasks and interns.
+   * @param mentor user form inputs
+   * @returns Mentor user. Store in session object.
+   */
+  public registerMentor(mentor: any): Observable<Mentor>
   {
     return this.http.post<Mentor>(`${this.apiURL}/registration`, mentor);
   }
 
+   //------------------------------------Intern Management Routes
+
+   /**
+    * @returns list of all interns
+    */
   public getAllInterns(): Observable<Intern[]>
   {
     return this.http.get<Intern[]>(`${this.apiURL}/all-interns`);
   }
 
-  public getAllSkills(): Observable<any>
+  /**
+   * @param id of intern to update
+   * @param intern object to change.
+   * @returns HttpResponse
+   */
+  public updateInternDetails(id: any, intern: any): Observable<Intern>
   {
-    return this.http.get<any>(`${this.apiURL}/skills-offered`);
+    return this.http.put<Intern>(`${this.apiURL}/edit-intern/`+id, intern);
   }
 
-  public addSkill(skill: Skills): Observable<any>
+  public getInternDetails(email: any): Observable<Intern>
+  {
+    return this.http.get<Intern>(`${this.apiURL}/intern/${email}`);
+  }
+
+  /**
+   * 
+   * @param id of intern to display details
+   * @returns Intern object, details populated to the view page.
+   */
+  public getInternDetailsById(id: any): Observable<Intern>
+  {
+    return this.http.get<Intern>(`${this.apiURL}/intern-user/${id}`);
+  }
+
+
+  public deactivateIntern(id: any): Observable<any>
+  {
+    return this.http.put<any>(`${this.apiURL}/deactivate/`, id);
+  }
+
+  public removeIntern(id: any): Observable<any>
+  {
+    return this.http.delete<any>(`${this.apiURL}/delete-account/`+id)
+  }
+
+  //--------------------------------------Skills Management Routes.
+
+  public getAllSkills(): Observable<Skills[]>
+  {
+    return this.http.get<Skills[]>(`${this.apiURL}/skills-offered`);
+  }
+
+  public addSkill(skill: any): Observable<any>
   {
     return this.http.post<any>(`${this.apiURL}/add-skill`, skill);
   }
 
-  public updateSkill(skill: Skills): Observable<Skills>
+  public createTask(skill: any): Observable<any>
   {
-    return this.http.put<Skills>(`${this.apiURL}/update-skill`, skill);
+    return this.http.post<any>(`${this.apiURL}/create-task`, skill);
   }
 
-  public updateInternDetails(intern: Intern): Observable<Intern>
+  public updateSkill(id: any, skill: any): Observable<any>
   {
-    return this.http.put<Intern>(`${this.apiURL}/edit-intern`, intern);
+    return this.http.put<any>(`${this.apiURL}/update-skill/`+id, skill);
   }
 
-  public removeSkill(): Observable<void>
+  public removeSkill(id: any): Observable<void>
   {
-    return this.http.delete<any>(`${this.apiURL}/remove-skill`)
+    return this.http.delete<any>(`${this.apiURL}/remove-skill/`+id)
   }
 
 }

@@ -1,22 +1,20 @@
 <div class="container-fluid">
     <div class="row justify-content-center centered">
         <div class="col-sm-8 col-md-9 col-lg-4">
-            <form action="">
-                <label for="">Create Username</label>
-                <input [(ngModel)]="intern.username" type="text" class="form-control">
+            <form [formGroup]="form" (ngSubmit)="registerIntern()">
 
                 <label for="">Your Email</label>
-                <input [(ngModel)]="intern.email" type="text" class="form-control">
+                <input type="email" formControlName="email" class="form-control">
 
                 <label for="">Your Name</label>
-                <input [(ngModel)]="intern.name" type="text" class="form-control">
+                <input type="text" formControlName="name" class="form-control">
 
                 <label for="">Your Surname</label>
-                <input [(ngModel)]="intern.surname" type="text" class="form-control">
+                <input type="text" formControlName="surname" class="form-control">
 
                 <div class="form-group">
                     <label>Skills Programme</label>
-                    <select multiple="" class="form-control">
+                    <select formControlName="trainingField" class="form-control" >
                         <option>Data Analytics</option>
                         <option>Full Stack Software Developer</option>
                         <option>Software Tester</option>
@@ -24,16 +22,30 @@
                 </div>
 
                 <label for="">Create Password</label>
-                <input [(ngModel)]="intern.password" type="password" class="form-control">
+                <input type="password" formControlName="password" class="form-control">
 
                 <label for="">Confirm Password</label>
-                <input type="password" class="form-control">
+                <input type="password" class="form-control" formControlName="confirmPassword">
+
+                <div class="row txt-center">
+                    <button
+                    type="submit"
+                     class="btn btn-primary my-2" 
+                    style="width: 100px; margin: auto;">Sign Up</button>
+                </div>
                 
             </form>
-            <div class="row txt-center">
-                <button routerLink="/signin" class="btn btn-primary my-2" 
+            <!-- <div class="row txt-center">
+                <button (click)="registerIntern(addEmployee)"
+                type="submit"
+                 class="btn btn-primary my-2" 
                 style="width: 100px; margin: auto;">Sign Up</button>
-            </div>
+            </div> -->
+
+            <pre>
+                {{form.valid}}
+                {{form.value | json}}
+            </pre>
             
             <div class="row txt-center redirect-text">
                 
@@ -42,6 +54,7 @@
                         Click here to login.</a>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

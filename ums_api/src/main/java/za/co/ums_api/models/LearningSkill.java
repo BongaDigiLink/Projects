@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import java.util.Date;
+
 @Entity
 @Table(name="Skills")
 public class LearningSkill
@@ -15,16 +17,34 @@ public class LearningSkill
     private String name;
     private String description;
     private Integer programmeDuration;
+    private Date dueDate;
+
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public void setFieldTraining(String fieldTraining) {
+        this.fieldTraining = fieldTraining;
+    }
+
+    private String fieldTraining;
 
     //Number of enrolled students/trainees/interns
     private static Integer count = 0;
 
-    public LearningSkill(String name, String description, Integer programmeDuration)
+    public LearningSkill(String name, String fieldTraining, Date date,String description)
+    {
+        this.name = name;
+        this.fieldTraining = fieldTraining;
+        this.description = description;
+        this.dueDate = date;
+        count +=1;
+    }
+
+    public LearningSkill(String name, String description)
     {
         this.name = name;
         this.description = description;
-        this.programmeDuration = programmeDuration;
-        count +=1;
     }
 
     public LearningSkill()
@@ -55,4 +75,11 @@ public class LearningSkill
         this.programmeDuration = programmeDuration;
     }
 
+    public String getFieldTraining() {
+        return this.fieldTraining;
+    }
+
+    public Date getDueDate() {
+        return this.dueDate;
+    }
 }

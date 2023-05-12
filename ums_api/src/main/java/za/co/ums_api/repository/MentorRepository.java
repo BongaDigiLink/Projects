@@ -7,10 +7,10 @@ import za.co.ums_api.models.Mentor;
 import java.util.List;
 import java.util.Optional;
 
-public interface MentorRepository extends JpaRepository<Mentor, Long>
+public interface MentorRepository extends JpaRepository<Mentor, Integer>
 {
     //private final MentorRepository mento
-    public default Mentor getMentor(Long id)
+    public default Mentor getMentor(Integer id)
     {
         Optional<Mentor> mentor = findById(id);
 

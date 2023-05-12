@@ -4,38 +4,48 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+//import javax.persistence.*;
 
 @Entity
 @Table(name="Interns")
 public class Intern
 {
-    @Id
+
     @GeneratedValue
-    private Long id;
-    private String username;
+    private Integer id;
     private String email;
     private String name;
     private String surname;
-    private Integer phone;
-    private String about;
+    private String role;
+
+    private Boolean activeStatus;
     private String trainingField;
     private String password;
-
-    public String getEmail() {
-        return email;
-    }
 
     //No args Constructor
     public Intern()
     {
     }
 
-    public String getUsername() {
-        return username;
+    //Default Registration Constructor
+    public Intern(String email, String name, String surname, String trainingField, String password) {
+        this.email = email;
+        this.name = name;
+        this.surname = surname;
+        this.password = password;
+        this.trainingField = trainingField;
+        this.role ="intern";
+        this.activeStatus = true;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    @Id
+    @GeneratedValue
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     //For verification. Only Store Hashed String and Return Hashed string
@@ -46,24 +56,6 @@ public class Intern
     //For changing password. Hashed string only.
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    //Default Registration Constructor
-    public Intern(String username,String email, String name, String surname, Integer phone, String password) {
-        this.username = username;
-        this.email = email;
-        this.name = name;
-        this.surname = surname;
-        this.phone = phone;
-        this.password = password;
-    }
-
-    public String getAbout() {
-        return about;
-    }
-
-    public void setAbout(String about) {
-        this.about = about;
     }
 
     public String getTrainingField() {
@@ -82,6 +74,14 @@ public class Intern
         return name;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -94,11 +94,27 @@ public class Intern
         this.surname = surname;
     }
 
-    public Integer getPhone() {
-        return phone;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPhone(Integer phone) {
-        this.phone = phone;
+    public Boolean getActiveStatus() {
+        return activeStatus;
     }
+
+    public void setActiveStatus(Boolean activeStatus) {
+        this.activeStatus = activeStatus;
+    }
+
+
+    public String toString()
+    {
+        return " "+this.email+
+                " "+this.name+
+                " "+this.surname+
+                " "+this.role+
+                " "+this.password+
+                " "+this.activeStatus;
+    }
+
 }
