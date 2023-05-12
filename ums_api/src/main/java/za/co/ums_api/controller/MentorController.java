@@ -51,49 +51,64 @@ public class MentorController
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
+    /**
+     * @param id intern to update
+     * @param intern data from client
+     * @return update object.
+     */
     @PutMapping(path = "/edit-intern/{id}")
     public ResponseEntity<Intern> updateIntern(@PathVariable("id") Integer id, @RequestBody Intern intern)
     {
         System.out.println("New details from front end "+intern.toString());
-        Intern user = this.mentorService.getUserById(id);
-        if(user == null)
+        if(this.mentorService.checkUser(id))
+        {
+            this.mentorService.updateIntern(id, intern);
+        }
+        else
         {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        user.setEmail(intern.getEmail());
-        user.setSurname(intern.getSurname());
-        user.setName(intern.getName());
-
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping(path = "/intern/{email}")
-    public ResponseEntity<Intern> getIntern(@PathVariable("email") String email)
+    @GetMapping("/intern-user/{id}")
+    public ResponseEntity<Intern> getInternById(@PathVariable("id") @RequestBody Integer id)
     {
-        if(this.mentorService.getUserByEmail(email) == null)
+        if(this.mentorService.getUserById(id) == null)
         {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(this.mentorService.getUserByEmail(email), HttpStatus.OK);
+        return new ResponseEntity<>(this.mentorService.getUserById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/intern-user/{email}")
-    public ResponseEntity<Intern> getInternById(@PathVariable("email") @RequestBody Integer email)
+    @DeleteMapping (path = "/delete-account/{id}")
+    public ResponseEntity<Boolean> deleteIntern(@PathVariable("id") @RequestBody Integer id)
     {
-        if(this.mentorService.getUserById(email) == null)
+        //Optional<Intern> intern_ = mentorService.deactivateIntern(id);
+        if(this.mentorService.getUserById(id) != null)
         {
+            if(this.mentorService.deleteIntern(id))
+            {
+                return new ResponseEntity<>(true, HttpStatus.OK);
+            }
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(this.mentorService.getUserById(email), HttpStatus.OK);
+        else
+        {
+            return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+        }
     }
 
-    @DeleteMapping (path = "/deactivate/{id}")
-    public ResponseEntity<Intern> deleteIntern(@PathVariable("id") @RequestBody Integer id)
+    @PutMapping("/deactivate/{id}")
+    public ResponseEntity<Boolean> deactivateIntern(@PathVariable("{id}") @RequestBody Integer id)
     {
-        Optional<Intern> intern_ = mentorService.deactivateIntern(id);
-        return new ResponseEntity<Intern>(HttpStatus.OK);
+        if(this.mentorService.deleteIntern(id))
+        {
+            this.mentorService.deleteIntern(id);
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
     }
-
 
     @GetMapping(path="/mentors")
     public ResponseEntity<List<Mentor>> getMentors()

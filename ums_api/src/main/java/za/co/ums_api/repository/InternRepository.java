@@ -11,7 +11,7 @@ public interface InternRepository extends JpaRepository<Intern, Long> {
 
     Boolean existsByEmail(String email);
 
-    boolean existsById(Integer email);
+    boolean existsById(Integer id);
 
     Optional<Intern> findById(Integer id);
 

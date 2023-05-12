@@ -6,6 +6,7 @@ export class Intern
     surname?: string;
     role?: string;
     trainingField?: string;
+    activeStatus?: string;
     password?: string;
 
 }

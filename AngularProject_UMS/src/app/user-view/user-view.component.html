@@ -55,42 +55,58 @@
                     </div>
                     
                       <div class="panel-body">
-                          <form [formGroup]="form">
+                          <form [formGroup]="form" (ngSubmit)="updateIntern()">
                                       
                               <div class="form-group">
                                     <label>Edit Email</label>
-                                    <input class="form-control" type="text" formControlName="email">
+                                    <input class="form-control" type="text"
+                                     formControlName="email">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Edit Name</label>
-                                    <input class="form-control" type="text" formControlName="name">
+                                    <input class="form-control" type="text"
+                                     formControlName="name">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Edit Surname</label>
-                                    <input class="form-control" type="text" formControlName="surname">
+                                    <input class="form-control" type="text"
+                                     formControlName="surname">
                                 </div>
 
                               <div class="form-group">
-                                    <label>User Access</label>
+                                    <label>Active Status</label>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" value="" />Activate
+                                            <input type="checkbox" value=""
+                                            formControlName="activeStatus" />Activate
                                         </label>
                                     </div>
                                  
                               </div>
 
+                              <div class="form-group">
+                                <label>Skills Programme</label>
+                                <select formControlName="trainingField" class="form-control" >
+                                    <option>Data Analytics</option>
+                                    <option>Full Stack Software Developer</option>
+                                    <option>Software Tester</option>
+                                </select>
+                            </div>
+
                               <div class="center text-center">
                                 <button
                                 type="submit"
-                                (click)="updateIntern(userView.id)"
                                  class="btn btn-primary">Update User</button>
                               </div>
-                              
                           </form>
-                        </div>
+
+                          <pre>
+                            {{form.valid}}
+                            {{form.value | json}}
+                          </pre>
+                     </div>
                   </div>
             </div>
 

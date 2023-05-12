@@ -53,16 +53,16 @@ export class UserViewComponent implements OnInit
     name:[''],
     surname:[''],
     trainingField:[''],
-    role:['']
+    activeStatus:['']
   })
 
   initForm(): FormGroup {
     let form =  this.fb.group({
-      email: ['', Validators.required],
+      email: ['', Validators.required, Validators.email],
       name: ['', Validators.required],
       surname: ['', Validators.required],
       trainingField: ['', Validators.required],
-      role:['', Validators.required]
+      activeStatus:[this.userView.activeStatus, Validators.required]
     })
 
     //Check whether email is not used by other account.
@@ -72,17 +72,17 @@ export class UserViewComponent implements OnInit
     return form;
   }
 
-  public updateIntern(id: any): void
+  public updateIntern(): void
   {
     const body = {
       email: this.form.value.email,
       name: this.form.value.name,
       surname: this.form.value.surname,
-      //trainingField: this.form.value.trainingField
+      activeStatus: this.form.value.activeStatus,
+      trainingField: this.form.value.trainingField
     }
 
-    console.log("Form inputs : "+ body)
-    this.mentorService.updateInternDetails(id,body).subscribe(
+    this.mentorService.updateInternDetails(this.userId,body).subscribe(
       (response: any) => {
         console.log("Response from api : "+response)
       }, 

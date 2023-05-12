@@ -16,9 +16,9 @@ public class Intern
     private String email;
     private String name;
     private String surname;
-
     private String role;
 
+    private Boolean activeStatus;
     private String trainingField;
     private String password;
 
@@ -35,6 +35,7 @@ public class Intern
         this.password = password;
         this.trainingField = trainingField;
         this.role ="intern";
+        this.activeStatus = true;
     }
 
     @Id
@@ -97,6 +98,14 @@ public class Intern
         return email;
     }
 
+    public Boolean getActiveStatus() {
+        return activeStatus;
+    }
+
+    public void setActiveStatus(Boolean activeStatus) {
+        this.activeStatus = activeStatus;
+    }
+
 
     public String toString()
     {
@@ -104,7 +113,8 @@ public class Intern
                 " "+this.name+
                 " "+this.surname+
                 " "+this.role+
-                " "+this.password;
+                " "+this.password+
+                " "+this.activeStatus;
     }
 
 }

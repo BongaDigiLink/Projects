@@ -55,7 +55,7 @@ export class MentorService
 
   public getInternDetails(email: any): Observable<Intern>
   {
-    return this.http.get<Intern>(`${this.apiURL}/intern/{email}`);
+    return this.http.get<Intern>(`${this.apiURL}/intern/${email}`);
   }
 
   /**
@@ -65,7 +65,7 @@ export class MentorService
    */
   public getInternDetailsById(id: any): Observable<Intern>
   {
-    return this.http.get<Intern>(`${this.apiURL}/intern-user/`+id);
+    return this.http.get<Intern>(`${this.apiURL}/intern-user/${id}`);
   }
 
 

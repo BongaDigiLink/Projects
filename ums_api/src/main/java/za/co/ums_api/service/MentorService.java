@@ -1,5 +1,8 @@
 package za.co.ums_api.service;
 
+import jakarta.transaction.Transactional;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import za.co.ums_api.models.Intern;
 import za.co.ums_api.models.LearningSkill;
@@ -12,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class MentorService {
     private final MentorRepository mentorRepository;
     private final LearningSkillRepository learningSkillRepository;
@@ -50,19 +54,19 @@ public class MentorService {
     }
 
 
-    public Optional<Intern> deleteIntern(Integer id)
+    public Boolean deleteIntern(Integer id)
     {
-        Optional<Intern> remove = this.internRepository.findById(id);
+       Boolean deletedDefault = false;
 
-        if(remove != null)
-        {
-
-        }
-        else {
-            internRepository.deleteById(id);
-            return remove;
-        }
-        return remove;
+       if(this.internRepository.existsById(id))
+       {
+           internRepository.deleteById(id);
+           return true;
+       }
+       else
+       {
+           return deletedDefault;
+       }
     }
 
     public Optional<Intern> deactivateIntern(Integer id)
@@ -145,4 +149,30 @@ public class MentorService {
     }
 
 
+    public boolean checkUser(Integer id)
+    {
+        return this.internRepository.existsById(id);
+    }
+
+    /**
+     *
+     * @param id of intern to update.
+     * @param intern data from the client
+     * @return the changed object.
+     */
+    public Intern updateIntern(Integer id, Intern intern)
+    {
+        Optional<Intern> user = this.internRepository.findById(id);
+
+        Intern update = user.get();
+
+        update.setName(intern.getName());
+        update.setSurname(intern.getSurname());
+        update.setEmail(intern.getEmail());
+        update.setActiveStatus(intern.getActiveStatus());
+        update.setTrainingField(intern.getTrainingField());
+
+        return this.internRepository.save(update);
+
+    }
 }

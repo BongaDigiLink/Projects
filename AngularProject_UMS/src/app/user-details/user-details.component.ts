@@ -15,8 +15,7 @@ export class UserDetailsComponent implements OnInit{
   public user: Intern | undefined;
 
   constructor(private mentorService: MentorService,
-    private router :Router,
-    private activatedRoute: ActivatedRoute)
+    private router :Router)
   {}
 
   ngOnInit(): void {
@@ -37,7 +36,7 @@ export class UserDetailsComponent implements OnInit{
   }
 
   viewUser(id : number | undefined) {
-    this.getDetails(id);
+    // this.getDetails(id);
     this.router.navigate([`/user/${id}`]).then(data => console.log("data on: "+data));
   }
 
@@ -46,6 +45,12 @@ export class UserDetailsComponent implements OnInit{
     .subscribe(user => {
       console.log(user);
       this.user = user;
+    })
+  }
+
+  public deleteUser(id: any){
+    this.mentorService.removeIntern(id).subscribe( response => {
+      console.log("delete response from API: "+response)
     })
   }
 
