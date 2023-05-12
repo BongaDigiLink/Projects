@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row pad-botm">
             <div class="col-md-12">
-                <h4 class="header-line">Blank Page</h4>
+                <h4 class="header-line">Create New Task</h4>
             </div>
         </div>
 
@@ -19,4 +19,58 @@
             </div>
         </div>
     </div>
+
+    <!--Open Form creating a Task.-->
+   
+    <div class="panel panel-info">
+        <div class="panel-heading">
+           Create Task
+        </div>
+        <div class="panel-body">
+            <form [formGroup]="form">
+
+                        <div class="form-group">
+                            <label>Task Title</label>
+                            <input class="form-control"
+                             type="text"
+                             formControlName="taskTitle">
+                            <p class="help-block">create title</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Skills Programme</label>
+                            <select formControlName="trainingField" class="form-control" >
+                                <option>Data Analytics</option>
+                                <option>Full Stack Software Developer</option>
+                                <option>Software Tester</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Due Date</label>
+                            <input class="form-control"
+                             type="date"
+                             formControlName="dueDate">
+                            <p class="help-block">Help text here.</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Task Description:</label>
+                            <textarea class="form-control" rows="3"
+                            formControlName="taskDescription">
+                            </textarea>
+                        </div>
+                  
+                 
+                        <button type="submit"
+                            type="submit"
+                            (click)="createTask()" 
+                            class="btn btn-info">Submit Task
+                        </button>
+
+                </form>
+            </div>
+        </div>
+
+    <!--End of Task form-->
 </div>

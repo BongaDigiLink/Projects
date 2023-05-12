@@ -36,11 +36,14 @@ public class InternController
     @PostMapping("/register/")
     public ResponseEntity<Intern> registerIntern(@RequestBody Intern intern)
     {
-        //System.out.println("Inputs from front end : "+intern.toString());
         try
         {
             Intern internObj = internRepository.save(
-                    new Intern(intern.getEmail(), intern.getName(), intern.getSurname(), intern.getTrainingField(), intern.getPassword()));
+                    new Intern(intern.getEmail(),
+                            intern.getName(),
+                            intern.getSurname(),
+                            intern.getTrainingField(),
+                            intern.getPassword()));
 
             return new ResponseEntity<>(HttpStatus.OK);
         }

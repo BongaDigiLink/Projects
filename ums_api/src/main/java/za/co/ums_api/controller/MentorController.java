@@ -125,9 +125,10 @@ public class MentorController
     }
 
     @PostMapping(path = "/add-skill")
-    public ResponseEntity<Boolean> createProgramme(@RequestBody LearningSkill newskill)
+    public ResponseEntity<Boolean> createProgramme(@RequestBody LearningSkill task)
     {
-        mentorService.createSkill(newskill);
+        System.out.println("Task Name: "+task.getDueDate());
+        mentorService.createTask(task);
         return new ResponseEntity<Boolean>(true, HttpStatus.OK);
     }
 

@@ -105,25 +105,19 @@ public class MentorService {
 
     //--------------------------------------Skills Management Functions
 
-    public Boolean createSkill(LearningSkill learningSkill)
+    public Boolean createSkill(LearningSkill task)
     {
-        LearningSkill check = learningSkillRepository.findByName(learningSkill.getName());
-
-        if(check != null)
-        {
-            return false;
-        }
-        else
-        {
-            learningSkillRepository.save(learningSkill);
-            return true;
-        }
+        learningSkillRepository.save(new LearningSkill(task.getName(), task.getDescription()));
+        return true;
     }
 
     public LearningSkill createTask(LearningSkill task)
     {
         LearningSkill createTask = this.learningSkillRepository.save(
-                new LearningSkill(task.getName(), task.getDescription())
+                new LearningSkill(task.getName(),
+                        task.getFieldTraining(),
+                        task.getDueDate(),
+                        task.getDescription())
         );
 
         return createTask;
