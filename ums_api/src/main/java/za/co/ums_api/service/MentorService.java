@@ -167,7 +167,6 @@ public class MentorService {
         update.setTrainingField(intern.getTrainingField());
 
         return this.internRepository.save(update);
-
     }
 
     public boolean checkMentor(String email)

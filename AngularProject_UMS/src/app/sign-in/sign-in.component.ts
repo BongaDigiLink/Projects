@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms'
 import { InternService } from '../service/intern.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Intern } from '../models/intern';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -46,8 +46,8 @@ export class SignInComponent
       (response: Intern) => 
       {
         //console.log("Logged in user status : "+response.activeStatus)
-        localStorage.setItem('user_email',`${response.email}`)
-        localStorage.setItem('user_id',`${response.id}`)
+        sessionStorage.setItem('user_email',`${response.email}`)
+        sessionStorage.setItem('user_id',`${response.id}`)
 
         this.router.navigate(['/dashboard']);
       }, 

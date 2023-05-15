@@ -1,8 +1,9 @@
 export class Skills{
     constructor(
-        name:string,
-        description:string,
-        programmeDuration:number
+        name?:string,
+        fieldTraining?:string,
+        dueDate?:Date,
+        Description?:string
     ){}
     
 }

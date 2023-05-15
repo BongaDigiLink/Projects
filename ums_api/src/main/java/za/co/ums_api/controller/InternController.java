@@ -74,6 +74,15 @@ public class InternController
         return new ResponseEntity<>(this.internService.getAllSkills(), HttpStatus.OK);
     }
 
+    @GetMapping("/tasks/")
+    public ResponseEntity<List<LearningSkill>> getTasks()
+    {
+        List<LearningSkill> all = this.internService.getAllSkills();
+//        List<LearningSkill> tasks = this.internService.getTasks();
+
+        return new ResponseEntity<>(all, HttpStatus.OK);
+    }
+
     @GetMapping("/skills-tasks/{name}")
     public ResponseEntity<List<LearningSkill>> getTasks(@PathVariable("name") String name)
     {
