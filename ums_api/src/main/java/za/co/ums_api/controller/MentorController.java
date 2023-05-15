@@ -29,11 +29,16 @@ public class MentorController
 
 
     //-------------------------------------Mentor Login (Auth)
-    @GetMapping(path = "/login")
-    public Mentor login(Integer id)
+
+    @PostMapping("/login")
+    public ResponseEntity<Mentor> login(@RequestBody Mentor mentor)
     {
-        Mentor mentor = mentorService.getMentor(id);
-        return mentor;
+        if(this.mentorService.checkMentor(mentor.getEmail()))
+        {
+            return  new ResponseEntity<>(this.mentorService.getUserByEmail(mentor.getEmail()), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping(path="/registration")

@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.co.ums_api.models.Intern;
 import za.co.ums_api.models.LearningSkill;
+import za.co.ums_api.models.Mentor;
 import za.co.ums_api.repository.InternRepository;
 import za.co.ums_api.service.InternService;
 
@@ -16,64 +17,49 @@ import java.util.Optional;
 @RequestMapping(path = "/intern")
 public class InternController
 {
-    //private final InternService internService;
-    //private final InternRepository internRepository;
-
     @Autowired
     InternRepository internRepository;
 
     @Autowired
     InternService internService;
 
-//    @Autowired
-//    public InternController(InternService internService, InternRepository internRepository)
-//    {
-//        this.internService = internService;
-//        this.internRepository = internRepository;
-//    }
-
     //------------------------------------Intern Login/Reg (Auth)
     @PostMapping("/register/")
     public ResponseEntity<Intern> registerIntern(@RequestBody Intern intern)
     {
-        try
+        if(this.internService.createNewUser(intern))
         {
-            Intern internObj = internRepository.save(
-                    new Intern(intern.getEmail(),
-                            intern.getName(),
-                            intern.getSurname(),
-                            intern.getTrainingField(),
-                            intern.getPassword()));
-
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(
+                    this.internService.getUserByEmail(intern.getEmail()), HttpStatus.CREATED);
         }
-        catch (Exception e)
+        else
         {
-            return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+            System.out.println("Issue registering user. http Status-> "+HttpStatus.CONFLICT);
+            return new ResponseEntity<>(null, HttpStatus.CONFLICT);
         }
     }
 
-    @PostMapping("/Login/")
+    @PostMapping ("/login/")
     public ResponseEntity<Intern> login(@RequestBody Intern intern)
     {
-        if(this.internRepository.existsByEmail(intern.getEmail()))
+        System.out.println("Data from API (auth data) : "+intern.getEmail()+"-"+intern.getPassword());
+        if(this.internService.checkUser(intern.getEmail()))
         {
-            Intern user = this.internRepository.findByEmail(intern.getEmail());
-            if(user.getPassword().equals(intern.getPassword()))
-            {
-                return new ResponseEntity<>(user, HttpStatus.OK);
-            }
-            else {
-                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-            }
-        }
-        else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return  new ResponseEntity<>(this.internService.getUserByEmail(intern.getEmail()),
+                    HttpStatus.OK);
         }
 
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     //------------------------------------Intern PUT update routes
+
+    @GetMapping("/intern-user/{id}")
+    public ResponseEntity<Intern> getInternUser(@PathVariable("id") @RequestBody Integer id)
+    {
+        return new ResponseEntity<>(this.internService.getInternById(id), HttpStatus.OK);
+    }
+
     @PutMapping("/update/{id}")
     public ResponseEntity<Intern> updateIntern(@PathVariable("id") Long id,@RequestBody Intern intern)
     {

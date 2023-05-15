@@ -50,7 +50,7 @@ public class Intern
 
     //For verification. Only Store Hashed String and Return Hashed string
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     //For changing password. Hashed string only.
@@ -59,7 +59,7 @@ public class Intern
     }
 
     public String getTrainingField() {
-        return trainingField;
+        return this.trainingField;
     }
 
     public void setTrainingField(String trainingField) {
@@ -71,11 +71,11 @@ public class Intern
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getRole() {
-        return role;
+        return this.role;
     }
 
     public void setRole(String role) {
@@ -87,7 +87,7 @@ public class Intern
     }
 
     public String getSurname() {
-        return surname;
+        return this.surname;
     }
 
     public void setSurname(String surname) {
@@ -95,11 +95,11 @@ public class Intern
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public Boolean getActiveStatus() {
-        return activeStatus;
+        return this.activeStatus;
     }
 
     public void setActiveStatus(Boolean activeStatus) {

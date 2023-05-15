@@ -88,11 +88,11 @@ public class MentorService {
         return null;
     }
 
-    public Intern getUserByEmail(String email)
+    public Mentor getUserByEmail(String email)
     {
-        if(this.internRepository.existsByEmail(email))
+        if(this.mentorRepository.existsByEmail(email))
         {
-            return internRepository.findByEmail(email);
+            return mentorRepository.findByEmail(email);
         }
 
         return null;
@@ -168,5 +168,10 @@ public class MentorService {
 
         return this.internRepository.save(update);
 
+    }
+
+    public boolean checkMentor(String email)
+    {
+        return this.mentorRepository.existsByEmail(email);
     }
 }

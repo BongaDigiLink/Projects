@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { InternService } from '../service/intern.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpHeaderResponse, HttpResponse } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class SignUpComponent
 
   constructor(
     private fb : FormBuilder,
-    private service: InternService
+    private service: InternService,
+    private router: Router
   ){}
   
     initForm(): FormGroup {
@@ -52,14 +54,14 @@ export class SignUpComponent
       trainingField: this.form.value.trainingField,
       password: this.form.value.password};
 
-    console.log("Form inputs : "+ body)
     this.service.register(body).subscribe(
-      (response: any) => {
-        console.log("Response from api : "+response)
+      (response: string) => {
+        //console.log("Response from api : "+response),
+        this.router.navigate(['/signin']);
       }, 
-      (error: HttpErrorResponse) =>
+      (error: HttpHeaderResponse) =>
       {
-        alert(error.message);
+        alert(error.status);
       }
     )
   }

@@ -1,5 +1,7 @@
 package za.co.ums_api.service;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import za.co.ums_api.models.Intern;
 import za.co.ums_api.models.LearningSkill;
@@ -7,6 +9,7 @@ import za.co.ums_api.repository.InternRepository;
 import za.co.ums_api.repository.LearningSkillRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class InternService
@@ -114,12 +117,52 @@ public class InternService
         return myTasks;
     }
 
-    public Intern getInternById(Integer email) {
-        if(this.internRepository.existsById(email))
+    public Intern getInternById(Integer id)
+    {
+        Optional<Intern> user = this.internRepository.findById(id);
+
+        if(user.isPresent())
         {
-            Intern intern = this.internRepository.getInternById(email);
-            return intern;
+            return user.get();
         }
+
         return null;
+    }
+
+    public boolean checkUser(String email)
+    {
+        return this.internRepository.existsByEmail(email);
+    }
+
+    public Intern getUserByEmail(String email)
+    {
+        return this.internRepository.findByEmail(email);
+    }
+
+    public Boolean createNewUser(Intern intern)
+    {
+        if(checkUser(intern.getEmail()))
+        {
+            return false;
+        }
+        else
+        {
+            try
+            {
+                this.internRepository.save(
+                        new Intern(intern.getEmail(),
+                                intern.getName(),
+                                intern.getSurname(),
+                                intern.getTrainingField(),
+                                intern.getPassword()));
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                System.out.println("Error creating user. "+e.getMessage());
+                return false;
+            }
+        }
     }
 }
