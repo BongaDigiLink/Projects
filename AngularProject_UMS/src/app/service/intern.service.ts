@@ -21,7 +21,7 @@ export class InternService
    */
     public loginIntern(intern: any): Observable<Intern>
     {
-      return this.http.get<Intern>(`${this.apiURL}/login/`)
+      return this.http.post<Intern>(`${this.apiURL}/login/`, intern);
     }
   
     /**
@@ -56,6 +56,16 @@ export class InternService
     return this.http.put<any>(`${this.apiURL}/deactivate/{id}`, intern);
   }
 
+  /**
+   * 
+   * @param id 
+   * @returns current logged in user object.
+   */
+  public getIntern(id: number): Observable<Intern>
+  {
+    return this.http.get<Intern>(`${this.apiURL}/intern-user/${id}`);
+  }
+
 
   //------------------------------------Intern skills routes
   /**
@@ -75,7 +85,7 @@ export class InternService
    */
   public getSkillsTasks(name: any): Observable<Skills[]>
   {
-    return this.http.get<Skills[]>(`${this.apiURL}/skills-tasks/{name}`)
+    return this.http.get<Skills[]>(`${this.apiURL}/skills-tasks/${name}`)
   }
 
 

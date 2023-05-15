@@ -22,7 +22,7 @@ export class UserDetailsComponent implements OnInit{
 
     this.mentorService.getAllInterns()
     .subscribe((users: Intern[]) => {
-      console.log(users);
+      //console.log(users);
       this.users = users;
     })
   }

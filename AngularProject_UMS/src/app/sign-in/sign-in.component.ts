@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms';
 import { InternService } from '../service/intern.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Intern } from '../models/intern';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -12,7 +14,8 @@ export class SignInComponent
 {
   constructor(
     private fb : FormBuilder,
-    private service: InternService
+    private service: InternService,
+    private router: Router
   ) {}
 
   initForm(): FormGroup 
@@ -40,8 +43,13 @@ export class SignInComponent
 
     console.log("Form inputs : "+ body)
     this.service.loginIntern(body).subscribe(
-      (response: any) => {
-        console.log("Response from api : "+response)
+      (response: Intern) => 
+      {
+        //console.log("Logged in user status : "+response.activeStatus)
+        sessionStorage.setItem('user_email',`${response.email}`)
+        sessionStorage.setItem('user_id',`${response.id}`)
+
+        this.router.navigate(['/dashboard']);
       }, 
       (error: HttpErrorResponse) =>
       {

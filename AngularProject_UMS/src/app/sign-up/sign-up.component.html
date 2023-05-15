@@ -1,8 +1,8 @@
 <div class="container-fluid">
     <div class="row justify-content-center centered">
         <div class="col-sm-8 col-md-9 col-lg-4">
-            <form [formGroup]="form" (ngSubmit)="registerIntern()">
 
+            <form [formGroup]="form" (ngSubmit)="registerIntern()">
                 <label for="">Your Email</label>
                 <input type="email" formControlName="email" class="form-control">
 
@@ -33,22 +33,15 @@
                      class="btn btn-primary my-2" 
                     style="width: 100px; margin: auto;">Sign Up</button>
                 </div>
-                
             </form>
-            <!-- <div class="row txt-center">
-                <button (click)="registerIntern(addEmployee)"
-                type="submit"
-                 class="btn btn-primary my-2" 
-                style="width: 100px; margin: auto;">Sign Up</button>
-            </div> -->
-
-            <pre>
+            
+            <!--For previewing inputs onto my form.-->
+            <!-- <pre>
                 {{form.valid}}
                 {{form.value | json}}
-            </pre>
+            </pre> -->
             
             <div class="row txt-center redirect-text">
-                
                 <div class="row txt-center">
                     <a routerLink="/signin">Already have an account? 
                         Click here to login.</a>

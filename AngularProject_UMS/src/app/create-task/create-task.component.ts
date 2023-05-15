@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MentorService } from '../service/mentor.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-task',
@@ -11,7 +12,8 @@ export class CreateTaskComponent
 {
 
   constructor(private fb: FormBuilder,
-    private mentorService: MentorService){}
+    private mentorService: MentorService,
+    private router: Router){}
 
     form = this.fb.group({
       taskTitle: ['', Validators.required],
@@ -41,7 +43,8 @@ export class CreateTaskComponent
     }
 
     this.mentorService.createTask(body).subscribe( data =>
-      console.log("API response: "+data))
+     //console.log("API response: "+data)),
+      this.router.navigate(['/dashboard']))
   }
 
 }
