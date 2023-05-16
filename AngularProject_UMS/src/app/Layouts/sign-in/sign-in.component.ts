@@ -4,6 +4,7 @@ import { InternService } from '../../service/intern.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Intern } from '../../models/intern';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -15,7 +16,8 @@ export class SignInComponent
   constructor(
     private fb : FormBuilder,
     private service: InternService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
   ) {}
 
   initForm(): FormGroup
@@ -41,7 +43,18 @@ export class SignInComponent
       email: this.form.value.email,
       password: this.form.value.password};
 
-    console.log("Form inputs : "+ body)
+    // console.log("Form inputs : "+ body)
+    // this.authService.signin(body).subscribe({
+    //   next: () => {
+    //     this.router.navigateByUrl('/dashboard');
+    //   },
+    //   error: ({ error }) => {
+    //     if (error.username || error.password) {
+    //       this.form.setErrors({ credentials: true });
+    //     }
+    //   }
+    // })
+
     this.service.loginIntern(body).subscribe(
       (response: Intern) =>
       {
@@ -56,5 +69,6 @@ export class SignInComponent
         alert(error.message);
       }
     )
+
   }
 }
