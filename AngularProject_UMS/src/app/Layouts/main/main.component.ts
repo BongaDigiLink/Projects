@@ -21,9 +21,9 @@ export class MainComponent implements OnInit
   public tasksList: Skills[] = [];
 
   public user_name: string | undefined ='';
-  public user_type: string | undefined='';
-  public internDisplay=false;
-  public mentorDisplay=false;
+  public user_type="";
+  public internDisplay="";
+  public mentorDisplay="";
 
   ngOnInit(): void
   {
@@ -34,7 +34,7 @@ export class MainComponent implements OnInit
     })
 
     this.getUserData();
-    this.setUIView();
+
   }
 
   getUserData()
@@ -43,25 +43,20 @@ export class MainComponent implements OnInit
     this.internService.getIntern(id_user).subscribe(
       (data: Intern) =>
     {
-      this.user_type = data.role;
       this.user_name = data.name;
+      sessionStorage.setItem('user_modifier',`${data.role}`);
+
+      //console.log("Comparison: "+this.user_type === `${data.role}`);
+
+      if(data.role === 'Mentor')
+      {
+        this.mentorDisplay ="true";;
+      }
+      if(data.role === 'Intern')
+      {
+        this.internDisplay= "true";
+      }
     })
-  }
-
-  setUIView()
-  {
-    if(this.user_type === 'Intern')
-    {
-      this.internDisplay = true;
-      this.mentorDisplay = false;
-    }
-
-    if(this.user_type == 'Mentor')
-    {
-      this.mentorDisplay = true;
-      this.internDisplay = false;
-    }
-
   }
 
 }

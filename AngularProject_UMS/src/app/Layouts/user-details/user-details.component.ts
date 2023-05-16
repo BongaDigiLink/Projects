@@ -13,6 +13,7 @@ export class UserDetailsComponent implements OnInit{
 
   public users: Intern[] = [];
   public user: Intern | undefined;
+  public mentorDisplay="";
 
   constructor(private mentorService: MentorService,
     private router :Router)
@@ -25,6 +26,11 @@ export class UserDetailsComponent implements OnInit{
       //console.log(users);
       this.users = users;
     })
+
+    if(sessionStorage.getItem('user_modifier') === "Mentor")
+    {
+      this.mentorDisplay = "true";
+    }
   }
 
   public getIntern(email: any): void{
