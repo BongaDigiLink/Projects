@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { MentorService } from '../service/mentor.service';
-import { Intern } from '../models/intern';
+import { MentorService } from '../../service/mentor.service';
+import { Intern } from '../../models/intern';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

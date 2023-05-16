@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MentorService } from '../service/mentor.service';
+import { MentorService } from '../../service/mentor.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { Intern } from '../models/intern';
+import { Intern } from '../../models/intern';
 
 @Component({
   selector: 'app-user-view',
@@ -29,7 +29,7 @@ export class UserViewComponent implements OnInit
       this.userId = params['id'];
     });
 
-    this.mentorService.getInternDetailsById(this.userId).subscribe( data => 
+    this.mentorService.getInternDetailsById(this.userId).subscribe( data =>
       {
         console.log("Data (user) from API "+data);
         this.userView = data;
@@ -85,7 +85,7 @@ export class UserViewComponent implements OnInit
     this.mentorService.updateInternDetails(this.userId,body).subscribe(
       (response: any) => {
         console.log("Response from api : "+response)
-      }, 
+      },
       (error: HttpErrorResponse) =>
       {
         alert(error.message);

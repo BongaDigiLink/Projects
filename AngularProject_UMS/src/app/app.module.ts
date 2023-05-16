@@ -4,21 +4,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { SignInComponent } from './sign-in/sign-in.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import { UserDetailsComponent } from './user-details/user-details.component';
-import { HomeComponent } from './home/home.component';
-import { UserViewComponent } from './user-view/user-view.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { FooterComponent } from './footer/footer.component';
-import { MainComponent } from './main/main.component';
+import { SignInComponent } from './Layouts/sign-in/sign-in.component';
+import { SignUpComponent } from './Layouts/sign-up/sign-up.component';
+import { UserDetailsComponent } from './Layouts/user-details/user-details.component';
+import { HomeComponent } from './Layouts/home/home.component';
+import { UserViewComponent } from './Layouts/user-view/user-view.component';
+import { NavbarComponent } from './Layouts/navbar/navbar.component';
+import { FooterComponent } from './Layouts/footer/footer.component';
+import { MainComponent } from './Layouts/main/main.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CreateTaskComponent } from './create-task/create-task.component';
+import { CreateTaskComponent } from './Layouts/create-task/create-task.component';
 
 @NgModule(
   {
-  declarations: 
+  declarations:
   [
     AppComponent,
     SignInComponent,
@@ -31,7 +31,7 @@ import { CreateTaskComponent } from './create-task/create-task.component';
     MainComponent,
     CreateTaskComponent
   ],
-  imports: 
+  imports:
   [
     HttpClientModule,
     BrowserModule,
@@ -46,7 +46,7 @@ import { CreateTaskComponent } from './create-task/create-task.component';
       {path: 'user-details', component: UserDetailsComponent},
       {path: 'user/:id', component: UserViewComponent},
       {path: 'create-task', component: CreateTaskComponent},
-      
+
     ])
   ],
   providers: [],

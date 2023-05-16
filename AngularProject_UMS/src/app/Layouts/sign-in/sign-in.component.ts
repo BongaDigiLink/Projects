@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms';
-import { InternService } from '../service/intern.service';
+import { InternService } from '../../service/intern.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Intern } from '../models/intern';
+import { Intern } from '../../models/intern';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.css']
 })
-export class SignInComponent 
+export class SignInComponent
 {
   constructor(
     private fb : FormBuilder,
@@ -18,16 +18,16 @@ export class SignInComponent
     private router: Router
   ) {}
 
-  initForm(): FormGroup 
+  initForm(): FormGroup
   {
     let form =  this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
     })
-  
+
   return form
 }
-  
+
 
   form = this.fb.group({
     email: ['', Validators.required],
@@ -43,14 +43,14 @@ export class SignInComponent
 
     console.log("Form inputs : "+ body)
     this.service.loginIntern(body).subscribe(
-      (response: Intern) => 
+      (response: Intern) =>
       {
         //console.log("Logged in user status : "+response.activeStatus)
         sessionStorage.setItem('user_email',`${response.email}`)
         sessionStorage.setItem('user_id',`${response.id}`)
 
         this.router.navigate(['/dashboard']);
-      }, 
+      },
       (error: HttpErrorResponse) =>
       {
         alert(error.message);

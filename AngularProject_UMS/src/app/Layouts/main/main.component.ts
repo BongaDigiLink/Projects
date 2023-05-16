@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { InternService } from '../service/intern.service';
+import { InternService } from '../../service/intern.service';
 import { Router } from '@angular/router';
-import { Intern } from '../models/intern';
-import { MainService } from '../service/main.service';
-import { Skills } from '../models/skills';
+import { Intern } from '../../models/intern';
+import { MainService } from '../../service/main.service';
+import { Skills } from '../../models/skills';
 
 @Component({
   selector: 'app-main',
@@ -25,7 +25,7 @@ export class MainComponent implements OnInit
   public internDisplay=false;
   public mentorDisplay=false;
 
-  ngOnInit(): void 
+  ngOnInit(): void
   {
     this.mainService.getTasks().subscribe(
       (list_: Skills[]) => {
@@ -41,7 +41,7 @@ export class MainComponent implements OnInit
   {
     var id_user: any = sessionStorage.getItem('user_id');
     this.internService.getIntern(id_user).subscribe(
-      (data: Intern) => 
+      (data: Intern) =>
     {
       this.user_type = data.role;
       this.user_name = data.name;

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { InternService } from '../service/intern.service';
+import { InternService } from '../../service/intern.service';
 import { HttpErrorResponse, HttpHeaderResponse, HttpResponse } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -27,7 +27,7 @@ export class SignUpComponent
     private service: InternService,
     private router: Router
   ){}
-  
+
     initForm(): FormGroup {
       let form =  this.fb.group({
         email: ['', Validators.required],
@@ -58,7 +58,7 @@ export class SignUpComponent
       (response: string) => {
         //console.log("Response from api : "+response),
         this.router.navigate(['/signin']);
-      }, 
+      },
       (error: HttpHeaderResponse) =>
       {
         alert(error.status);
