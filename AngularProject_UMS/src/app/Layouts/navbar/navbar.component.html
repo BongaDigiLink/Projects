@@ -32,10 +32,16 @@
           
           <div class="right-div">
             <!--Display one of the two buttons depending on User status (Logged In or Out) -->
-            <a routerLink="/signin" class="btn btn-success pull-right"
+            <a
+            (click)="logInUser()" 
+            *ngIf="btnLogin"
+            class="btn btn-success pull-right"
              style="width: 60px; height: 30px; font-size: 14px;">Login</a>
 
-             <a routerLink="/signin" class="btn btn-warning pull-right"
+             <a 
+             (click)="logOutUser()"
+             *ngIf="btnLogOut" 
+             class="btn btn-warning pull-right"
              style="width: 60px; height: 30px; font-size: 11px; font-weight: bolder;">Logout</a>
             
           </div>

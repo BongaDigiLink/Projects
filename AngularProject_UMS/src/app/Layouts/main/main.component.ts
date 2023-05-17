@@ -22,8 +22,8 @@ export class MainComponent implements OnInit
 
   public user_name: string | undefined ='';
   public user_type="";
-  public internDisplay="";
-  public mentorDisplay="";
+  public internDisplay: boolean=false;
+  public mentorDisplay: boolean=false;
 
   ngOnInit(): void
   {
@@ -50,11 +50,11 @@ export class MainComponent implements OnInit
 
       if(data.role === 'Mentor')
       {
-        this.mentorDisplay ="true";;
+        this.mentorDisplay =true;;
       }
       if(data.role === 'Intern')
       {
-        this.internDisplay= "true";
+        this.internDisplay= true;
       }
     })
   }

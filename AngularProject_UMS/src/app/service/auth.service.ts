@@ -3,30 +3,57 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, tap } from 'rxjs';
 import { Intern } from '../models/intern';
 
-interface SigninCredentials{
-  email: string;
-  password: string;
-}
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService 
 {
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
-  signedin$ = new BehaviorSubject(false);
-  baseUrl = 'http://localhost:8080';
+  private userLoggedIn: boolean = false;
+  private internUser: boolean = false;
+  private mentorUser: boolean = false;
+  private userType: string = '';
 
-  signin(credentials: any) {
-    return this.http.post(`${this.baseUrl}/intern/login/`, credentials).pipe(
-      tap((res: Intern) => {
-        sessionStorage.setItem('user', `${res.email}`);
-        sessionStorage.setItem('id', `${res.id}`);
-        this.signedin$.next(true);
-      })
-    )
+
+  isLoggedIn(): boolean
+  {
+    return this.userLoggedIn;
+  }
+
+  loginUser()
+  {
+    this.userLoggedIn = true;
+    this.setUserAccess();
+  }
+
+  logOut()
+  {
+    sessionStorage.clear();
+    this.userLoggedIn = false;
+
+  }
+
+  setUserAccess()
+  {
+    if(sessionStorage.getItem('user_modifier') === "Intern")
+    {
+      this.internUser = true;
+      this.userType = 'Intern';
+    }
+    else if(sessionStorage.getItem('user_modifier') === "Mentor")
+    {
+      this.mentorUser = true;
+      this.userType = 'Mentor';
+    }
+  }
+
+  checkUserAccess(): string
+  {
+    return this.userType;
   }
 
 }
