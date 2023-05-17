@@ -21,6 +21,7 @@ export class AuthService
 
   isLoggedIn(): boolean
   {
+    console.log("User login status: "+this.userLoggedIn);
     return this.userLoggedIn;
   }
 
@@ -32,8 +33,9 @@ export class AuthService
 
   logOut()
   {
-    sessionStorage.clear();
+    //sessionStorage.clear();
     this.userLoggedIn = false;
+    console.log("User login status: "+this.userLoggedIn);
 
   }
 

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Intern } from '../../models/intern';
 import { MainService } from '../../service/main.service';
 import { Skills } from '../../models/skills';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-main',
@@ -16,6 +17,7 @@ export class MainComponent implements OnInit
     private internService: InternService,
     private mainService: MainService,
     private router: Router,
+    private authService: AuthService
   ){}
 
   public tasksList: Skills[] = [];
@@ -45,8 +47,6 @@ export class MainComponent implements OnInit
     {
       this.user_name = data.name;
       sessionStorage.setItem('user_modifier',`${data.role}`);
-
-      //console.log("Comparison: "+this.user_type === `${data.role}`);
 
       if(data.role === 'Mentor')
       {

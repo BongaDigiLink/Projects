@@ -15,6 +15,7 @@ import { MainComponent } from './Layouts/main/main.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateTaskComponent } from './Layouts/create-task/create-task.component';
+import { DashBoardAccessGuard } from './guard/dash-board-access.guard';
 
 @NgModule(
   {
@@ -42,14 +43,14 @@ import { CreateTaskComponent } from './Layouts/create-task/create-task.component
       {path: 'home', component: HomeComponent},
       {path: 'signup', component: SignUpComponent},
       {path: 'signin', component: SignInComponent},
-      {path: 'dashboard', component: MainComponent},
+      {path: 'dashboard', component: MainComponent, canActivate:[DashBoardAccessGuard]},
       {path: 'user-details', component: UserDetailsComponent},
       {path: 'user/:id', component: UserViewComponent},
       {path: 'create-task', component: CreateTaskComponent},
 
     ])
   ],
-  providers: [],
+  providers: [DashBoardAccessGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

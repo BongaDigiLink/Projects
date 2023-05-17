@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit
     private authService: AuthService,
     private router: Router){}
 
-    public btnLogin: boolean=false;
+    public btnLogin: boolean=true;
     public btnLogOut: boolean=false;
 
 
@@ -31,13 +31,14 @@ export class NavbarComponent implements OnInit
   {
     this.btnLogOut = true;
     this.btnLogin = false;
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/signin']);
   }
 
   logOutUser()
   {
     this.authService.logOut();
-    this.router.navigate(['/signin']);
+    this.btnLogin = true;
+    this.router.navigate(['/home']);
   }
 
 }
