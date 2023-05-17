@@ -9,7 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './user-details.component.html',
   styleUrls: ['./user-details.component.css']
 })
-export class UserDetailsComponent implements OnInit{
+export class UserDetailsComponent implements OnInit
+{
 
   public users: Intern[] = [];
   public user: Intern | undefined;
@@ -19,13 +20,9 @@ export class UserDetailsComponent implements OnInit{
     private router :Router)
   {}
 
-  ngOnInit(): void {
-
-    this.mentorService.getAllInterns()
-    .subscribe((users: Intern[]) => {
-      //console.log(users);
-      this.users = users;
-    })
+  ngOnInit(): void 
+  {
+    this.getUsers();
 
     if(sessionStorage.getItem('user_modifier') === "Mentor")
     {
@@ -33,7 +30,8 @@ export class UserDetailsComponent implements OnInit{
     }
   }
 
-  public getIntern(email: any): void{
+  public getIntern(email: any): void
+  {
     this.mentorService.getInternDetails(email)
     .subscribe(user => {
       console.log(user);
@@ -41,12 +39,13 @@ export class UserDetailsComponent implements OnInit{
     })
   }
 
-  viewUser(id : number | undefined) {
-    // this.getDetails(id);
+  viewUser(id : number | undefined) 
+  {
     this.router.navigate([`/user/${id}`]).then(data => console.log("data on: "+data));
   }
 
-  public getDetails(id: any): void{
+  public getDetails(id: any): void
+  {
     this.mentorService.getInternDetailsById(id)
     .subscribe(user => {
       console.log(user);
@@ -54,7 +53,16 @@ export class UserDetailsComponent implements OnInit{
     })
   }
 
-  public deleteUser(id: any){
+  getUsers()
+  {
+    this.mentorService.getAllInterns()
+    .subscribe((users: Intern[]) => {
+      this.users = users;
+    })
+  }
+
+  public deleteUser(id: any)
+  {
     this.mentorService.removeIntern(id).subscribe( response => {
       console.log("delete response from API: "+response)
     })

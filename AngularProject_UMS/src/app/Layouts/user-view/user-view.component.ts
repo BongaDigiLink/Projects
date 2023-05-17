@@ -10,7 +10,7 @@ import { Intern } from '../../models/intern';
   templateUrl: './user-view.component.html',
   styleUrls: ['./user-view.component.css']
 })
-export class UserViewComponent implements OnInit
+export class UserViewComponent
 {
   public edit = false;
   public userView: Intern = new Intern;
@@ -31,7 +31,7 @@ export class UserViewComponent implements OnInit
 
     this.mentorService.getInternDetailsById(this.userId).subscribe( data =>
       {
-        console.log("Data (user) from API "+data);
+        //console.log("Data (user) from API "+data);
         this.userView = data;
       }, (err: any) => {
         console.log('Could not retrieve this user '+ this.userId)
@@ -49,15 +49,23 @@ export class UserViewComponent implements OnInit
   }
 
   form = this.fb.group({
-    email: [''],
+    email: [`${this.userView.email?.toString()}`],
     name:[''],
     surname:[''],
     trainingField:[''],
     activeStatus:['']
   })
 
-  initForm(): FormGroup {
-    let form =  this.fb.group({
+  editform =  this.fb.group({
+    email: ['', Validators.required, Validators.email],
+    name: ['', Validators.required],
+    surname: ['', Validators.required],
+    trainingField: ['', Validators.required],
+    activeStatus:[this.userView.activeStatus, Validators.required]
+  })
+
+  initForm(): void {
+    let editform =  this.fb.group({
       email: ['', Validators.required, Validators.email],
       name: ['', Validators.required],
       surname: ['', Validators.required],
@@ -69,7 +77,7 @@ export class UserViewComponent implements OnInit
     //checkPassword()
     //If valid return form.
 
-    return form;
+    editform = this.editform;
   }
 
   public updateIntern(): void

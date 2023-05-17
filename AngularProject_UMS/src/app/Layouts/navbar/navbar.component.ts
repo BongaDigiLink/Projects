@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit
 
   ngOnInit(): void 
   {
-    if(this.authService.isLoggedIn())
+    if(this.authService.checkUserAccess())
     {
       this.btnLogin=false;
       this.btnLogOut=true;
@@ -38,6 +38,7 @@ export class NavbarComponent implements OnInit
   {
     this.authService.logOut();
     this.btnLogin = true;
+    this.btnLogOut=false;
     this.router.navigate(['/home']);
   }
 

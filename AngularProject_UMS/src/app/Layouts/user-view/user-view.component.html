@@ -55,18 +55,20 @@
                     </div>
                     
                       <div class="panel-body">
-                          <form [formGroup]="form" (ngSubmit)="updateIntern()">
+                          <form [formGroup]="editform" (ngSubmit)="updateIntern()">
                                       
                               <div class="form-group">
                                     <label>Edit Email</label>
                                     <input class="form-control" type="text"
-                                     formControlName="email">
+                                     formControlName="email"
+                                     value="{{userView.email}}">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Edit Name</label>
                                     <input class="form-control" type="text"
-                                     formControlName="name">
+                                     formControlName="name"
+                                     value="{{userView.name}}">
                                 </div>
 
                                 <div class="form-group">

@@ -8,6 +8,7 @@ import za.co.ums_api.models.LearningSkill;
 import za.co.ums_api.repository.InternRepository;
 import za.co.ums_api.repository.LearningSkillRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -96,7 +97,18 @@ public class InternService
 
     public List<Intern> getInterns()
     {
-        return this.internRepository.findAll();
+        List<Intern> list = internRepository.findAll();
+        List<Intern> activeUsers = new ArrayList<>();
+
+        for(Intern user: list)
+        {
+            if(user.getActiveStatus().equals(true))
+            {
+                activeUsers.add(user);
+            }
+        }
+
+        return  activeUsers;
     }
 
     public List<LearningSkill> getAllSkills()

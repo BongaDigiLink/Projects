@@ -105,11 +105,11 @@ public class MentorController
     }
 
     @PutMapping("/deactivate/{id}")
-    public ResponseEntity<Boolean> deactivateIntern(@PathVariable("{id}") @RequestBody Integer id)
+    public ResponseEntity<Boolean> deactivateIntern(@PathVariable("id") @RequestBody Integer id)
     {
-        if(this.mentorService.deleteIntern(id))
+        if(this.mentorService.checkUser(id))
         {
-            this.mentorService.deleteIntern(id);
+            this.mentorService.deactivateIntern(id);
             return new ResponseEntity<>(true, HttpStatus.OK);
         }
         return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);

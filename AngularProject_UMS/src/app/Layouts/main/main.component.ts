@@ -48,11 +48,11 @@ export class MainComponent implements OnInit
       this.user_name = data.name;
       sessionStorage.setItem('user_modifier',`${data.role}`);
 
-      if(data.role === 'Mentor')
+      if(sessionStorage.getItem('user_modifier') === 'Mentor')
       {
-        this.mentorDisplay =true;;
+        this.mentorDisplay =true;
       }
-      if(data.role === 'Intern')
+      if(sessionStorage.getItem('user_modifier') === 'Intern')
       {
         this.internDisplay= true;
       }

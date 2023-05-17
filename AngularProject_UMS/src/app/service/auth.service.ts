@@ -13,29 +13,37 @@ export class AuthService
 
   constructor() { }
 
-  private userLoggedIn: boolean = false;
+  //private userLoggedIn: boolean = false;
+  private userLoggedIn = new BehaviorSubject(false);
   private internUser: boolean = false;
   private mentorUser: boolean = false;
   private userType: string = '';
+  private status: boolean=false;
 
 
   isLoggedIn(): boolean
   {
-    console.log("User login status: "+this.userLoggedIn);
-    return this.userLoggedIn;
+    //console.log("Emitted value: "+this.userLoggedIn.next(true));
+
+    this.userLoggedIn.subscribe((data)=>{ this.status = data});
+    return this.status;
   }
 
   loginUser()
   {
-    this.userLoggedIn = true;
+
+    this.userLoggedIn = new BehaviorSubject<boolean>(true);
+    sessionStorage.setItem('active_status','active');
+    console.log((this.userLoggedIn.subscribe((data) => {
+      console.log("Subscribed data: "+data);
+    })));
     this.setUserAccess();
   }
 
   logOut()
   {
-    //sessionStorage.clear();
-    this.userLoggedIn = false;
-    console.log("User login status: "+this.userLoggedIn);
+    sessionStorage.clear();
+    this.userLoggedIn = new BehaviorSubject<boolean>(false);
 
   }
 
@@ -48,14 +56,20 @@ export class AuthService
     }
     else if(sessionStorage.getItem('user_modifier') === "Mentor")
     {
+      console.log("Mentor run");
       this.mentorUser = true;
       this.userType = 'Mentor';
     }
   }
 
-  checkUserAccess(): string
+  checkUserAccess(): boolean
   {
-    return this.userType;
+    if(sessionStorage.getItem('active_status') === 'active')
+    {
+      return true;
+    }
+    
+    return false;
   }
 
 }

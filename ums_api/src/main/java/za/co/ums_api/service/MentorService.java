@@ -21,8 +21,7 @@ public class MentorService {
     private final LearningSkillRepository learningSkillRepository;
     private final InternRepository internRepository;
 
-    public MentorService(MentorRepository mentorRepository, LearningSkillRepository learningSkillRepository, InternRepository internRepository)
-    {
+    public MentorService(MentorRepository mentorRepository, LearningSkillRepository learningSkillRepository, InternRepository internRepository) {
         this.mentorRepository = mentorRepository;
         this.learningSkillRepository = learningSkillRepository;
         this.internRepository = internRepository;
@@ -33,13 +32,11 @@ public class MentorService {
     public Boolean registerMentor(Mentor mentor)
     {
         Mentor user = mentorRepository.findByEmail(mentor.getEmail());
-        if(user != null)
-        {
+        if (user != null) {
             System.out.println("User already exists.");
             return false;
 
-        }else
-        {
+        } else {
             //System.out.println("Debug Inside "+mentor.getName()+" Username: "+mentor.getUsername());
             mentorRepository.save(mentor);
             return true;
@@ -48,40 +45,28 @@ public class MentorService {
 
     //------------------------------------Intern Management Functions
 
-    public Mentor getMentor(Integer id)
-    {
+    public Mentor getMentor(Integer id) {
         return mentorRepository.getMentor(id);
     }
 
 
     public Boolean deleteIntern(Integer id)
     {
-       Boolean deletedDefault = false;
+        Boolean deletedDefault = false;
 
-       if(this.internRepository.existsById(id))
-       {
-           internRepository.deleteById(id);
-           return true;
-       }
-       else
-       {
-           return deletedDefault;
-       }
+        if (this.internRepository.existsById(id)) {
+            internRepository.deleteById(id);
+            return true;
+        } else {
+            return deletedDefault;
+        }
     }
 
-    public Optional<Intern> deactivateIntern(Integer id)
+    public Intern getUserById(Integer id)
     {
-        Optional<Intern> deactivated = this.internRepository.findById(id);
-        deactivated.get().setRole("offline");
-
-        return  deactivated;
-    }
-
-    public Intern getUserById(Integer id) {
         Optional<Intern> user = this.internRepository.findById(id);
 
-        if(user.isPresent())
-        {
+        if (user.isPresent()) {
             return user.get();
         }
 
@@ -90,58 +75,16 @@ public class MentorService {
 
     public Mentor getUserByEmail(String email)
     {
-        if(this.mentorRepository.existsByEmail(email))
-        {
+        if (this.mentorRepository.existsByEmail(email)) {
             return mentorRepository.findByEmail(email);
         }
 
         return null;
     }
 
-    public List<Mentor> getMentors()
-    {
+    public List<Mentor> getMentors() {
         return mentorRepository.findAll();
     }
-
-    //--------------------------------------Skills Management Functions
-
-    public Boolean createSkill(LearningSkill task)
-    {
-        learningSkillRepository.save(new LearningSkill(task.getName(), task.getDescription()));
-        return true;
-    }
-
-    public LearningSkill createTask(LearningSkill task)
-    {
-        LearningSkill createTask = this.learningSkillRepository.save(
-                new LearningSkill(task.getName(),
-                        task.getFieldTraining(),
-                        task.getDueDate(),
-                        task.getDescription())
-        );
-
-        return createTask;
-    }
-
-    public LearningSkill updateSkill(LearningSkill skill)
-    {
-        LearningSkill edit = learningSkillRepository.findByName(skill.getName());
-         if(edit !=null)
-         {
-             edit = skill;
-             return edit;
-         }
-         else
-         {
-             return null;
-         }
-    }
-
-    public List<LearningSkill> skills()
-    {
-         return learningSkillRepository.findAll();
-    }
-
 
     public boolean checkUser(Integer id)
     {
@@ -169,8 +112,55 @@ public class MentorService {
         return this.internRepository.save(update);
     }
 
+    public Intern deactivateIntern(Integer id)
+    {
+        Optional<Intern> user = this.internRepository.findById(id);
+
+        Intern user_ = user.get();
+        user_.setActiveStatus(false);
+
+        return  this.internRepository.save(user_);
+    }
+
     public boolean checkMentor(String email)
     {
         return this.mentorRepository.existsByEmail(email);
     }
+
+    //--------------------------------------Skills Management Functions
+
+    public Boolean createSkill(LearningSkill task)
+    {
+        learningSkillRepository.save(new LearningSkill(task.getName(), task.getDescription()));
+        return true;
+    }
+
+    public LearningSkill createTask(LearningSkill task)
+    {
+        LearningSkill createTask = this.learningSkillRepository.save(
+                new LearningSkill(task.getName(),
+                        task.getFieldTraining(),
+                        task.getDueDate(),
+                        task.getDescription())
+        );
+
+        return createTask;
+    }
+
+    public LearningSkill updateSkill(LearningSkill skill)
+    {
+        LearningSkill edit = learningSkillRepository.findByName(skill.getName());
+        if (edit != null) {
+            edit = skill;
+            return edit;
+        } else {
+            return null;
+        }
+    }
+
+    public List<LearningSkill> skills() {
+        return learningSkillRepository.findAll();
+    }
+
+
 }
