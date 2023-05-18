@@ -16,6 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateTaskComponent } from './Layouts/create-task/create-task.component';
 import { DashBoardAccessGuard } from './guard/dash-board-access.guard';
+import { TasksComponent } from './Layouts/tasks/tasks.component';
+import { TaskComponent } from './Layouts/task/task.component';
 
 @NgModule(
   {
@@ -30,7 +32,8 @@ import { DashBoardAccessGuard } from './guard/dash-board-access.guard';
     NavbarComponent,
     FooterComponent,
     MainComponent,
-    CreateTaskComponent
+    CreateTaskComponent,
+    TasksComponent
   ],
   imports:
   [
@@ -47,6 +50,8 @@ import { DashBoardAccessGuard } from './guard/dash-board-access.guard';
       {path: 'user-details', component: UserDetailsComponent},
       {path: 'user/:id', component: UserViewComponent},
       {path: 'create-task', component: CreateTaskComponent},
+      {path: 'tasks', component: TasksComponent},
+      {path: 'task/:title', component: TaskComponent},
 
     ])
   ],

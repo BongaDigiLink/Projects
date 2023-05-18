@@ -1,0 +1,40 @@
+<app-navbar></app-navbar>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container bootstrap snippets bootdey">
+    <div class="row">
+        <h2 class="text-muted">Digilink Due Work</h2>
+        <hr>
+    </div>
+    <div class="row" style="margin-top: 40px;">
+        <!-- posts -->
+    <div class="col-md-8"> 
+
+            <div class="panel blog-container" *ngFor="let task of tasks">
+              <div class="panel-body">
+                <div class="image-wrapper">
+                  <a class="image-wrapper image-zoom cboxElement" href="#">
+                    <img src="https://www.bootdey.com/image/700x250/FF69B4/000000" alt="Photo of Blog">
+                    <div class="image-overlay"></div> 
+                  </a>
+                </div>
+                
+                <h4>{{task.name}}</h4>
+                <small class="text-muted"><a href="#">
+                    <strong> {{task.fieldTraining}}</strong></a> |  {{task.dueDate | date }} </small>
+                
+                <p class="m-top-sm m-bottom-sm">
+                  {{task.description}}
+                </p>
+                <a
+                 (click)="viewTask(task.id)">
+                 <i class="fa fa-angle-double-right"></i>view task</a>
+
+              </div>
+            </div>          
+    </div>
+        
+  </div>
+</div>
+
+<app-footer></app-footer>

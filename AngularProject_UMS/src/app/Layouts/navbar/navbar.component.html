@@ -1,19 +1,18 @@
 <nav class="navbar navbar-expand-lg fixed-top navbar-scroll shadow-0"
- style="background-color: rgba(25, 25, 240, 0.726); font-size: 12px;">
+ style="background-color: #9170E4; font-size: 12px;">
     <div class="container">
 
-      <a class="navbar-brand header" href="#"
-      routerLink="/home" 
-      style="font-size: 14px; color: black; font-weight: bolder;">UMS</a>
+      <ul class="navbar-nav flex-row">
+          <a 
+        *ngIf="btnLogOut" 
+        routerLink="/dashboard" 
+        style="font-size: 14px; color: white; font-weight: bolder;">UMS</a>
+      </ul>
+      
 
-      <button class="navbar-toggler ps-0" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
-        aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="d-flex justify-content-start align-items-center">
-          <i class="fas fa-bars"></i>
-        </span>
-      </button>
+      
 
-      <div class="collapse navbar-collapse header-line" id="navbarExample01">
+      <div class="collapse navbar-collapse" id="navbarExample01">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           
           <!-- <li class="nav-item">

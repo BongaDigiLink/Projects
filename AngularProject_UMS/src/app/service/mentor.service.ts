@@ -20,7 +20,7 @@ export class MentorService
 
   public login(user: any): Observable<Mentor>
   {
-    return this.http.post<Mentor>(`${this.apiURL}/login`, user);
+    return this.http.post<Mentor>(`${this.apiURL}/login/`, user);
   }
 
   /**
@@ -30,7 +30,7 @@ export class MentorService
    */
   public registerMentor(mentor: any): Observable<Mentor>
   {
-    return this.http.post<Mentor>(`${this.apiURL}/registration`, mentor);
+    return this.http.post<Mentor>(`${this.apiURL}/registration/`, mentor);
   }
 
    //------------------------------------Intern Management Routes
@@ -40,7 +40,7 @@ export class MentorService
     */
   public getAllInterns(): Observable<Intern[]>
   {
-    return this.http.get<Intern[]>(`${this.apiURL}/all-interns`);
+    return this.http.get<Intern[]>(`${this.apiURL}/all-interns/`);
   }
 
   /**
@@ -93,17 +93,17 @@ export class MentorService
 
   public getAllSkills(): Observable<Skills[]>
   {
-    return this.http.get<Skills[]>(`${this.apiURL}/skills-offered`);
+    return this.http.get<Skills[]>(`${this.apiURL}/skills-offered/`);
   }
 
   public addSkill(skill: any): Observable<any>
   {
-    return this.http.post<any>(`${this.apiURL}/add-skill`, skill);
+    return this.http.post<any>(`${this.apiURL}/add-skill/`, skill);
   }
 
   public createTask(skill: any): Observable<any>
   {
-    return this.http.post<any>(`${this.apiURL}/create-task`, skill);
+    return this.http.post<any>(`${this.apiURL}/create-task/`, skill);
   }
 
   public updateSkill(id: any, skill: any): Observable<any>
@@ -115,5 +115,23 @@ export class MentorService
   {
     return this.http.delete<any>(`${this.apiURL}/remove-skill/`+id)
   }
+
+    /**
+   * See all tasks
+   * @returns  a list of tasks
+   */
+    public getTasks(): Observable<Skills[]>
+    {
+      return this.http.get<Skills[]>(`${this.apiURL}/all-tasks/`)
+    }
+
+    /**
+     * @param id get data of a specific task
+     * @returns 
+     */
+    public getTaskByID(id: number): Observable<Skills>
+    {
+      return this.http.get<Skills>(`${this.apiURL}/get-task/`+id);
+    }
 
 }

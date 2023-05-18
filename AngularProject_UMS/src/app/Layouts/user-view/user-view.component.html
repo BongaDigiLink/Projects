@@ -97,8 +97,12 @@
                               <div class="center text-center">
                                 <button
                                 type="submit"
-                                 class="btn btn-primary" style="margin-bottom: 60px;">Update User</button>
+                                 class="btn btn-primary" >Update User</button>
                               </div>
+                              <pre>
+                                {{form.valid}}
+                                {{form | json}}
+                              </pre>
                           </form>
                      </div>
                   </div>

@@ -9,6 +9,7 @@ import java.util.Date;
 @Table(name="Skills")
 public class LearningSkill
 {
+
     @Id
     @GeneratedValue
     private Integer id;
@@ -48,6 +49,10 @@ public class LearningSkill
 
     public LearningSkill()
     {
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getName() {

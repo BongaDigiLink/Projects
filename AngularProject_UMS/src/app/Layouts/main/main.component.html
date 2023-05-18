@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <!--If user role is admin - display-->
 
-    <div class="row" style="margin-top: 100px;">
+    <div class="row">
         <div class="col-md-12 col-sm-3">
             <div class="jumbotron">
                 <h1>Hello! {{ user_name }}</h1>
@@ -19,7 +19,7 @@
             <div *ngIf="internDisplay" class="col-md-3 col-lg-3 col-sm-3 col-xs-6">
                 <div class="alert alert-info back-widget-set text-center"
                 routerLink="/user-details">
-                        <i class="fa fa-history fa-5x"></i>
+                        <i class="fa fa-user fa-5x"></i>
                         <h3>See Cohort</h3>
                         View other interns in your cohort
                 </div>
@@ -28,7 +28,7 @@
             <div *ngIf="mentorDisplay" class="col-md-3 col-lg-3 col-sm-3 col-xs-6">
                 <div class="alert alert-info back-widget-set text-center"
                 routerLink="/user-details">
-                        <i class="fa fa-history fa-5x"></i>
+                        <i class="fa fa-user fa-5x"></i>
                         <h3>Manage Interns</h3>
                         Edit, Delete, Deactivate Interns
                 </div>
@@ -36,7 +36,7 @@
 
             <div class="col-md-3 col-lg-3 col-sm-3 col-xs-6">
                 <div class="alert alert-success back-widget-set text-center"
-                routerLink="/user-details">
+                routerLink="/tasks">
                     <i class="fa fa-bars fa-5x"></i>
                     <h3>View Tasks</h3>
                     View all work issued to interns
@@ -46,18 +46,19 @@
             <div *ngIf="mentorDisplay" class="col-md-3 col-lg-3 col-sm-3 col-xs-6">
                 <div class="alert alert-warning back-widget-set text-center"
                 routerLink="/create-task">
-                    <i class="fa fa-recycle fa-5x"></i>
+                    <i class="fa fa-plus-circle fa-5x"></i>
+
                     <h3>Create New Task</h3>
                 Allocate new task to interns
                 </div>
             </div>
 
             <div class="col-md-3 col-lg-3 col-sm-3 col-xs-6">
-                <div class="alert alert-danger back-widget-set text-center"
+                <div class="alert alert-success back-widget-set text-center"
                 routerLink="/user-details">
-                    <i class="fa fa-briefcase fa-5x"></i>
-                    <h3>30+ Issues </h3>
-                    That Should Be Resolved Now
+                    <i class="fa fa-list-ol fa-5x"></i>
+                    <h3>Completed Tasks </h3>
+                    Over tasks, Submissions
                 </div>
             </div>
 
@@ -94,12 +95,8 @@
                                     <p class="m-top-sm m-bottom-sm" style="font-size: 14px;">
                                     {{ task.description }}
                                     </p>
-                                    <a href="#"><i class="fa fa-angle-double-right"></i> Continue reading</a>
-                                    <span class="post-like text-muted tooltip-test" data-toggle="tooltip"
-                                     data-original-title="I like this post!">
-
-                                    <i class="fa fa-heart"></i> <span class="like-count">25</span>
-                                    </span>
+                                    <a href="#"><i class="fa fa-angle-double-right"></i> view task</a>
+                                    
                                 </div>
 
                             </ng-container>

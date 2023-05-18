@@ -10,6 +10,7 @@ import za.co.ums_api.models.Mentor;
 import za.co.ums_api.service.InternService;
 import za.co.ums_api.service.MentorService;
 
+import java.net.http.HttpTimeoutException;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,7 +50,7 @@ public class MentorController
 
     //------------------------------------Intern Management Controllers
 
-    @GetMapping(path = "/all-interns")
+    @GetMapping(path = "/all-interns/")
     public ResponseEntity<List<Intern>> getInterns()
     {
         List<Intern> list = this.internService.getInterns();
@@ -81,12 +82,12 @@ public class MentorController
         if(this.mentorService.checkUser(id))
         {
             this.mentorService.updateIntern(id, intern);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
         else
         {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(null,HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/intern-user/{id}")
@@ -136,13 +137,13 @@ public class MentorController
 
 
     //--------------------------------------Skills Controllers.
-    @GetMapping(path = "/skills-offered")
+    @GetMapping(path = "/skills-offered/")
     public ResponseEntity<List<LearningSkill>> getAllSkills()
     {
         return new ResponseEntity<>(mentorService.skills(), HttpStatus.OK);
     }
 
-    @PostMapping(path = "/add-skill")
+    @PostMapping(path = "/add-skill/")
     public ResponseEntity<Boolean> createProgramme(@RequestBody LearningSkill task)
     {
         System.out.println("Task Name: "+task.getDueDate());
@@ -150,14 +151,14 @@ public class MentorController
         return new ResponseEntity<Boolean>(true, HttpStatus.OK);
     }
 
-    @PutMapping(path="/update-skill")
+    @PutMapping(path="/update-skill/")
     public ResponseEntity<LearningSkill> updateSkill(@RequestBody LearningSkill skill)
     {
         LearningSkill updated = mentorService.updateSkill(skill);
         return  new ResponseEntity<LearningSkill>(updated, HttpStatus.OK);
     }
 
-    @DeleteMapping(path = "/remove-skill")
+    @DeleteMapping(path = "/remove-skill/")
     public Boolean removeSkill()
     {
 
@@ -165,11 +166,34 @@ public class MentorController
     }
 
     //Create and Update, Routes for Training Skills Management
-    @PostMapping(path="/create-task")
+    @PostMapping(path="/create-task/")
     public ResponseEntity<LearningSkill> createTask(@RequestBody LearningSkill task)
     {
         LearningSkill createdTask = this.mentorService.createTask(task);
         return  new ResponseEntity<>(createdTask, HttpStatus.OK);
+    }
+
+    @GetMapping("/all-tasks/")
+    public ResponseEntity<List<LearningSkill>> getAllTasks()
+    {
+        if(this.mentorService.tasksExist())
+        {
+            List<LearningSkill> tasks = this.mentorService.skills();
+            return new ResponseEntity<>(tasks, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/get-task/{id}")
+    public ResponseEntity<LearningSkill> getTask(@PathVariable("id") @RequestBody Integer id)
+    {
+        if(this.mentorService.taskExist(id))
+        {
+            LearningSkill task = this.mentorService.getTask(id);
+            return new ResponseEntity<>(task, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
 

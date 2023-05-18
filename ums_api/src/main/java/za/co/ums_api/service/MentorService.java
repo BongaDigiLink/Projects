@@ -107,6 +107,7 @@ public class MentorService {
         update.setSurname(intern.getSurname());
         update.setEmail(intern.getEmail());
         update.setActiveStatus(intern.getActiveStatus());
+        System.out.print("Intern Status :"+intern.getActiveStatus());
         update.setTrainingField(intern.getTrainingField());
 
         return this.internRepository.save(update);
@@ -160,6 +161,32 @@ public class MentorService {
 
     public List<LearningSkill> skills() {
         return learningSkillRepository.findAll();
+    }
+
+    public Boolean tasksExist()
+    {
+        if(skills().isEmpty())
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public Boolean taskExist(Integer id)
+    {
+        if(this.learningSkillRepository.existsById(id))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public LearningSkill getTask(Integer id)
+    {
+        Optional<LearningSkill> task =  this.learningSkillRepository.findById(id);
+        LearningSkill tasks_ = task.get();
+
+        return  tasks_;
     }
 
 

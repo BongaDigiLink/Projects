@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MentorService } from '../../service/mentor.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Intern } from '../../models/intern';
 
 @Component({
@@ -20,7 +20,8 @@ export class UserViewComponent implements OnInit
   constructor(
     private fb : FormBuilder,
     private mentorService: MentorService,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private router_: Router
   ){}
 
 
@@ -70,7 +71,7 @@ export class UserViewComponent implements OnInit
       name: ['', Validators.required],
       surname: ['', Validators.required],
       trainingField: ['', Validators.required],
-      activeStatus:[this.userView.activeStatus, Validators.required]
+      activeStatus:['', Validators.required]
     })
 
     //Check whether email is not used by other account.
@@ -99,6 +100,8 @@ export class UserViewComponent implements OnInit
         alert(error.message);
       }
     )
+
+    this.router_.navigate(['/user-details']);
   }
 
 
