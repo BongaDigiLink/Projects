@@ -111,6 +111,27 @@ public class InternService
         return  activeUsers;
     }
 
+    public List<Intern> getInactiveInterns()
+    {
+        List<Intern> list = internRepository.findAll();
+        List<Intern> inactiveUsers = new ArrayList<>();
+
+        if(list.isEmpty())
+        {
+            return null;
+        }
+
+        for(Intern user: list)
+        {
+            if(user.getActiveStatus().equals(false))
+            {
+                inactiveUsers.add(user);
+            }
+        }
+
+        return  inactiveUsers;
+    }
+
     public List<LearningSkill> getAllSkills()
     {
         return this.learningSkillRepository.findAll();

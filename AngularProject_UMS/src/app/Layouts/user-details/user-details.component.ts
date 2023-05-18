@@ -13,6 +13,7 @@ export class UserDetailsComponent implements OnInit
 {
 
   public users: Intern[] = [];
+  public ausers: Intern[] = [];
   public user: Intern | undefined;
   public mentorDisplay="";
 
@@ -23,6 +24,7 @@ export class UserDetailsComponent implements OnInit
   ngOnInit(): void 
   {
     this.getUsers();
+    this.getInactiveUsers();
 
     if(sessionStorage.getItem('user_modifier') === "Mentor")
     {
@@ -61,11 +63,21 @@ export class UserDetailsComponent implements OnInit
     })
   }
 
+  getInactiveUsers()
+  {
+    this.mentorService.getAllInactiveInterns()
+    .subscribe((data: Intern[]) => {
+      console.log(data);
+      this.ausers = data;
+    })
+  }
+
   public deleteUser(id: any)
   {
     this.mentorService.removeIntern(id).subscribe( response => {
       console.log("delete response from API: "+response)
-    })
+    }),
+    this.router.navigate(['/dashboard']);
   }
 
 }

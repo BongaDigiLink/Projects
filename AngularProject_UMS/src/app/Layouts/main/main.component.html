@@ -88,13 +88,15 @@
                                     </div>
                                     
                                     <h2>{{ task.name }}</h2>
-                                    <h4 class="text-muted"><a href="#"><strong>{{ task.fieldTraining }}</strong></a> |  Due on : {{ task.dueDate | date }}</h4>
+                                    <h4 class="text-muted"><a href="#"><strong>
+                                        {{ task.fieldTraining }}</strong></a> |  Due date : {{ task.dueDate | date }}</h4>
                                     
                                     <p class="m-top-sm m-bottom-sm" style="font-size: 14px;">
                                     {{ task.description }}
                                     </p>
                                     <a href="#"><i class="fa fa-angle-double-right"></i> Continue reading</a>
-                                    <span class="post-like text-muted tooltip-test" data-toggle="tooltip" data-original-title="I like this post!">
+                                    <span class="post-like text-muted tooltip-test" data-toggle="tooltip"
+                                     data-original-title="I like this post!">
 
                                     <i class="fa fa-heart"></i> <span class="like-count">25</span>
                                     </span>

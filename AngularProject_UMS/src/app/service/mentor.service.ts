@@ -36,7 +36,7 @@ export class MentorService
    //------------------------------------Intern Management Routes
 
    /**
-    * @returns list of all interns
+    * @returns list of all activated interns (only active)
     */
   public getAllInterns(): Observable<Intern[]>
   {
@@ -59,7 +59,6 @@ export class MentorService
   }
 
   /**
-   * 
    * @param id of intern to display details
    * @returns Intern object, details populated to the view page.
    */
@@ -68,13 +67,24 @@ export class MentorService
     return this.http.get<Intern>(`${this.apiURL}/intern-user/${id}`);
   }
 
+  /**
+   * @returns list of all interns whose accounts are deactivated.
+   */
+  getAllInactiveInterns(): Observable<Intern[]>
+  {
+    return this.http.get<Intern[]>(`${this.apiURL}/inactive-users/`);
+  }
 
-  public deactivateIntern(id: any): Observable<any>
+  public deactivateIntern(id: number): Observable<any>
   {
     return this.http.put<any>(`${this.apiURL}/deactivate/`, id);
   }
 
-  public removeIntern(id: any): Observable<any>
+  /**
+   * @param id delete this intern account
+   * @returns null
+   */
+  public removeIntern(id: number): Observable<any>
   {
     return this.http.delete<any>(`${this.apiURL}/delete-account/`+id)
   }

@@ -56,6 +56,19 @@ public class MentorController
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
+    @GetMapping("/inactive-users/")
+    public ResponseEntity<List<Intern>> getInactiveInterns()
+    {
+        List<Intern> inactiveUsers = this.internService.getInactiveInterns();
+
+        if(inactiveUsers == null)
+        {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(inactiveUsers, HttpStatus.OK);
+    }
+
     /**
      * @param id intern to update
      * @param intern data from client
