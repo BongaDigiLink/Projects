@@ -10,7 +10,7 @@ import { Intern } from '../../models/intern';
   templateUrl: './user-view.component.html',
   styleUrls: ['./user-view.component.css']
 })
-export class UserViewComponent
+export class UserViewComponent implements OnInit
 {
   public edit = false;
   public userView: Intern = new Intern;
@@ -31,11 +31,18 @@ export class UserViewComponent
 
     this.mentorService.getInternDetailsById(this.userId).subscribe( data =>
       {
-        //console.log("Data (user) from API "+data);
         this.userView = data;
+
+        this.form.setValue({name:`${this.userView.name}`,
+       surname:`${this.userView.surname}`,
+        email:`${this.userView.email}`,
+         trainingField:`${this.userView.trainingField}`,
+          activeStatus:`${this.userView.activeStatus}`});
+
       }, (err: any) => {
         console.log('Could not retrieve this user '+ this.userId)
       })
+
   }
 
   onClickEdit()
@@ -49,23 +56,16 @@ export class UserViewComponent
   }
 
   form = this.fb.group({
-    email: [`${this.userView.email?.toString()}`],
+    email: [''],
     name:[''],
     surname:[''],
     trainingField:[''],
     activeStatus:['']
   })
 
-  editform =  this.fb.group({
-    email: ['', Validators.required, Validators.email],
-    name: ['', Validators.required],
-    surname: ['', Validators.required],
-    trainingField: ['', Validators.required],
-    activeStatus:[this.userView.activeStatus, Validators.required]
-  })
-
-  initForm(): void {
-    let editform =  this.fb.group({
+  initForm(): FormGroup 
+  {
+    let form =  this.fb.group({
       email: ['', Validators.required, Validators.email],
       name: ['', Validators.required],
       surname: ['', Validators.required],
@@ -77,7 +77,7 @@ export class UserViewComponent
     //checkPassword()
     //If valid return form.
 
-    editform = this.editform;
+    return form;
   }
 
   public updateIntern(): void
@@ -92,7 +92,7 @@ export class UserViewComponent
 
     this.mentorService.updateInternDetails(this.userId,body).subscribe(
       (response: any) => {
-        console.log("Response from api : "+response)
+        //console.log("Response from api : "+response)
       },
       (error: HttpErrorResponse) =>
       {
