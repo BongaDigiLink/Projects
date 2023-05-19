@@ -105,7 +105,7 @@ public class InternService
 
         for(Intern user: list)
         {
-            if(user.getActiveStatus().equals(true))
+            if(user.getActiveStatus().equals("ACTIVE"))
             {
                 activeUsers.add(user);
             }
@@ -126,7 +126,7 @@ public class InternService
 
         for(Intern user: list)
         {
-            if(user.getActiveStatus().equals(false))
+            if(user.getActiveStatus().equals("INACTIVE"))
             {
                 inactiveUsers.add(user);
             }

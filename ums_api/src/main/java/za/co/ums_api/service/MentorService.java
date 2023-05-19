@@ -118,7 +118,7 @@ public class MentorService {
         Optional<Intern> user = this.internRepository.findById(id);
 
         Intern user_ = user.get();
-        user_.setActiveStatus(false);
+        user_.setActiveStatus("INACTIVE");
 
         return  this.internRepository.save(user_);
     }

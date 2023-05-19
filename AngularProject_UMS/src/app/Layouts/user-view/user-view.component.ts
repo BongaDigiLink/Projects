@@ -61,7 +61,7 @@ export class UserViewComponent implements OnInit
     name:[''],
     surname:[''],
     trainingField:[''],
-    activeStatus:['']
+    activeStatus:[''],
   })
 
   initForm(): FormGroup 
