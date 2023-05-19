@@ -142,10 +142,30 @@ public class MentorService {
                 new LearningSkill(task.getName(),
                         task.getFieldTraining(),
                         task.getDueDate(),
-                        task.getDescription())
+                        task.getDescription(),
+                        setImg(task))
         );
 
         return createTask;
+    }
+
+    private String setImg(LearningSkill task)
+    {
+        //System.out.println("String img url: "+task.getFieldTraining().toString());
+        if(task.getFieldTraining().toString().equals("Data Analytics"))
+        {
+            return "https://images.unsplash.com/photo-1608222351212-18fe0ec7b13b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80";
+        }
+        else if (task.getFieldTraining().toString().equals("Full Stack Software Developer"))
+        {
+            return "https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80";
+        }
+        else if(task.getFieldTraining().toString().equals("Software Tester"))
+        {
+            return "https://images.unsplash.com/photo-1573496004846-eb89fae542b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80";
+        }else {
+            return null;
+        }
     }
 
     public LearningSkill updateSkill(LearningSkill skill)

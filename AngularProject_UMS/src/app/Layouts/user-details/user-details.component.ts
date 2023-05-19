@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MentorService } from '../../service/mentor.service';
 import { Intern } from '../../models/intern';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-user-details',
@@ -18,6 +19,7 @@ export class UserDetailsComponent implements OnInit
   public mentorDisplay="";
 
   constructor(private mentorService: MentorService,
+    private authService: AuthService,
     private router :Router)
   {}
 
@@ -32,7 +34,7 @@ export class UserDetailsComponent implements OnInit
     }
   }
 
-  public getIntern(email: any): void
+  public getIntern(email: string): void
   {
     this.mentorService.getInternDetails(email)
     .subscribe(user => {
@@ -43,10 +45,11 @@ export class UserDetailsComponent implements OnInit
 
   viewUser(id : number | undefined) 
   {
+    this.authService.checkEditAccess();
     this.router.navigate([`/user/${id}`]).then(data => console.log("data on: "+data));
   }
 
-  public getDetails(id: any): void
+  public getDetails(id: number): void
   {
     this.mentorService.getInternDetailsById(id)
     .subscribe(user => {

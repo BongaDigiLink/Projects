@@ -18,7 +18,7 @@ export class MentorService
 
   //-------------------------------------Mentor Login (Auth)
 
-  public login(user: any): Observable<Mentor>
+  public login(user: Mentor): Observable<Mentor>
   {
     return this.http.post<Mentor>(`${this.apiURL}/login/`, user);
   }
@@ -28,7 +28,7 @@ export class MentorService
    * @param mentor user form inputs
    * @returns Mentor user. Store in session object.
    */
-  public registerMentor(mentor: any): Observable<Mentor>
+  public registerMentor(mentor: Mentor): Observable<Mentor>
   {
     return this.http.post<Mentor>(`${this.apiURL}/registration/`, mentor);
   }
@@ -48,12 +48,12 @@ export class MentorService
    * @param intern object to change.
    * @returns HttpResponse
    */
-  public updateInternDetails(id: any, intern: any): Observable<Intern>
+  public updateInternDetails(id: number, intern: any): Observable<Intern>
   {
     return this.http.put<Intern>(`${this.apiURL}/edit-intern/`+id, intern);
   }
 
-  public getInternDetails(email: any): Observable<Intern>
+  public getInternDetails(email: string): Observable<Intern>
   {
     return this.http.get<Intern>(`${this.apiURL}/intern/${email}`);
   }
@@ -62,7 +62,7 @@ export class MentorService
    * @param id of intern to display details
    * @returns Intern object, details populated to the view page.
    */
-  public getInternDetailsById(id: any): Observable<Intern>
+  public getInternDetailsById(id: number): Observable<Intern>
   {
     return this.http.get<Intern>(`${this.apiURL}/intern-user/${id}`);
   }
@@ -106,12 +106,12 @@ export class MentorService
     return this.http.post<any>(`${this.apiURL}/create-task/`, skill);
   }
 
-  public updateSkill(id: any, skill: any): Observable<any>
+  public updateSkill(id: number, skill: Skills): Observable<any>
   {
     return this.http.put<any>(`${this.apiURL}/update-skill/`+id, skill);
   }
 
-  public removeSkill(id: any): Observable<void>
+  public removeSkill(id: number): Observable<void>
   {
     return this.http.delete<any>(`${this.apiURL}/remove-skill/`+id)
   }

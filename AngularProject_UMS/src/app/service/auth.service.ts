@@ -72,4 +72,14 @@ export class AuthService
     return false;
   }
 
+  checkEditAccess(): boolean
+  {
+    if(sessionStorage.getItem('user_modifier') === 'Mentor')
+    {
+      return true;
+    }
+
+    return false;
+  }
+
 }

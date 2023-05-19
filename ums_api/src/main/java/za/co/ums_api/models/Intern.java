@@ -34,7 +34,7 @@ public class Intern
         this.surname = surname;
         this.password = password;
         this.trainingField = trainingField;
-        this.role ="intern";
+        this.role ="Intern";
         this.activeStatus = true;
     }
 

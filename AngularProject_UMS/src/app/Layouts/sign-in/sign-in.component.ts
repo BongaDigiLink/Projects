@@ -51,6 +51,7 @@ export class SignInComponent
         sessionStorage.setItem('user_id',`${response.id}`)
 
         this.authService.loginUser();
+        //alertifyjs.success('message');
 
         this.router.navigate(['/dashboard']);
       },

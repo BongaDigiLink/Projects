@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Skills } from 'src/app/models/skills';
 import { MentorService } from 'src/app/service/mentor.service';
 
 @Component({
@@ -9,17 +10,27 @@ import { MentorService } from 'src/app/service/mentor.service';
 })
 export class TaskComponent implements OnInit
 {
+  public task_id!:Number;
+  public task_!: Skills;
 
   constructor(private dataService: MentorService,
-    private router_a: ActivatedRoute){}
+    private router: ActivatedRoute){}
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+    this.router.params.subscribe( params => {
+      this.task_id = params['id'];
+  })
 
-  getTask()
+
+}
+
+  getTask(id: number)
   {
-    
+    this.dataService.getTaskByID(id).subscribe((data)=> 
+    {
+    console.log(data),
+    this.task_ = data
+  });
   }
   
 

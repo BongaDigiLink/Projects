@@ -14,7 +14,7 @@ export class UserViewComponent implements OnInit
 {
   public edit = false;
   public userView: Intern = new Intern;
-  public userId!: Number;
+  public userId!: number;
 
 
   constructor(

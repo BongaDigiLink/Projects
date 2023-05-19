@@ -41,7 +41,7 @@ export class InternService
    * @param intern 
    * @returns true when updated.
    */
-  public updateIntern(id: any, intern: any): Observable<any>
+  public updateIntern(id: number, intern: any): Observable<any>
   {
     return this.http.put<any>(`${this.apiURL}/update/{id}`, intern);
   }
@@ -51,7 +51,7 @@ export class InternService
    * @param intern 
    * @returns true when account deactivated.
    */
-  public deactivateIntern(id: any, intern: any): Observable<any>
+  public deactivateIntern(id: number, intern: any): Observable<any>
   {
     return this.http.put<any>(`${this.apiURL}/deactivate/{id}`, intern);
   }
@@ -83,7 +83,7 @@ export class InternService
    * @param id of a skill to query [01 - Data, 24 -AI, ...]
    * @returns  a list of tasks from a specific training programme
    */
-  public getSkillsTasks(name: any): Observable<Skills[]>
+  public getSkillsTasks(name: string): Observable<Skills[]>
   {
     return this.http.get<Skills[]>(`${this.apiURL}/skills-tasks/${name}`)
   }

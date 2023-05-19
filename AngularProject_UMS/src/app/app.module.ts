@@ -18,6 +18,7 @@ import { CreateTaskComponent } from './Layouts/create-task/create-task.component
 import { DashBoardAccessGuard } from './guard/dash-board-access.guard';
 import { TasksComponent } from './Layouts/tasks/tasks.component';
 import { TaskComponent } from './Layouts/task/task.component';
+import { UserEditGuard } from './guard/user-edit.guard';
 
 @NgModule(
   {
@@ -48,7 +49,7 @@ import { TaskComponent } from './Layouts/task/task.component';
       {path: 'signin', component: SignInComponent},
       {path: 'dashboard', component: MainComponent, canActivate:[DashBoardAccessGuard]},
       {path: 'user-details', component: UserDetailsComponent},
-      {path: 'user/:id', component: UserViewComponent},
+      {path: 'user/:id', component: UserViewComponent, canActivate:[UserEditGuard]},
       {path: 'create-task', component: CreateTaskComponent},
       {path: 'tasks', component: TasksComponent},
       {path: 'task/:title', component: TaskComponent},

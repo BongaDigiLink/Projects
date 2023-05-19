@@ -10,6 +10,10 @@ import za.co.ums_api.models.Mentor;
 import za.co.ums_api.repository.InternRepository;
 import za.co.ums_api.service.InternService;
 
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,12 +49,57 @@ public class InternController
         System.out.println("Data from API (auth data) : "+intern.getEmail()+"-"+intern.getPassword());
         if(this.internService.checkUser(intern.getEmail()))
         {
-            return  new ResponseEntity<>(this.internService.getUserByEmail(intern.getEmail()),
-                    HttpStatus.OK);
-        }
+            if(compareIncomingPassword(intern.getEmail(), hashPassword(intern.getPassword())))
+            {
+                return new ResponseEntity<>(this.internService.getUserByEmail(intern.getEmail()),
+                        HttpStatus.OK);
+            }
 
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    /**
+     * compares input password and password already in database.
+     * @param password from user
+     * @return
+     */
+    private String hashPassword(String password)
+    {
+        try
+        {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] bytePassword = digest.digest(
+                    password.getBytes());
+
+            BigInteger no = new BigInteger(1, bytePassword);
+            String hashedPassword = no.toString(16);
+
+            while (hashedPassword.length() < 32) {
+                hashedPassword = "0" + hashedPassword;
+            }
+            return hashedPassword;
+
+        }
+        catch (NoSuchAlgorithmException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private Boolean compareIncomingPassword(String email, String inPassword)
+    {
+        Intern user = this.internService.getUserByEmail(email);
+
+        if(user.getPassword().toString().equals(inPassword))
+        {
+            return true;
+        }
+        return false;
+    }
+
+
 
     //------------------------------------Intern PUT update routes
 
