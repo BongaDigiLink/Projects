@@ -93,14 +93,10 @@ body {
     zoom: 1;
   }
 
-  .jumbotron{
-    margin-top: 100px;
-    margin-left: 10px; 
-    margin-right: 10px;
+  p{
+    font-size: 14px;
   }
 
-  .icons{
-    width: 50px;
-    height: 50px;
-}
-  
+  a .text-muted{
+    font-size: 16px;
+  }

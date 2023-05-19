@@ -8,6 +8,10 @@ import za.co.ums_api.models.LearningSkill;
 import za.co.ums_api.repository.InternRepository;
 import za.co.ums_api.repository.LearningSkillRepository;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -96,7 +100,39 @@ public class InternService
 
     public List<Intern> getInterns()
     {
-        return this.internRepository.findAll();
+        List<Intern> list = internRepository.findAll();
+        List<Intern> activeUsers = new ArrayList<>();
+
+        for(Intern user: list)
+        {
+            if(user.getActiveStatus().equals("ACTIVE"))
+            {
+                activeUsers.add(user);
+            }
+        }
+
+        return  activeUsers;
+    }
+
+    public List<Intern> getInactiveInterns()
+    {
+        List<Intern> list = internRepository.findAll();
+        List<Intern> inactiveUsers = new ArrayList<>();
+
+        if(list.isEmpty())
+        {
+            return null;
+        }
+
+        for(Intern user: list)
+        {
+            if(user.getActiveStatus().equals("INACTIVE"))
+            {
+                inactiveUsers.add(user);
+            }
+        }
+
+        return  inactiveUsers;
     }
 
     public List<LearningSkill> getAllSkills()
@@ -154,7 +190,7 @@ public class InternService
                                 intern.getName(),
                                 intern.getSurname(),
                                 intern.getTrainingField(),
-                                intern.getPassword()));
+                                hashPassword(intern.getPassword())));
 
                 return true;
             }
@@ -163,6 +199,27 @@ public class InternService
                 System.out.println("Error creating user. "+e.getMessage());
                 return false;
             }
+        }
+    }
+    private String hashPassword(String password)
+    {
+        try
+        {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] bytePassword = digest.digest(
+                    password.getBytes());
+
+            BigInteger no = new BigInteger(1, bytePassword);
+            String hashedPassword = no.toString(16);
+
+            while (hashedPassword.length() < 32) {
+                hashedPassword = "0" + hashedPassword;
+            }
+            return hashedPassword;
+
+        } catch (NoSuchAlgorithmException e)
+        {
+            throw new RuntimeException(e);
         }
     }
 }

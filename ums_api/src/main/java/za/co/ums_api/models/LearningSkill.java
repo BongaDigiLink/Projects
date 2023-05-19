@@ -9,14 +9,24 @@ import java.util.Date;
 @Table(name="Skills")
 public class LearningSkill
 {
+
     @Id
     @GeneratedValue
     private Integer id;
     private String name;
-    @Column(length=1000)
+    @Column(length=1255)
     private String description;
     private Integer programmeDuration;
     private Date dueDate;
+    private String imgUrl;
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
 
     public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
@@ -31,13 +41,14 @@ public class LearningSkill
     //Number of enrolled students/trainees/interns
     private static Integer count = 0;
 
-    public LearningSkill(String name, String fieldTraining, Date date,String description)
+    public LearningSkill(String name, String fieldTraining, Date date,String description, String url)
     {
         this.name = name;
         this.fieldTraining = fieldTraining;
         this.description = description;
         this.dueDate = date;
         count +=1;
+        this.imgUrl = url;
     }
 
     public LearningSkill(String name, String description)
@@ -48,6 +59,16 @@ public class LearningSkill
 
     public LearningSkill()
     {
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    @Id
+    @GeneratedValue
+    public Integer getId() {
+        return id;
     }
 
     public String getName() {

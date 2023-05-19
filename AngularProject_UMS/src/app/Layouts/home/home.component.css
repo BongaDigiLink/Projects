@@ -23,17 +23,11 @@
     padding-bottom: 0px;
 }
 
-.carousel-inner{
-
-}
-
-.carousel-item{
-
-}
-
-.active{
-
-}
+.jumbotron{
+    margin-bottom: 50px;
+    margin-left: 10px; 
+    margin-right: 10px;
+  }
 
 .banner_taital_main {
     width: 100%;

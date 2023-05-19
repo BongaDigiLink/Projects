@@ -43,24 +43,15 @@ export class SignInComponent
       email: this.form.value.email,
       password: this.form.value.password};
 
-    // console.log("Form inputs : "+ body)
-    // this.authService.signin(body).subscribe({
-    //   next: () => {
-    //     this.router.navigateByUrl('/dashboard');
-    //   },
-    //   error: ({ error }) => {
-    //     if (error.username || error.password) {
-    //       this.form.setErrors({ credentials: true });
-    //     }
-    //   }
-    // })
-
     this.service.loginIntern(body).subscribe(
       (response: Intern) =>
       {
         //console.log("Logged in user status : "+response.activeStatus)
         sessionStorage.setItem('user_email',`${response.email}`)
         sessionStorage.setItem('user_id',`${response.id}`)
+
+        this.authService.loginUser();
+        //alertifyjs.success('message');
 
         this.router.navigate(['/dashboard']);
       },
@@ -69,6 +60,5 @@ export class SignInComponent
         alert(error.message);
       }
     )
-
   }
 }

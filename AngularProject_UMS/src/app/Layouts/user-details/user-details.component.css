@@ -9,3 +9,18 @@
     font-size: 14px;
     color: rgb(51, 50, 50);
 }
+
+.divider
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.inactive{
+    background-color: grey;
+}
+
+.active-header{
+    background-color: green;
+}
+

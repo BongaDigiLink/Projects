@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MentorService } from '../../service/mentor.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Intern } from '../../models/intern';
 
 @Component({
@@ -14,13 +14,14 @@ export class UserViewComponent implements OnInit
 {
   public edit = false;
   public userView: Intern = new Intern;
-  public userId!: Number;
+  public userId!: number;
 
 
   constructor(
     private fb : FormBuilder,
     private mentorService: MentorService,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private router_: Router
   ){}
 
 
@@ -31,11 +32,18 @@ export class UserViewComponent implements OnInit
 
     this.mentorService.getInternDetailsById(this.userId).subscribe( data =>
       {
-        console.log("Data (user) from API "+data);
         this.userView = data;
+
+        this.form.setValue({name:`${this.userView.name}`,
+       surname:`${this.userView.surname}`,
+        email:`${this.userView.email}`,
+         trainingField:`${this.userView.trainingField}`,
+          activeStatus:`${this.userView.activeStatus}`});
+
       }, (err: any) => {
         console.log('Could not retrieve this user '+ this.userId)
       })
+
   }
 
   onClickEdit()
@@ -53,16 +61,17 @@ export class UserViewComponent implements OnInit
     name:[''],
     surname:[''],
     trainingField:[''],
-    activeStatus:['']
+    activeStatus:[''],
   })
 
-  initForm(): FormGroup {
+  initForm(): FormGroup 
+  {
     let form =  this.fb.group({
       email: ['', Validators.required, Validators.email],
       name: ['', Validators.required],
       surname: ['', Validators.required],
       trainingField: ['', Validators.required],
-      activeStatus:[this.userView.activeStatus, Validators.required]
+      activeStatus:['', Validators.required]
     })
 
     //Check whether email is not used by other account.
@@ -84,13 +93,15 @@ export class UserViewComponent implements OnInit
 
     this.mentorService.updateInternDetails(this.userId,body).subscribe(
       (response: any) => {
-        console.log("Response from api : "+response)
+        //console.log("Response from api : "+response)
       },
       (error: HttpErrorResponse) =>
       {
         alert(error.message);
       }
     )
+
+    this.router_.navigate(['/user-details']);
   }
 
 
