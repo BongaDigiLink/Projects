@@ -46,14 +46,23 @@ export class SignInComponent
     this.service.loginIntern(body).subscribe(
       (response: Intern) =>
       {
-        //console.log("Logged in user status : "+response.activeStatus)
-        sessionStorage.setItem('user_email',`${response.email}`)
-        sessionStorage.setItem('user_id',`${response.id}`)
+        console.log((response.activeStatus?.toString() === "ACTIVE"));
+        if(response.activeStatus?.toString() === "ACTIVE")
+        {
+          //console.log("Logged in user status : "+response.activeStatus)
+          sessionStorage.setItem('user_email',`${response.email}`)
+          sessionStorage.setItem('user_id',`${response.id}`)
 
-        this.authService.loginUser();
-        //alertifyjs.success('message');
+          this.authService.loginUser();
+          //alertifyjs.success('message');
 
-        this.router.navigate(['/dashboard']);
+          this.router.navigate(['/dashboard']);
+        }
+        else{
+          alert("Unauthorised Access, Please contact your System Admin at Admin@digilink.africa")
+        }
+
+        
       },
       (error: HttpErrorResponse) =>
       {

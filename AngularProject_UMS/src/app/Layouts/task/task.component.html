@@ -1,1 +1,43 @@
-<p>task works!</p>
+<app-navbar></app-navbar>
+<div class="container" style="margin-top: 10px;">
+  <h1>{{task.name}}</h1>
+
+  <form [formGroup]="form">
+    
+    <input class="form-control"
+     type="text" formControlName="taskTitle" required>
+
+    <label for="description">Description:</label>
+    <textarea class="form-control"
+     type="text" formControlName="taskDescription" rows="4" required></textarea>
+
+
+    <label for="dueDate">Due Date:</label>
+    <input class="form-control"
+     type="date" formControlName="dueDate" required>
+
+    <label for="trainingField">Training Field:</label>
+    <select formControlName="trainingField" class="form-control" >
+      <option>Data Analytics</option>
+      <option>Full Stack Software Developer</option>
+      <option>Software Tester</option>
+    </select>
+
+    <button
+      type="submit" 
+      (click)="markDone()"
+      *ngIf="viewElem"
+      class="btn btn-primary">Mark Done
+    </button>
+
+    <button
+      type="submit" 
+      (click)="updateTask()"
+      *ngIf="viewElemS"
+      class="btn btn-primary">Save Changes
+    </button>
+     
+  </form>
+</div>
+<app-footer></app-footer>
+

@@ -14,7 +14,7 @@
                 <div class="panel-body">
                   <h4>{{task.name}}</h4>
                   <div class="image-wrapper">
-                    <a class="image-wrapper image-zoom cboxElement" href="#">
+                    <a class="image-wrapper image-zoom cboxElement" (click)="viewTask(task.id)">
                       <img src="{{task.imgUrl}}" alt="Photo of Task placeholder" height="400px" width="1200px">
                       <div class="image-overlay"></div> 
                     </a>

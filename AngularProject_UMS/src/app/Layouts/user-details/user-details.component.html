@@ -1,53 +1,113 @@
 <app-navbar></app-navbar>
-<div class="container" style="margin-top: 100px;">
-  
-    <!--Loop through all the users (Display them)-->
+<head>
+  <title>User Accounts</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
 
-  <h1><span class="badge badge-success active-header">Active Users</span></h1>
+    h1 {
+      text-align: center;
+    }
 
-    
-  <div class="row">
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
 
-      <div class="card card-user" style="width: 18rem;" *ngFor="let user of users">
-        <img class="card-img-top"
-         src="https://images.unsplash.com/photo-1599009434802-ca1dd09895e7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Card image cap">
-        <div class="card-body card-details">
-          <h5 class="card-title" style="color:black">Name: {{ user.name }}</h5>
-          <p class="card-text">Surname: {{ user.surname }}</p>
-          <p class="card-text">Email: {{ user.email }}</p>
-          <p class="card-text">Training Field: {{ user.trainingField }}</p>
-          <!-- <a class="btn btn-primary" 
-      
-          (click)="getIntern(user.email)">View User</a> -->
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+      background-color: #ffffff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1><span class="badge badge-success active-header">Active Users</span></h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Edit</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Training Field</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Account Status</th>
+        <th>Delete User</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr *ngFor="let user of users">
+        <td>
           <a class="btn btn-primary" (click)="viewUser(user.id)">View User</a>
-          <a *ngIf="mentorDisplay" class="btn btn-danger" (click)="deleteUser(user.id)" style="float: right;">Delete User</a>
-        </div>
-      </div>
+        </td>
+        <td>{{user.name}}</td>
+        <td>{{user.surname}}</td>
+        <td>{{user.trainingField}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.role}}</td>
+        <td>{{user.activeStatus}}</td>
+        <td>
+          <a *ngIf="mentorDisplay" class="btn btn-danger"
+           (click)="deleteUser(user.id)">Delete User</a>
+        </td>
+      </tr>
 
+    </tbody>
+  </table>
   </div>
-
-  <div class="row divider">
+  
+  <div class="container" style="margin-top: 20px;">
     <h1><span class="badge badge-secondary">Deactivated Users</span></h1>
-  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Edit</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Training Field</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Account Status</th>
+        <th>Delete User</th>
+      </tr>
+    </thead>
+    <tbody>
 
-  <div class="row">
-    <div class="card card-user inactive" style="width: 18rem;" *ngFor="let user of ausers">
-      <img class="card-img-top"
-       src="https://images.unsplash.com/photo-1599009434802-ca1dd09895e7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Card image cap">
-      <div class="card-body card-details">
-        <h5 class="card-title" style="color:black">Name: {{ user.name }}</h5>
-        <p class="card-text">Surname: {{ user.surname }}</p>
-        <p class="card-text">Email: {{ user.email }}</p>
-        <p class="card-text">Training Field: {{ user.trainingField }}</p>
-        <!-- <a class="btn btn-primary" 
-    
-        (click)="getIntern(user.email)">View User</a> -->
-        <a class="btn btn-primary" (click)="viewUser(user.id)">View User</a>
-        <a *ngIf="mentorDisplay" class="btn btn-danger" (click)="deleteUser(user.id)" style="float: right;">Delete User</a>
-      </div>
-    </div>
-  </div>
+      <tr *ngFor="let user of ausers">
+        <td>
+          <a class="btn btn-primary" (click)="viewUser(user.id)">View User</a>
+        </td>
+        <td>{{user.name}}</td>
+        <td>{{user.surname}}</td>
+        <td>{{user.trainingField}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.role}}</td>
+        <td>{{user.activeStatus}}</td>
+        <td>
+          <a *ngIf="mentorDisplay" class="btn btn-danger"
+           (click)="deleteUser(user.id)">Delete User</a>
+        </td>
+      </tr>
 
-</div>
+    </tbody>
+  </table>
+  </div>
+</body>
+
 
 <app-footer></app-footer>

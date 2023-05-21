@@ -134,4 +134,8 @@ export class MentorService
       return this.http.get<Skills>(`${this.apiURL}/get-task/`+id);
     }
 
+    public updateTask(id: number, email: string | null)
+    {
+      return this.http.post<any>(`${this.apiURL}/update-task/${id}`, email);
+    }
 }

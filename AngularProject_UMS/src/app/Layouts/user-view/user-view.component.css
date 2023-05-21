@@ -9,3 +9,57 @@
     margin: 10px 14px 0px 14px;
     
 }
+
+
+body {
+  font-family: Arial, sans-serif;
+  font-size: medium;
+  background-color: #f2f2f2;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-details img {
+  width: 150px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.user-details p {
+  margin-bottom: 10px;
+}
+
+.user-details span {
+  font-weight: bold;
+}
+
+.user-details a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+
+.user-details a:hover {
+  text-decoration: underline;
+}
