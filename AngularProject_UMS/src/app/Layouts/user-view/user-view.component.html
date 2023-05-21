@@ -9,8 +9,6 @@
             <p><span>Surname:</span>{{userView.surname}}</p>
             <p><span>Email:</span> {{userView.email}}</p>
             <p><span>Training Field:</span> {{userView.trainingField}}</p>
-            <p><span>Interests:</span> Technology, Travel, Photography</p>
-            <p><span>Website:</span> <a href="https://example.com">https://example.com</a></p>
         </div>
 
         <div class="center text-center">
@@ -29,7 +27,7 @@
                   Update User
                 </div>
                 
-                  <div class="panel-body">
+                  <div class="panel-body" style="margin-left: 20px; margin-right: 20px;">
                       <form [formGroup]="form" (ngSubmit)="updateIntern()">
                                   
                           <div class="form-group">
@@ -67,10 +65,10 @@
                             </select>
                         </div>
 
-                          <div class="center text-center">
+                          <div class="center text-center" style="margin-bottom: 40px;">
                             <button
                             type="submit"
-                             class="btn btn-primary" >Update User</button>
+                             class="btn btn-primary">Update User</button>
                           </div>
                       </form>
                  </div>

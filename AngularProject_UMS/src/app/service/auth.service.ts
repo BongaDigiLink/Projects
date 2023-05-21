@@ -33,7 +33,7 @@ export class AuthService
   {
 
     this.userLoggedIn = new BehaviorSubject<boolean>(true);
-    sessionStorage.setItem('active_status','active');
+    sessionStorage.setItem('active_status','ACTIVE');
     console.log((this.userLoggedIn.subscribe((data) => {
       console.log("Subscribed data: "+data);
     })));
@@ -56,7 +56,7 @@ export class AuthService
     }
     else if(sessionStorage.getItem('user_modifier') === "Mentor")
     {
-      console.log("Mentor run");
+      //console.log("Mentor run");
       this.mentorUser = true;
       this.userType = 'Mentor';
     }
@@ -64,7 +64,7 @@ export class AuthService
 
   checkUserAccess(): boolean
   {
-    if(sessionStorage.getItem('active_status') === 'active')
+    if(sessionStorage.getItem('active_status') === 'ACTIVE')
     {
       return true;
     }

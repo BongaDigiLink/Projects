@@ -3,6 +3,7 @@ import { MentorService } from '../../service/mentor.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Skills } from 'src/app/models/skills';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-task',
@@ -14,9 +15,12 @@ export class TaskComponent implements OnInit
   public edit = false;
   public task: Skills = new Skills;
   public taskId!: number;
+  public viewElem: boolean = false;
+  public viewElemS: boolean = false;
 
 
   constructor(
+    private authService: AuthService,
     private fb : FormBuilder,
     private mentorService: MentorService,
     private router: ActivatedRoute,
@@ -28,6 +32,8 @@ export class TaskComponent implements OnInit
     this.router.params.subscribe( params => {
       this.taskId = params['id'];
     });
+
+    this.checkUserAuth();
 
     this.mentorService.getTaskByID(this.taskId).subscribe( data =>
       {
@@ -48,15 +54,28 @@ export class TaskComponent implements OnInit
 
   }
 
-  onClickEdit()
+  public checkUserAuth()
   {
-    if(this.edit === false)
+    if(sessionStorage.getItem('user_modifier') === "Mentor")
     {
-    this.edit = true;
-    }else{
-      this.edit = false;
+      this.viewElem = false;
+      this.viewElemS = true;
+      
     }
+    else{
+      this.viewElem = true;
+    this.viewElemS = false;
+    }
+
   }
+
+  public markDone()
+  {
+    this.mentorService.updateTask(this.taskId, sessionStorage.getItem('user_email'));
+    alert("This task has been updated.");
+    this.router_.navigate(['/tasks']);
+  }
+
 
   public form = this.fb.group({
     taskTitle:[''],
@@ -88,11 +107,5 @@ export class TaskComponent implements OnInit
 
     this.router_.navigate(['/tasks']);
   }
-
-  public markDone()
-  {
-    
-  }
-
 
 }
