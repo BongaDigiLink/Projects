@@ -11,8 +11,7 @@ import { MentorService } from 'src/app/service/mentor.service';
 export class TasksComponent implements OnInit{
 
   constructor(private dataService: MentorService,
-    private router: Router,
-    private activatedRouter: ActivatedRoute){}
+    private router: Router){}
 
     public tasks: Skills[] = [];
 

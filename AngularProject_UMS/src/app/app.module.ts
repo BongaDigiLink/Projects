@@ -34,7 +34,8 @@ import { UserEditGuard } from './guard/user-edit.guard';
     FooterComponent,
     MainComponent,
     CreateTaskComponent,
-    TasksComponent
+    TasksComponent,
+    TaskComponent
   ],
   imports:
   [
@@ -52,7 +53,7 @@ import { UserEditGuard } from './guard/user-edit.guard';
       {path: 'user/:id', component: UserViewComponent, canActivate:[UserEditGuard]},
       {path: 'create-task', component: CreateTaskComponent},
       {path: 'tasks', component: TasksComponent},
-      {path: 'task/:title', component: TaskComponent},
+      {path: 'task/:id', component: TaskComponent},
 
     ])
   ],

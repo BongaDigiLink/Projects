@@ -1,1 +1,34 @@
-<p>task works!</p>
+
+<div class="container">
+  <h1>Edit Task: </h1>
+
+  <form [formGroup]="form">
+    
+    <input class="form-control"
+     type="text" formControlName="taskTitle" required>
+
+    <label for="description">Description:</label>
+    <textarea class="form-control"
+     type="text" formControlName="taskDescription" rows="4" required></textarea>
+
+
+    <label for="dueDate">Due Date:</label>
+    <input class="form-control"
+     type="date" formControlName="dueDate" required>
+
+    <label for="trainingField">Training Field:</label>
+    <select formControlName="trainingField" class="form-control" >
+      <option>Data Analytics</option>
+      <option>Full Stack Software Developer</option>
+      <option>Software Tester</option>
+    </select>
+
+    <button
+      type="submit" 
+      (ngSubmit)="updateTask()"
+      class="btn btn-primary" >Save Changes
+    </button>
+     
+  </form>
+</div>
+
