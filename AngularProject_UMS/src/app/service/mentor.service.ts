@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Mentor } from '../models/mentor';
 import { Intern } from '../models/intern';
 import { Skills } from '../models/skills';
+import { Record } from '../models/records';
 
 @Injectable({
   providedIn: 'root'
@@ -137,5 +138,25 @@ export class MentorService
     public updateTask(id: number, email: string | null)
     {
       return this.http.post<any>(`${this.apiURL}/update-task/${id}`, email);
+    }
+
+    /**
+     *  Get logged in users tasks (completed tasks)
+     *  Admin -> Get all completed tasks records
+     *  User  -> Create a record  
+     */
+    public getMytasks(id: number): Observable<Record[]>
+    {
+      return this.http.get<Record[]>(`${this.apiURL}/get-records/${id}`);
+    }
+
+    public getCompleteTasks(id: number): Observable<Record[]>
+    {
+      return this.http.get<Record[]>(`${this.apiURL}/user-tasks/${id}`);
+    }
+
+    public createRecord(data: any, email: string)
+    {
+      return this.http.post<any>(`${this.apiURL}/create-record/${email}`, data);
     }
 }

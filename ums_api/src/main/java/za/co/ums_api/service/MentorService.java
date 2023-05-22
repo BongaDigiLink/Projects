@@ -1,15 +1,18 @@
 package za.co.ums_api.service;
 
 import jakarta.transaction.Transactional;
+import org.apache.catalina.Store;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import za.co.ums_api.models.Intern;
 import za.co.ums_api.models.LearningSkill;
 import za.co.ums_api.models.Mentor;
+import za.co.ums_api.models.Records;
 import za.co.ums_api.repository.InternRepository;
 import za.co.ums_api.repository.LearningSkillRepository;
 import za.co.ums_api.repository.MentorRepository;
+import za.co.ums_api.repository.RecordRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,11 +23,17 @@ public class MentorService {
     private final MentorRepository mentorRepository;
     private final LearningSkillRepository learningSkillRepository;
     private final InternRepository internRepository;
+    private final RecordRepository recordsRepo;
 
-    public MentorService(MentorRepository mentorRepository, LearningSkillRepository learningSkillRepository, InternRepository internRepository) {
+    public MentorService(MentorRepository mentorRepository,
+                         LearningSkillRepository learningSkillRepository,
+                         InternRepository internRepository,
+                         RecordRepository recordsRepo)
+    {
         this.mentorRepository = mentorRepository;
         this.learningSkillRepository = learningSkillRepository;
         this.internRepository = internRepository;
+        this.recordsRepo = recordsRepo;
     }
 
     //------------------------------------Intern Auth Management Functions
@@ -207,6 +216,41 @@ public class MentorService {
         LearningSkill tasks_ = task.get();
 
         return  tasks_;
+    }
+
+    public Boolean createRecord(Records record)
+    {
+        try
+        {
+            Intern user = this.internRepository.findByEmail(record.getUserName());
+
+            this.recordsRepo.save(new Records(
+                    user.getName()+" "+user.getSurname(),
+                    record.getTaskName(),
+                    record.getTaskTrainingField()
+            ));
+
+            return true;
+        }
+        catch (Exception e)
+        {
+            e.getMessage();
+            return false;
+        }
+    }
+
+    public List<Records> getUserRecords(Integer id)
+    {
+        if(!this.recordsRepo.findAll().isEmpty())
+        {
+            List<Records> list = this.recordsRepo.findAll();
+
+            for (Records record: list)
+            {
+
+            }
+        }
+        return null;
     }
 
 

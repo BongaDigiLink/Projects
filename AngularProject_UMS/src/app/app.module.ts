@@ -19,6 +19,7 @@ import { DashBoardAccessGuard } from './guard/dash-board-access.guard';
 import { TasksComponent } from './Layouts/tasks/tasks.component';
 import { TaskComponent } from './Layouts/task/task.component';
 import { UserEditGuard } from './guard/user-edit.guard';
+import { RecordComponent } from './Layouts/record/record.component';
 
 @NgModule(
   {
@@ -35,7 +36,8 @@ import { UserEditGuard } from './guard/user-edit.guard';
     MainComponent,
     CreateTaskComponent,
     TasksComponent,
-    TaskComponent
+    TaskComponent,
+    RecordComponent
   ],
   imports:
   [

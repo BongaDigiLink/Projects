@@ -7,12 +7,11 @@ import org.springframework.web.bind.annotation.*;
 import za.co.ums_api.models.Intern;
 import za.co.ums_api.models.LearningSkill;
 import za.co.ums_api.models.Mentor;
+import za.co.ums_api.models.Records;
 import za.co.ums_api.service.InternService;
 import za.co.ums_api.service.MentorService;
 
-import java.net.http.HttpTimeoutException;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/mentor")
@@ -194,6 +193,28 @@ public class MentorController
             return new ResponseEntity<>(task, HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping("/create-record/")
+    public ResponseEntity<?> createRecord(@RequestBody Records data)
+    {
+        if(this.mentorService.createRecord(data))
+        {
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        };
+
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping("/get-records/")
+    public ResponseEntity<?> getRecords(@RequestBody Integer email)
+    {
+        if(this.mentorService.checkUser(email))
+        {
+            List<Records> records = this.mentorService.getUserRecords(email);
+            return new ResponseEntity<>(records, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 
