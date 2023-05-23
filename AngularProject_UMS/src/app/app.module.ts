@@ -19,6 +19,7 @@ import { DashBoardAccessGuard } from './guard/dash-board-access.guard';
 import { TasksComponent } from './Layouts/tasks/tasks.component';
 import { TaskComponent } from './Layouts/task/task.component';
 import { UserEditGuard } from './guard/user-edit.guard';
+import { RecordComponent } from './Layouts/record/record.component';
 
 @NgModule(
   {
@@ -35,7 +36,8 @@ import { UserEditGuard } from './guard/user-edit.guard';
     MainComponent,
     CreateTaskComponent,
     TasksComponent,
-    TaskComponent
+    TaskComponent,
+    RecordComponent
   ],
   imports:
   [
@@ -43,7 +45,8 @@ import { UserEditGuard } from './guard/user-edit.guard';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot([
+    RouterModule.forRoot(
+      [
       {path: '', redirectTo : 'home', pathMatch: 'full'},
       {path: 'home', component: HomeComponent},
       {path: 'signup', component: SignUpComponent},
@@ -54,6 +57,7 @@ import { UserEditGuard } from './guard/user-edit.guard';
       {path: 'create-task', component: CreateTaskComponent},
       {path: 'tasks', component: TasksComponent},
       {path: 'task/:id', component: TaskComponent},
+      {path: 'completed', component: RecordComponent}
 
     ])
   ],

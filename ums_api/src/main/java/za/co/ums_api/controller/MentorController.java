@@ -7,12 +7,11 @@ import org.springframework.web.bind.annotation.*;
 import za.co.ums_api.models.Intern;
 import za.co.ums_api.models.LearningSkill;
 import za.co.ums_api.models.Mentor;
+import za.co.ums_api.models.Records;
 import za.co.ums_api.service.InternService;
 import za.co.ums_api.service.MentorService;
 
-import java.net.http.HttpTimeoutException;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/mentor")
@@ -151,11 +150,11 @@ public class MentorController
         return new ResponseEntity<Boolean>(true, HttpStatus.OK);
     }
 
-    @PutMapping(path="/update-skill/")
-    public ResponseEntity<LearningSkill> updateSkill(@RequestBody LearningSkill skill)
+    @PutMapping(path="/update-skill/{id}")
+    public ResponseEntity<LearningSkill> updateSkill(@PathVariable("id") Integer id,@RequestBody LearningSkill skill)
     {
-        LearningSkill updated = mentorService.updateSkill(skill);
-        return  new ResponseEntity<LearningSkill>(updated, HttpStatus.OK);
+        LearningSkill updated = mentorService.updateSkill(id,skill);
+        return  new ResponseEntity<>(updated, HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/remove-skill/")
@@ -194,6 +193,36 @@ public class MentorController
             return new ResponseEntity<>(task, HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping("/create-record/{id}")
+    public ResponseEntity<?> createRecord(@PathVariable("id") Integer id, @RequestBody Records data)
+    {
+        System.out.println("Incoming record: "+data.toString());
+        if(this.mentorService.createRecord(id,data))
+        {
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        };
+
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping("/get-records/")
+    public ResponseEntity<?> getRecords(@RequestBody Integer email)
+    {
+        if(this.mentorService.checkUser(email))
+        {
+            List<Records> records = this.mentorService.getUserRecords(email);
+            return new ResponseEntity<>(records, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/user-tasks/")
+    public ResponseEntity<List<Records>> completedRecords()
+    {
+        List<Records> list = this.mentorService.getRecords();
+         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
 

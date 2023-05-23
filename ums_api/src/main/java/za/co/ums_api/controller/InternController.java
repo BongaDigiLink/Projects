@@ -6,16 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.co.ums_api.models.Intern;
 import za.co.ums_api.models.LearningSkill;
-import za.co.ums_api.models.Mentor;
 import za.co.ums_api.repository.InternRepository;
 import za.co.ums_api.service.InternService;
 
 import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/intern")
@@ -140,4 +137,5 @@ public class InternController
 
         return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
+
 }

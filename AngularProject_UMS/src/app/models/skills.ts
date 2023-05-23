@@ -1,4 +1,5 @@
-export class Skills{
+export class Skills
+{
     id?:number;
     name?:string;
     fieldTraining?:string;

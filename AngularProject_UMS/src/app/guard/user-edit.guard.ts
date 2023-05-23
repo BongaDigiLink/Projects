@@ -24,6 +24,10 @@ export class UserEditGuard implements CanActivate
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree 
     {
+      if(this.authService.getToEdit()?.toString() === sessionStorage.getItem('user_id'))
+      {
+        return true;
+      }
 
       if(this.authService.checkEditAccess())
       {
