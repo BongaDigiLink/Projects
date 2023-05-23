@@ -18,7 +18,7 @@ export class SignUpComponent
     name: ['', Validators.required],
     surname: ['', Validators.required],
     trainingField: ['', Validators.required],
-    password: ['', Validators.required],
+    password: ['', Validators.required, Validators.min(6)],
     confirmPassword: ['', Validators.required]
   })
 
