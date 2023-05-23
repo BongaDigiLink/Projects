@@ -45,7 +45,8 @@ import { RecordComponent } from './Layouts/record/record.component';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot([
+    RouterModule.forRoot(
+      [
       {path: '', redirectTo : 'home', pathMatch: 'full'},
       {path: 'home', component: HomeComponent},
       {path: 'signup', component: SignUpComponent},
@@ -56,6 +57,7 @@ import { RecordComponent } from './Layouts/record/record.component';
       {path: 'create-task', component: CreateTaskComponent},
       {path: 'tasks', component: TasksComponent},
       {path: 'task/:id', component: TaskComponent},
+      {path: 'completed', component: RecordComponent}
 
     ])
   ],

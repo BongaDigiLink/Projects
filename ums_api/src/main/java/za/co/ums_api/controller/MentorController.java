@@ -150,11 +150,11 @@ public class MentorController
         return new ResponseEntity<Boolean>(true, HttpStatus.OK);
     }
 
-    @PutMapping(path="/update-skill/")
-    public ResponseEntity<LearningSkill> updateSkill(@RequestBody LearningSkill skill)
+    @PutMapping(path="/update-skill/{id}")
+    public ResponseEntity<LearningSkill> updateSkill(@PathVariable("id") Integer id,@RequestBody LearningSkill skill)
     {
-        LearningSkill updated = mentorService.updateSkill(skill);
-        return  new ResponseEntity<LearningSkill>(updated, HttpStatus.OK);
+        LearningSkill updated = mentorService.updateSkill(id,skill);
+        return  new ResponseEntity<>(updated, HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/remove-skill/")
@@ -195,10 +195,10 @@ public class MentorController
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping("/create-record/")
-    public ResponseEntity<?> createRecord(@RequestBody Records data)
+    @PostMapping("/create-record/{id}")
+    public ResponseEntity<?> createRecord(@PathVariable("id") Integer id, @RequestBody Records data)
     {
-        if(this.mentorService.createRecord(data))
+        if(this.mentorService.createRecord(id,data))
         {
             return new ResponseEntity<>(HttpStatus.CREATED);
         };

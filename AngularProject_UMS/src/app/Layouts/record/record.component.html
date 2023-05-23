@@ -37,11 +37,10 @@
 <body>
 
   <div class="container" style="margin-top: 20px;">
-    <h1><span class="badge badge-secondary">Completed Tasks</span></h1>
+    <h1><span class="badge badge-secondary">My Completed Tasks</span></h1>
     <table>
         <thead>
         <tr>
-            <th>Name</th>
             <th>Date Completed</th>
             <th>Task Name</th>
             <th>Training Field</th>
@@ -83,7 +82,7 @@
   
             <tr *ngFor="let task of tasks">
     
-                <td>{{task.userName}}</td>
+                <td>{{task.email}}</td>
                 <td>{{task.dateCompleted}}</td>
                 <td>{{task.taskName}}</td>
                 <td>{{task.taskTraining}}</td>

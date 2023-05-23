@@ -15,24 +15,18 @@ public class Records
     @GeneratedValue
     private Integer recordID;
 
-    public String getEmail()
-    {
-        return email;
-    }
-
     private String email;
     private String dateCompleted;
-    private String userName;
     private String taskName;
-    private String taskTrainingField;
+    private String taskTraining;
 
     //Constructors
 
     public Records(String userName, String taskName, String taskTrainingField)
     {
-        this.userName = userName;
+        this.email = userName;
         this.taskName = taskName;
-        this.taskTrainingField = taskTrainingField;
+        this.taskTraining = taskTrainingField;
         this.dateCompleted = "Submitted "+LocalDateTime.now();
     }
 
@@ -50,13 +44,13 @@ public class Records
     public void setDateCompleted(String dateCompleted) {
         this.dateCompleted = dateCompleted;
     }
-
-    public String getUserName() {
-        return userName;
+    public String getEmail()
+    {
+        return email;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getTaskName()
@@ -68,11 +62,11 @@ public class Records
         this.taskName = taskName;
     }
 
-    public String getTaskTrainingField() {
-        return taskTrainingField;
+    public String getTaskTraining() {
+        return taskTraining;
     }
 
-    public void setTaskTrainingField(String taskTrainingField) {
-        this.taskTrainingField = taskTrainingField;
+    public void setTaskTraining(String taskTrainingField) {
+        this.taskTraining = taskTrainingField;
     }
 }

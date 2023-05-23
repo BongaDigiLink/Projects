@@ -55,7 +55,7 @@
 
             <div class="col-md-3 col-lg-3 col-sm-3 col-xs-6">
                 <div class="alert alert-success back-widget-set text-center"
-                routerLink="/user-details">
+                routerLink="/completed">
                     <i class="fa fa-list-ol fa-5x"></i>
                     <h3>Completed Tasks </h3>
                     Over tasks, Submissions
@@ -73,7 +73,7 @@
                     <hr>
                 </div>
                 
-                <div class="row">
+                <div class="row" style="margin-bottom: 20px;">
                     <!-- view allocated tasks [admin], due submissions[intern] etc -->
                     <div class="col-md-12 col-lg-12 col-sm-4">
                         <!-- One Item -->
@@ -82,20 +82,14 @@
                             <ng-container>
 
                                 <div class="panel-body">
-                                    <div class="image-wrapper">
-                                    <a class="image-wrapper image-zoom cboxElement" href="#">
-                                        <div class="image-overlay"></div> 
-                                    </a>
-                                    </div>
                                     
-                                    <h2>{{ task.name }}</h2>
-                                    <h4 class="text-muted"><a href="#"><strong>
+                                    <h2><a (click)="viewTask(task.id)">{{ task.name }}</a></h2>
+                                    <h4><a><strong>
                                         {{ task.fieldTraining }}</strong></a> |  Due date : {{ task.dueDate | date }}</h4>
                                     
                                     <p class="m-top-sm m-bottom-sm" style="font-size: 14px;">
                                     {{ task.description }}
                                     </p>
-                                    <a href="#"><i class="fa fa-angle-double-right"></i> view task</a>
                                     
                                 </div>
 
@@ -104,6 +98,7 @@
                         </div>           
                     </div>
                 </div>
+
         </div>
     </div>
 

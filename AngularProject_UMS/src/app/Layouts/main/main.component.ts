@@ -59,4 +59,9 @@ export class MainComponent implements OnInit
     })
   }
 
+  viewTask(id: number | undefined)
+  {
+    this.router.navigate([`/task/${id}`]);
+  }
+
 }

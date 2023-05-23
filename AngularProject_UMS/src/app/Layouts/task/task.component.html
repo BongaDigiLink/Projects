@@ -25,14 +25,14 @@
 
     <button
       type="submit" 
-      (ngSubmit)="markDone()"
+      (click)="markDone()"
       *ngIf="viewElem"
       class="btn btn-primary" >Mark Done
     </button>
 
     <button
       type="submit" 
-      (ngSubmit)="updateTask()"
+      (click)="updateTask()"
       *ngIf="viewElemS"
       class="btn btn-primary" >Save Changes
     </button>

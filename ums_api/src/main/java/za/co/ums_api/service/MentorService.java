@@ -1,9 +1,6 @@
 package za.co.ums_api.service;
 
 import jakarta.transaction.Transactional;
-import org.apache.catalina.Store;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import za.co.ums_api.models.Intern;
 import za.co.ums_api.models.LearningSkill;
@@ -177,15 +174,18 @@ public class MentorService {
         }
     }
 
-    public LearningSkill updateSkill(LearningSkill skill)
+    public LearningSkill updateSkill(Integer id, LearningSkill skill)
     {
-        LearningSkill edit = learningSkillRepository.findByName(skill.getName());
-        if (edit != null) {
-            edit = skill;
-            return edit;
-        } else {
-            return null;
-        }
+
+        Optional<LearningSkill> task = this.learningSkillRepository.findById(id);
+
+        LearningSkill task_ = task.get();
+        task_.setName(skill.getName());
+        task_.setDescription(skill.getDescription());
+        task_.setDueDate(skill.getDueDate());
+        task_.setFieldTraining(skill.getFieldTraining());
+
+        return this.learningSkillRepository.save(task_);
     }
 
     public List<LearningSkill> skills() {
@@ -218,16 +218,19 @@ public class MentorService {
         return  tasks_;
     }
 
-    public Boolean createRecord(Records record)
+    public Boolean createRecord(Integer id, Records record)
     {
+        Optional<LearningSkill> task = this.learningSkillRepository.findById(id);
+        Intern user = this.internRepository.findByEmail(record.getEmail());
+
+        LearningSkill task_ = task.get();
+
         try
         {
-            Intern user = this.internRepository.findByEmail(record.getUserName());
-
             this.recordsRepo.save(new Records(
-                    user.getName()+" "+user.getSurname(),
-                    record.getTaskName(),
-                    record.getTaskTrainingField()
+                    user.getName() +" "+user.getSurname(),
+                    task_.getName(),
+                    task_.getFieldTraining()
             ));
 
             return true;

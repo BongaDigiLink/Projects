@@ -17,6 +17,7 @@ export class TaskComponent implements OnInit
   public taskId!: number;
   public viewElem: boolean = false;
   public viewElemS: boolean = false;
+  private email_: string | undefined;
 
 
   constructor(
@@ -26,6 +27,7 @@ export class TaskComponent implements OnInit
     private router: ActivatedRoute,
     private router_: Router
   ){}
+  
 
 
   ngOnInit(): void {
@@ -69,13 +71,6 @@ export class TaskComponent implements OnInit
 
   }
 
-  public markDone()
-  {
-    this.mentorService.updateTask(this.taskId, sessionStorage.getItem('user_email'));
-    alert("This task has been updated.");
-    this.router_.navigate(['/tasks']);
-  }
-
 
   public form = this.fb.group({
     taskTitle:[''],
@@ -96,16 +91,39 @@ export class TaskComponent implements OnInit
     return form;
   }
 
-  public updateTask(): void
+  //Admin update function.
+  public updateTask()
   {
     const body = {
       name: this.form.value.taskTitle,
-      taskDescription: this.form.value.taskDescription,
+      description: this.form.value.taskDescription,
       dueDate: this.form.value.dueDate,
       trainingField: this.form.value.trainingField
     }
 
-    this.router_.navigate(['/tasks']);
+    this.mentorService.updateSkill(this.taskId, body).subscribe((data) => {
+      console.log(data);
+
+      alert("This task has been updated.");
+
+      this.router_.navigate(['/dashboard']);
+    })
+    
   }
+
+    //Intern user, mark this as completed an remove from task view.
+    public markDone()
+    {
+      const body = {
+        email: sessionStorage.getItem('user_email')?.toString(),
+      }
+  
+     this.email_ = sessionStorage.getItem('user_email')?.toString();
+     console.log(body);
+  
+      this.mentorService.updateTask(this.taskId, body);
+      alert("This task has been submitted. Marked done.");
+      this.router_.navigate(['/tasks']);
+    }
 
 }

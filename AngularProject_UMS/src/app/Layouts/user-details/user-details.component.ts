@@ -45,8 +45,9 @@ export class UserDetailsComponent implements OnInit
 
   viewUser(id : number | undefined) 
   {
-    this.authService.checkEditAccess();
-    this.router.navigate([`/user/${id}`]).then(data => console.log("data on: "+data));
+    //this.authService.checkEditAccess();
+    this.authService.toEdit(id);
+    this.router.navigate([`/user/${id}`]);//.then(data => console.log("data on: "+data));
   }
 
   public getDetails(id: number): void

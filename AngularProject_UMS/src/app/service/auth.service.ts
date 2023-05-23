@@ -19,6 +19,17 @@ export class AuthService
   private mentorUser: boolean = false;
   private userType: string = '';
   private status: boolean=false;
+  private user_id?: number | undefined;
+
+  public toEdit(id: number | undefined)
+  {
+    this.user_id = id;
+  }
+
+  public getToEdit(): number | undefined
+  {
+    return this.user_id;
+  }
 
 
   isLoggedIn(): boolean
@@ -80,6 +91,22 @@ export class AuthService
     }
 
     return false;
+  }
+
+  checkCurrentUser(): boolean
+  {
+    console.log(this.getUserId.toString() +' '+sessionStorage.getItem('user_id')?.toString())
+    if(this.getUserId.toString() === sessionStorage.getItem('user_id')?.toString())
+    {
+      return true;
+    }
+
+    return false;
+  }
+
+  getUserId(): number | undefined
+  {
+    return this.user_id;
   }
 
 }

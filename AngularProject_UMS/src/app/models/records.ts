@@ -1,8 +1,8 @@
 export class Record
 {
+    id?: number;
     email?: string;
     dateCompleted?: string;
-    userName?: string;
     taskName?: string;
     taskTraining?: string;
 }

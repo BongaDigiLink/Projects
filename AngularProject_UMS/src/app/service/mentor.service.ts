@@ -107,7 +107,7 @@ export class MentorService
     return this.http.post<any>(`${this.apiURL}/create-task/`, skill);
   }
 
-  public updateSkill(id: number, skill: Skills): Observable<any>
+  public updateSkill(id: number, skill: any): Observable<any>
   {
     return this.http.put<any>(`${this.apiURL}/update-skill/`+id, skill);
   }
@@ -135,9 +135,11 @@ export class MentorService
       return this.http.get<Skills>(`${this.apiURL}/get-task/`+id);
     }
 
-    public updateTask(id: number, email: string | null)
+    //Intern method to post to api. create a record.
+    //Records of completed tasks
+    public updateTask(id: number, data: any)
     {
-      return this.http.post<any>(`${this.apiURL}/update-task/${id}`, email);
+      return this.http.post<any>(`${this.apiURL}/create-record/${id}`, data);
     }
 
     /**

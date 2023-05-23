@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Intern } from '../../models/intern';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-user-view',
@@ -21,13 +22,17 @@ export class UserViewComponent implements OnInit
     private fb : FormBuilder,
     private mentorService: MentorService,
     private router: ActivatedRoute,
-    private router_: Router
+    private router_: Router,
+    private authService: AuthService
   ){}
 
 
   ngOnInit(): void {
     this.router.params.subscribe( params => {
       this.userId = params['id'];
+
+      //Set the to edit param, for Guard check, Should I want to edit this user.
+      this.authService.toEdit(this.userId);
     });
 
     this.mentorService.getInternDetailsById(this.userId).subscribe( data =>
