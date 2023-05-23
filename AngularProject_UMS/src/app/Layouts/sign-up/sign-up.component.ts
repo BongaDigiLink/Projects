@@ -54,16 +54,24 @@ export class SignUpComponent
       trainingField: this.form.value.trainingField,
       password: this.form.value.password};
 
-    this.service.register(body).subscribe(
-      (response: string) => {
-        //console.log("Response from api : "+response),
-        this.router.navigate(['/signin']);
-      },
-      (error: HttpHeaderResponse) =>
+      if(this.form.value.password === this.form.value.confirmPassword)
       {
-        alert(error.status);
+        this.service.register(body).subscribe(
+          (response: string) => {
+            //console.log("Response from api : "+response),
+            alert('Account Created, continue to login page.');
+            this.router.navigate(['/signin']);
+          },
+          (error: HttpHeaderResponse) =>
+          {
+            alert(error.status);
+          }
+        )
       }
-    )
+      else{
+        alert('Passwords do not match!');
+      }
+
   }
 
   matchValidator(

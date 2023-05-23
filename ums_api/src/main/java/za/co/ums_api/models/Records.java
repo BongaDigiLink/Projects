@@ -11,6 +11,14 @@ import java.time.LocalDateTime;
 @Table(name="Records")
 public class Records
 {
+    public Integer getRecordID() {
+        return recordID;
+    }
+
+    public void setRecordID(Integer recordID) {
+        this.recordID = recordID;
+    }
+
     @Id
     @GeneratedValue
     private Integer recordID;

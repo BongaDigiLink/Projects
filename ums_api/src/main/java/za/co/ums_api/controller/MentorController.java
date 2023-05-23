@@ -198,6 +198,7 @@ public class MentorController
     @PostMapping("/create-record/{id}")
     public ResponseEntity<?> createRecord(@PathVariable("id") Integer id, @RequestBody Records data)
     {
+        System.out.println("Incoming record: "+data.toString());
         if(this.mentorService.createRecord(id,data))
         {
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -215,6 +216,13 @@ public class MentorController
             return new ResponseEntity<>(records, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/user-tasks/")
+    public ResponseEntity<List<Records>> completedRecords()
+    {
+        List<Records> list = this.mentorService.getRecords();
+         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
 

@@ -152,9 +152,9 @@ export class MentorService
       return this.http.get<Record[]>(`${this.apiURL}/get-records/${id}`);
     }
 
-    public getCompleteTasks(id: number): Observable<Record[]>
+    public getCompleteTasks(): Observable<Record[]>
     {
-      return this.http.get<Record[]>(`${this.apiURL}/user-tasks/${id}`);
+      return this.http.get<Record[]>(`${this.apiURL}/user-tasks/`);
     }
 
     public createRecord(data: any, email: string)

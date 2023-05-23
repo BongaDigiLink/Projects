@@ -256,5 +256,11 @@ public class MentorService {
         return null;
     }
 
+    public List<Records> getRecords()
+    {
+        List<Records> list = this.recordsRepo.findAll();
+        return list;
+    }
+
 
 }

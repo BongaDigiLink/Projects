@@ -36,7 +36,7 @@
 <!--View for Current user-->
 <body>
 
-  <div class="container" style="margin-top: 20px;">
+  <div class="container" style="margin-top: 20px;" *ngIf="internDisplay">
     <h1><span class="badge badge-secondary">My Completed Tasks</span></h1>
     <table>
         <thead>
@@ -67,12 +67,12 @@
 <!--View for Admin-->
 <body>
 
-    <div class="container" style="margin-top: 20px;">
+    <div class="container" style="margin-top: 20px;" *ngIf="mentorDisplay">
       <h1><span class="badge badge-secondary">Completed Tasks by Users</span></h1>
       <table>
           <thead>
           <tr>
-              <th>Name</th>
+              <th>Intern</th>
               <th>Date Completed</th>
               <th>Task Name</th>
               <th>Training Field</th>

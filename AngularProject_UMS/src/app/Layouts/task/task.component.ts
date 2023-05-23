@@ -116,6 +116,10 @@ export class TaskComponent implements OnInit
     {
       const body = {
         email: sessionStorage.getItem('user_email')?.toString(),
+        name: this.form.value.taskTitle,
+      description: this.form.value.taskDescription,
+      dueDate: this.form.value.dueDate,
+      trainingField: this.form.value.trainingField
       }
   
      this.email_ = sessionStorage.getItem('user_email')?.toString();
