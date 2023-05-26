@@ -1,0 +1,34 @@
+#----------------Insert to Users
+
+INSERT INTO INTERNS(ID,ACTIVE_STATUS, EMAIL, NAME, PASSWORD,ROLE,SURNAME, TRAINING_FIELD) 
+VALUES (131,'ACTIVE','bonga@gmail.com','Bonga','d5c40e418539a91860b5bb9ae07f0d51552cfba7b1a5ca37ff8ec8f836f7aca7','Mentor','Gougota','ADMIN'),
+(121,'ACTIVE','sizwe@gmail.com','Sizwe','78cf75e271be53f968ad90da0295c16abbab7eaee1641c60daf433b6c9d73529','Intern','Kumar','Full Stack Software Developer'),
+(101,'ACTIVE','thembi@mail.com','Thembi','f25cdbd2c6f7153b8caf8378f1308f00241a26cf8398eae39106960a3f2a6bfb','Intern','Khumalo','Software Tester')
+
+INSERT INTO RECORDS(RECORDID,DATE_COMPLETED,EMAIL,TASK_NAME,TASK_TRAINING)
+VALUES (11,'23 May 2023','thembi khumalo','Testing Angular Software','Software Tester'),
+(10,'23 May 2023','thembi khumalo','Testing Angular Software','Software Tester');
+
+#----------------Inserting into Skills
+
+INSERT INTO SKILLS (ID, DESCRIPTION,DUE_DATE,FIELD_TRAINING,IMG_URL,NAME) 
+VALUES (3,
+'This project comprises software development tools, frameworks, and libraries to manage Angular projects. It is called Angular CLI and allows you to analyse and test...',
+'2023-06-09 02:00:00',
+'Software Tester',
+'https://images.unsplash.com/photo-1573496004846-eb89fae542b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80	',
+'Testing Angular Software'),
+(221,
+'Most software developers use an Agile framework to get work done. And we get it: Agile makes it easy to ship a product and keep iterating on it. 
+But ishould... ',
+'2023-05-31 02:00:00',
+'Full Stack Software Developer',
+'https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+'Importance of Software Development Plan'),
+(132,
+'By analyzing Uber trips, we can draw many patterns like which day has the highest and the lowest trips or the busiest hour for Uber and many other patterns...',
+'2023-05-20 02:00:00',
+'Data Analytics',
+'https://images.unsplash.com/photo-1608222351212-18fe0ec7b13b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80',
+'Uber Trips Analysis');
+
