@@ -29,32 +29,23 @@ public class UserService
 
     public boolean updateContact(String email, Contact contact)
     {
-        if(!(this.userRepository.findByEmail(email) == null))
+        if( this.userRepository.findByEmail(contact.getEmail()) == null )
         {
-            return false;
-        }
-        //Do the update
-        Contact toUpdateContact = this.userRepository.findByEmail(contact.getEmail());
-        toUpdateContact.setName(contact.getEmail());
-        toUpdateContact.setSurname(contact.getSurname());
-        //First check before changing - each contact unique email address.
-        if(toUpdateContact.getEmail().equals(contact.getEmail()))
-        {
-            //ignore or paste same password again.
-            toUpdateContact.setEmail(contact.getEmail());
-        }
-        else
-        {
-            if( this.userRepository.findByEmail(contact.getEmail()) == null)
+            //Do the update
+            Contact toUpdateContact = this.userRepository.findByEmail(email);
+            if(toUpdateContact == null)
             {
-                toUpdateContact.setEmail(contact.getEmail());
+                return false;
             }
-            return false;
+            toUpdateContact.setName(contact.getEmail());
+            toUpdateContact.setSurname(contact.getSurname());
+            //First check before changing - each contact unique email address.
+            toUpdateContact.setEmail(contact.getEmail());
+
+            this.userRepository.save(toUpdateContact);
+            return true;
         }
-
-        this.userRepository.save(toUpdateContact);
-
-        return true;
+            return false;
     }
 
     public List<Contact> getUsers()
