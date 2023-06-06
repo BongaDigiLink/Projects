@@ -37,7 +37,7 @@ public class UserService
             {
                 return false;
             }
-            toUpdateContact.setName(contact.getEmail());
+            toUpdateContact.setName(contact.getName());
             toUpdateContact.setSurname(contact.getSurname());
             //First check before changing - each contact unique email address.
             toUpdateContact.setEmail(contact.getEmail());
