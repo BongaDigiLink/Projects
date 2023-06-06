@@ -1,9 +1,9 @@
 package co.zaCrudApplication.repository;
 
-import co.zaCrudApplication.model.User;
+import co.zaCrudApplication.model.Contact;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Integer>
+public interface UserRepository extends JpaRepository<Contact, Integer>
 {
-    boolean findByEmail(String email);
+    Contact findByEmail(String email);
 }

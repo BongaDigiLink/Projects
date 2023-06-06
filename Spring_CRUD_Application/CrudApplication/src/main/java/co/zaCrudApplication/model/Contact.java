@@ -3,18 +3,16 @@ package co.zaCrudApplication.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.springframework.stereotype.Component;
 
 @Data
 @RequiredArgsConstructor
 @Entity
 @NoArgsConstructor
-public class User
+public class Contact
 {
     @Id
     @GeneratedValue

@@ -1,6 +1,6 @@
 package co.zaCrudApplication.controller;
 
-import co.zaCrudApplication.model.User;
+import co.zaCrudApplication.model.Contact;
 import co.zaCrudApplication.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,21 +22,32 @@ public class UserController
         this.userService = userService;
     }
 
-    @PostMapping("create-user")
-    public ResponseEntity<User> createUser(@RequestBody User user)
+    @PostMapping("create-contact")
+    public ResponseEntity<Contact> createUser(@RequestBody Contact contact)
     {
-        if(this.userService.createUser(user))
+        System.out.println("Inside Post controller");
+        if(this.userService.createUser(contact))
         {
-            return new ResponseEntity<>(user, HttpStatus.CREATED);
+            return new ResponseEntity<>(contact, HttpStatus.CREATED);
         }
         return new ResponseEntity<>(null, HttpStatus.METHOD_NOT_ALLOWED);
     }
 
     @GetMapping("users")
-    public ResponseEntity<List<User>> getUsers()
+    public ResponseEntity<List<Contact>> getUsers()
     {
-        List<User> all_users = this.userService.getUsers();
-        return new ResponseEntity<>(all_users, HttpStatus.OK);
+        List<Contact> all_contacts = this.userService.getUsers();
+        return new ResponseEntity<>(all_contacts, HttpStatus.OK);
+    }
+
+    @PutMapping("/update-user/{email}")
+    public ResponseEntity<?> updateUser(@PathVariable("email") String email, @RequestBody Contact contact)
+    {
+        if(this.userService.updateContact(email, contact))
+        {
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        }
+        return new ResponseEntity<>("Operation unsuccessful",HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping(value = {"/",""})
