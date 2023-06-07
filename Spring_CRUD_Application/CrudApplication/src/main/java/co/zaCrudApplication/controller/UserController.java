@@ -49,6 +49,16 @@ public class UserController
         return new ResponseEntity<>("Operation unsuccessful",HttpStatus.BAD_REQUEST);
     }
 
+    @DeleteMapping("delete-user/{email}")
+    public ResponseEntity<?> deleteUser(@PathVariable("email") String email)
+    {
+        if(this.userService.deleteUser(email))
+        {
+            return new ResponseEntity<>("User account deleted.",HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Account not deleted.",HttpStatus.BAD_REQUEST);
+    }
+
     @GetMapping(value = {"/",""})
     public String homePage()
     {

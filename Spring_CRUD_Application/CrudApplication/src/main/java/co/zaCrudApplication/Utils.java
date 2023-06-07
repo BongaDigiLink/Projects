@@ -6,11 +6,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class Utils
 {
-    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public String hashPassword(String password)
     {
-        System.out.println("Inside the hash method:");
         String hashedPassword;
         hashedPassword = passwordEncoder.encode(password);
         return  hashedPassword;

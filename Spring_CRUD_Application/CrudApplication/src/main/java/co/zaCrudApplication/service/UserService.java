@@ -55,6 +55,16 @@ public class UserService implements UserDetailsService
             return false;
     }
 
+    public boolean deleteUser(String email)
+    {
+        if(this.userRepository.findByEmail(email) != null)
+        {
+            this.userRepository.deleteByEmail(email);
+            return true;
+        }
+        return false;
+    }
+
     public List<Contact> getUsers()
     {
         return this.userRepository.findAll();
