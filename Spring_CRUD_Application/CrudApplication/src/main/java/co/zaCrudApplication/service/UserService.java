@@ -1,29 +1,36 @@
 package co.zaCrudApplication.service;
 
+import co.zaCrudApplication.Utils;
 import co.zaCrudApplication.model.Contact;
 import co.zaCrudApplication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
-public class UserService
+public class UserService implements UserDetailsService
 {
-    @Autowired
     private UserRepository userRepository;
-    //private PasswordEncoder passwordEncoder;
+    private Utils utils = new Utils();
+    @Autowired
+    public UserService(UserRepository userRepository)
+    {
+        this.userRepository = userRepository;
+    }
 
     public boolean createUser(Contact newContact)
     {
-
         if(!(this.userRepository.findByEmail(newContact.getEmail()) == null))
         {
             return false;
         }
-        this.userRepository.save(new Contact(newContact.getName(), newContact.getSurname(), newContact.getEmail(), newContact.getPassword()));
+        String hashedPassword = utils.hashPassword(newContact.getPassword());
+
+        this.userRepository.save(new Contact(newContact.getName(), newContact.getSurname(), newContact.getEmail(), hashedPassword));
         return true;
     }
 
@@ -51,5 +58,10 @@ public class UserService
     public List<Contact> getUsers()
     {
         return this.userRepository.findAll();
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
     }
 }

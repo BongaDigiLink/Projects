@@ -25,7 +25,6 @@ public class UserController
     @PostMapping("create-contact")
     public ResponseEntity<Contact> createUser(@RequestBody Contact contact)
     {
-        System.out.println("Inside Post controller");
         if(this.userService.createUser(contact))
         {
             return new ResponseEntity<>(contact, HttpStatus.CREATED);
