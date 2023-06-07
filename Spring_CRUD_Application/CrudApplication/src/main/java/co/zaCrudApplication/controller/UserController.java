@@ -39,7 +39,7 @@ public class UserController
         return new ResponseEntity<>(all_contacts, HttpStatus.OK);
     }
 
-    @PutMapping("/update-user/{email}")
+    @PutMapping("update-user/{email}")
     public ResponseEntity<?> updateUser(@PathVariable("email") String email, @RequestBody Contact contact)
     {
         if(this.userService.updateContact(email, contact))

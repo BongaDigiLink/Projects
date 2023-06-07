@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class AppConfig
@@ -23,19 +24,30 @@ public class AppConfig
         this.userService = userService;
     }
 
-    protected void configure(HttpSecurity httpSecurity) throws Exception
+
+    @Bean
+    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity httpSecurity) throws Exception
     {
         httpSecurity
+                .csrf()
+                .disable()
                 .authorizeRequests()
-                .requestMatchers("/home").permitAll()
+                .requestMatchers("/").permitAll()
                 .requestMatchers("/create-contact").permitAll()
-                .and();
+                .requestMatchers("/users").permitAll()
+                .requestMatchers("/update-user/**").permitAll()
+                .and().formLogin()
+                .and()
+                .httpBasic();
+
+        return httpSecurity.build();
     }
 
-    protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception
-    {
-        authenticationManagerBuilder.userDetailsService(userService).passwordEncoder(passwordEncoder());
-    }
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception
+//    {
+//        authenticationManagerBuilder.userDetailsService(userService).passwordEncoder(passwordEncoder());
+//    }
 
     @Bean
      public PasswordEncoder passwordEncoder()
