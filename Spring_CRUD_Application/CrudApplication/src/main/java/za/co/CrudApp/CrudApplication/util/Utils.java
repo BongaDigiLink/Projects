@@ -1,4 +1,4 @@
-package za.co.CrudApp.CrudApplication;
+package za.co.CrudApp.CrudApplication.util;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

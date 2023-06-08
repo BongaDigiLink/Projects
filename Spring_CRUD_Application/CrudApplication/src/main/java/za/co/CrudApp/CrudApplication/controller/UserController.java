@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.co.CrudApp.CrudApplication.model.Contact;
 import za.co.CrudApp.CrudApplication.service.UserService;
+import za.co.CrudApp.CrudApplication.util.ResponseApp;
 
 import java.util.List;
 
@@ -56,6 +57,7 @@ public class UserController
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         }
         return new ResponseEntity<>("Operation unsuccessful",HttpStatus.BAD_REQUEST);
+//        return new ResponseApp(new ResponseEntity().response());
     }
 
     @DeleteMapping("delete-user/{email}")
