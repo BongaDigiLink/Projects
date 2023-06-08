@@ -31,6 +31,16 @@ public class UserController
         return new ResponseEntity<>(null, HttpStatus.METHOD_NOT_ALLOWED);
     }
 
+    @PostMapping("create-contact")
+    public ResponseEntity<Contact> createContact(@RequestBody Contact contact)
+    {
+        if(this.userService.createUser(contact))
+        {
+            return new ResponseEntity<>(contact, HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(null, HttpStatus.METHOD_NOT_ALLOWED);
+    }
+
     @GetMapping("users")
     public ResponseEntity<List<Contact>> getUsers()
     {

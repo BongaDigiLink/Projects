@@ -59,7 +59,8 @@ public class UserService implements UserDetailsService
     {
         if(this.userRepository.findByEmail(email) != null)
         {
-            this.userRepository.deleteByEmail(email);
+            Contact _del = this.userRepository.findByEmail(email);
+            this.userRepository.deleteById(_del.getUser_id());
             return true;
         }
         return false;
