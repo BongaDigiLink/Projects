@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.co.CrudApp.CrudApplication.model.Contact;
 import za.co.CrudApp.CrudApplication.service.UserService;
-import za.co.CrudApp.CrudApplication.util.ResponseApp;
+import za.co.CrudApp.CrudApplication.util.CustomResponse;
 
 import java.util.List;
 
@@ -22,17 +22,20 @@ public class UserController
         this.userService = userService;
     }
 
-    @PostMapping("create-user")
-    public ResponseEntity<Contact> createUser(@RequestBody Contact contact)
+    @PostMapping("create-contact")
+    public String createUser(@RequestBody Contact contact)
     {
+        CustomResponse customResponse;
         if(this.userService.createUser(contact))
         {
-            return new ResponseEntity<>(contact, HttpStatus.CREATED);
+            customResponse = new CustomResponse(new ResponseEntity<>(contact, HttpStatus.CREATED));
+            return customResponse.response();
         }
-        return new ResponseEntity<>(null, HttpStatus.METHOD_NOT_ALLOWED);
+        customResponse = new CustomResponse(new ResponseEntity<>("null",HttpStatus.METHOD_NOT_ALLOWED));
+        return customResponse.response();
     }
 
-    @PostMapping("create-contact")
+    @PostMapping("create-user")
     public ResponseEntity<Contact> createContact(@RequestBody Contact contact)
     {
         if(this.userService.createUser(contact))
@@ -50,24 +53,29 @@ public class UserController
     }
 
     @PutMapping("update-user/{email}")
-    public ResponseEntity<?> updateUser(@PathVariable("email") String email, @RequestBody Contact contact)
+    public String updateUser(@PathVariable("email") String email, @RequestBody Contact contact)
     {
+        CustomResponse customResponse;
         if(this.userService.updateContact(email, contact))
         {
-            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+            customResponse = new CustomResponse(new ResponseEntity<>(HttpStatus.ACCEPTED));
+            return customResponse.response();
         }
-        return new ResponseEntity<>("Operation unsuccessful",HttpStatus.BAD_REQUEST);
-//        return new ResponseApp(new ResponseEntity().response());
+        customResponse = new CustomResponse(new ResponseEntity<>("Operation unsuccessful",HttpStatus.BAD_REQUEST));
+        return customResponse.response();
     }
 
     @DeleteMapping("delete-user/{email}")
-    public ResponseEntity<?> deleteUser(@PathVariable("email") String email)
+    public String deleteUser(@PathVariable("email") String email)
     {
+        CustomResponse customResponse;
         if(this.userService.deleteUser(email))
         {
-            return new ResponseEntity<>("User account deleted.",HttpStatus.OK);
+            customResponse = new CustomResponse(new ResponseEntity<>("User account deleted.",HttpStatus.OK));
+            return  customResponse.response();
         }
-        return new ResponseEntity<>("Account not deleted.", HttpStatus.BAD_REQUEST);
+        customResponse = new CustomResponse(new ResponseEntity<>("Account not deleted.", HttpStatus.BAD_REQUEST));
+        return customResponse.response();
     }
 
     @GetMapping(value = {"/",""})
