@@ -32,6 +32,11 @@ public class UserController
         return new ResponseEntity<>(null, HttpStatus.METHOD_NOT_ALLOWED);
     }
 
+    /**
+     * @param contact - Java Pojo from client (postman, angular front end ...)
+     * @return - Object if created true, null if email already exists of JSON body does not match
+     *              expected POJO class.
+     */
     @PostMapping("create-contact")
     public ResponseEntity<Contact> createContact(@RequestBody Contact contact)
     {
@@ -42,6 +47,7 @@ public class UserController
         return new ResponseEntity<>(null, HttpStatus.METHOD_NOT_ALLOWED);
     }
 
+    //View the list of users in the data source.
     @GetMapping("users")
     public ResponseEntity<List<Contact>> getUsers()
     {
@@ -49,6 +55,12 @@ public class UserController
         return new ResponseEntity<>(all_contacts, HttpStatus.OK);
     }
 
+    /**
+     * Updating the user details.
+     * email forms part of the url e.g www.localhost:8080/update-user/bonga@mail.com
+     * @param email - of the user to update.
+     * @return status body. Details updated if email exists in the data source
+     */
     @PutMapping("update-user/{email}")
     public ResponseEntity<?> updateUser(@PathVariable("email") String email, @RequestBody Contact contact)
     {
@@ -60,6 +72,12 @@ public class UserController
 //        return new ResponseApp(new ResponseEntity().response());
     }
 
+    /**
+     * deleting the user details.
+     * email forms part of the url e.g www.localhost:8080/delete-user/bonga@mail.com
+     * @param email - of the user to delete.
+     * @return status body message.
+     */
     @DeleteMapping("delete-user/{email}")
     public ResponseEntity<?> deleteUser(@PathVariable("email") String email)
     {
