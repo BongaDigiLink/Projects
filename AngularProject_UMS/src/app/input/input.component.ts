@@ -8,7 +8,7 @@ import { FormControl } from '@angular/forms';
 })
 export class InputComponent implements OnInit{
 
-  @Input() form = new FormControl;
+  @Input() control = new FormControl;
 
   ngOnInit(){}
 }
