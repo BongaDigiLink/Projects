@@ -1,0 +1,23 @@
+<input [formControl]="form" />
+<ng-container *ngIf="form.dirty && form.touched && form.errors">
+    <div *ngIf="form.errors['required']">
+    Value is required.
+  </div>
+  <div *ngIf="form.errors['minlength']">
+    Value you entered is
+    {{ form.errors['actualLength'] }}
+    characters long, but it must be at least
+    {{ form.errors['minlength'].requiredLength }}
+    characters
+  </div>
+  <div *ngIf="form.errors['maxlength']">
+    Value you entered is
+    {{ form.errors['maxlength'].actualLength }}
+    characters long, but it cannot be longer than
+    {{ form.errors['maxlength'].requiredLength }}
+    characters
+  </div>
+  <div *ngIf="form.errors['pattern']">
+    Invalid format
+  </div>
+</ng-container>

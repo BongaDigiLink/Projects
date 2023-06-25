@@ -20,6 +20,7 @@ import { TasksComponent } from './Layouts/tasks/tasks.component';
 import { TaskComponent } from './Layouts/task/task.component';
 import { UserEditGuard } from './guard/user-edit.guard';
 import { RecordComponent } from './Layouts/record/record.component';
+import { InputComponent } from './input/input.component';
 
 @NgModule(
   {
@@ -37,7 +38,8 @@ import { RecordComponent } from './Layouts/record/record.component';
     CreateTaskComponent,
     TasksComponent,
     TaskComponent,
-    RecordComponent
+    RecordComponent,
+    InputComponent
   ],
   imports:
   [

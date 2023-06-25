@@ -2,8 +2,9 @@
     <div class="row justify-content-center centered">
         <div class="col-sm-8 col-md-9 col-lg-4">
 
-            <form [formGroup]="form" (ngSubmit)="registerIntern()">
+            <form [formGroup]="signupform" (ngSubmit)="registerIntern()">
                 <label for="">Your Email</label>
+                <!-- <app-input [form]="signupform.get('email')" ></app-input> -->
                 <input type="email" formControlName="email" class="form-control">
 
                 <label for="">Your Name</label>
@@ -36,10 +37,10 @@
             </form>
             
             <!--For previewing inputs onto my form.-->
-            <!-- <pre>
-                {{form.valid}}
-                {{form.value | json}}
-            </pre> -->
+            <pre>
+                {{signupform.valid}}
+                {{signupform.value | json}}
+            </pre>
             
             <div class="row txt-center redirect-text">
                 <div class="row txt-center">
