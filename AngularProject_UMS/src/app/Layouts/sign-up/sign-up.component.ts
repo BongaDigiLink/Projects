@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { InternService } from '../../service/intern.service';
 import { HttpErrorResponse, HttpHeaderResponse, HttpResponse } from '@angular/common/http';
-import { FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, ValidatorFn } from '@angular/forms';
 import { Router } from '@angular/router';
 
 
@@ -10,36 +10,34 @@ import { Router } from '@angular/router';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css']
 })
-export class SignUpComponent
+export class SignUpComponent implements OnInit
 {
 
   constructor(
-    private fb : FormBuilder,
     private service: InternService,
     private router: Router
   ){}
 
-    initForm(): FormGroup {
-      let form =  this.fb.group({
-        email: ['', Validators.required],
-        name: ['', Validators.required],
-        surname: ['', Validators.required],
-        trainingField: ['', Validators.required],
-        password: ['', Validators.required],
-        confirmPassword: ['', Validators.required]
-      })
+  signupform = new FormGroup({
+    email: new FormControl('',[Validators.required]),
+    name: new FormControl ('', [Validators.required]),
+    surname: new FormControl('', [Validators.required]),
+    trainingField: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required, Validators.min(6)]),
+    confirmPassword: new FormControl('', [Validators.required])
+  })
 
-      return form;
-    }
+  ngOnInit(): void {
+    console.log(this.signupform.value);
+  }
 
-    form = this.initForm()
-
-  public registerIntern(): void
+  registerIntern(): void
   {
-      if(this.initForm().value.password === this.initForm().value.confirmPassword)
+    console.log(this.signupform.value)
+
+      if(this.signupform.get('password') === this.signupform.get('confirmPassword'))
       {
-        // this.service.register(this.initForm().value).subscribe(
-        this.service.register(this.form.value).subscribe(
+        this.service.register(this.signupform.value).subscribe(
           (response: string) => {
             //console.log("Response from api : "+response),
             alert('Account Created, continue to login page.');
@@ -57,15 +55,5 @@ export class SignUpComponent
 
   }
 
-  matchValidator(
-    passwordOne: string | null,
-    passwordTwo: string | null
-  ): ValidatorFn {
-    return () => {
-      if (passwordOne?.valueOf !== passwordTwo?.valueOf)
-        return { match_error: 'Passwords do not match' };
-      return null;
-    };
-  }
-
 }
+

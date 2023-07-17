@@ -4,10 +4,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class Utils
 {
-    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private static final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     //Hashing user password.
-    public String hashPassword(String password)
+    public static String hashPassword(String password)
     {
         String hashedPassword;
         hashedPassword = passwordEncoder.encode(password);
@@ -20,7 +20,7 @@ public class Utils
      * @param existingPassword - account stored in the datasource
      * @return - boolean, true for password match. false for incorrect password.
      */
-    public boolean checkPasswordMatch(String password, String existingPassword)
+    public static boolean checkPasswordMatch(String password, String existingPassword)
     {
         if(passwordEncoder.matches(password, existingPassword))
         {
