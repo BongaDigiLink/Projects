@@ -13,15 +13,6 @@ import { Router } from '@angular/router';
 export class SignUpComponent
 {
 
-  form = this.fb.group({
-    email: ['', Validators.required],
-    name: ['', Validators.required],
-    surname: ['', Validators.required],
-    trainingField: ['', Validators.required],
-    password: ['', Validators.required, Validators.min(6)],
-    confirmPassword: ['', Validators.required]
-  })
-
   constructor(
     private fb : FormBuilder,
     private service: InternService,
@@ -37,26 +28,18 @@ export class SignUpComponent
         password: ['', Validators.required],
         confirmPassword: ['', Validators.required]
       })
-      //form.addValidators()
-      //add validation to compare passwords
-      //form.addValidators(this.matchValidator(form.get('password').value, form.get('confirmPassword').value));
 
-      //If valid return form.
       return form;
     }
 
+    form = this.initForm()
+
   public registerIntern(): void
   {
-    const body = {
-      email: this.form.value.email,
-      name: this.form.value.name,
-      surname: this.form.value.surname,
-      trainingField: this.form.value.trainingField,
-      password: this.form.value.password};
-
-      if(this.form.value.password === this.form.value.confirmPassword)
+      if(this.initForm().value.password === this.initForm().value.confirmPassword)
       {
-        this.service.register(body).subscribe(
+        // this.service.register(this.initForm().value).subscribe(
+        this.service.register(this.form.value).subscribe(
           (response: string) => {
             //console.log("Response from api : "+response),
             alert('Account Created, continue to login page.');

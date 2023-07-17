@@ -16,7 +16,7 @@ export class UserDetailsComponent implements OnInit
   public users: Intern[] = [];
   public ausers: Intern[] = [];
   public user: Intern | undefined;
-  public mentorDisplay="";
+  public mentorDisplay = "";
 
   constructor(private mentorService: MentorService,
     private authService: AuthService,
@@ -37,7 +37,7 @@ export class UserDetailsComponent implements OnInit
   public getIntern(email: string): void
   {
     this.mentorService.getInternDetails(email)
-    .subscribe(user => {
+    .subscribe( (user) => {
       console.log(user);
       this.user = user;
     })
@@ -62,7 +62,7 @@ export class UserDetailsComponent implements OnInit
   getUsers()
   {
     this.mentorService.getAllInterns()
-    .subscribe((users: Intern[]) => {
+    .subscribe(( users: Intern[]) => {
       this.users = users;
     })
   }

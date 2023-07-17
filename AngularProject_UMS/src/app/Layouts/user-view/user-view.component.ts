@@ -17,7 +17,6 @@ export class UserViewComponent implements OnInit
   public userView: Intern = new Intern;
   public userId!: number;
 
-
   constructor(
     private fb : FormBuilder,
     private mentorService: MentorService,
@@ -35,8 +34,7 @@ export class UserViewComponent implements OnInit
       this.authService.toEdit(this.userId);
     });
 
-    this.mentorService.getInternDetailsById(this.userId).subscribe( data =>
-      {
+    this.mentorService.getInternDetailsById(this.userId).subscribe( (data) => {
         this.userView = data;
 
         this.form.setValue({name:`${this.userView.name}`,
@@ -48,26 +46,15 @@ export class UserViewComponent implements OnInit
       }, (err: any) => {
         console.log('Could not retrieve this user '+ this.userId)
       })
-
   }
 
-  onClickEdit()
-  {
-    if(this.edit === false)
+
+  onClickEdit(){
+    if(this.edit = !this.edit)
     {
-    this.edit = true;
-    }else{
-      this.edit = false;
+      this.edit = true;
     }
   }
-
-  form = this.fb.group({
-    email: [''],
-    name:[''],
-    surname:[''],
-    trainingField:[''],
-    activeStatus:[''],
-  })
 
   initForm(): FormGroup 
   {
@@ -82,9 +69,10 @@ export class UserViewComponent implements OnInit
     //Check whether email is not used by other account.
     //checkPassword()
     //If valid return form.
-
     return form;
   }
+
+  form = this.initForm()
 
   public updateIntern(): void
   {
@@ -96,8 +84,8 @@ export class UserViewComponent implements OnInit
       trainingField: this.form.value.trainingField
     }
 
-    this.mentorService.updateInternDetails(this.userId,body).subscribe(
-      (response: any) => {
+    this.mentorService.updateInternDetails(this.userId, this.form.value)
+    .subscribe( (response: any) => {
         //console.log("Response from api : "+response)
       },
       (error: HttpErrorResponse) =>
@@ -108,6 +96,4 @@ export class UserViewComponent implements OnInit
 
     this.router_.navigate(['/user-details']);
   }
-
-
 }
