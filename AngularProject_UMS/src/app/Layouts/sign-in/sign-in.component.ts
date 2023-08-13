@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/service/auth.service';
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.css']
 })
+
 export class SignInComponent
 {
   constructor(
@@ -30,22 +31,12 @@ export class SignInComponent
   return form
 }
 
-
-  form = this.fb.group({
-    email: ['', Validators.required],
-    password: ['', Validators.required]
-  })
-
+  form = this.initForm()
 
   public login(): void
   {
-    const body = {
-      email: this.form.value.email,
-      password: this.form.value.password};
 
-    this.service.loginIntern(body).subscribe(
-      (response: Intern) =>
-      {
+    this.service.loginIntern(this.form.value).subscribe( (response: Intern) => {
         console.log((response.activeStatus?.toString() === "ACTIVE"));
         if(response.activeStatus?.toString() === "ACTIVE")
         {
@@ -58,14 +49,12 @@ export class SignInComponent
 
           this.router.navigate(['/dashboard']);
         }
-        else{
+        else {
           alert("Unauthorised Access, Please contact your System Admin at Admin@digilink.africa")
         }
-
         
       },
-      (error: HttpErrorResponse) =>
-      {
+      (error: HttpErrorResponse) => {
         alert(error.message);
       }
     )

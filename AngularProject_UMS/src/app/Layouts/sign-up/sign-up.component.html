@@ -2,15 +2,15 @@
     <div class="row justify-content-center centered">
         <div class="col-sm-8 col-md-9 col-lg-4">
 
-            <form [formGroup]="form" (ngSubmit)="registerIntern()">
+            <form [formGroup]="signupform" (ngSubmit)="registerIntern()">
                 <label for="">Your Email</label>
-                <input type="email" formControlName="email" class="form-control">
+                <app-input [control]="signupform.controls.email" ></app-input>
 
                 <label for="">Your Name</label>
-                <input type="text" formControlName="name" class="form-control">
+                <app-input [control]="signupform.controls.name" ></app-input>
 
                 <label for="">Your Surname</label>
-                <input type="text" formControlName="surname" class="form-control">
+                <app-input [control]="signupform.controls.surname" ></app-input>
 
                 <div class="form-group">
                     <label>Skills Programme</label>
@@ -22,10 +22,10 @@
                 </div>
 
                 <label for="">Create Password</label>
-                <input type="password" formControlName="password" class="form-control">
+                <app-input [control]="signupform.controls.password" ></app-input>
 
                 <label for="">Confirm Password</label>
-                <input type="password" class="form-control" formControlName="confirmPassword">
+                <app-input [control]="signupform.controls.confirmPassword" ></app-input>
 
                 <div class="row txt-center">
                     <button
@@ -36,10 +36,10 @@
             </form>
             
             <!--For previewing inputs onto my form.-->
-            <!-- <pre>
-                {{form.valid}}
-                {{form.value | json}}
-            </pre> -->
+            <pre>
+                {{signupform.valid}}
+                {{signupform.value | json}}
+            </pre>
             
             <div class="row txt-center redirect-text">
                 <div class="row txt-center">

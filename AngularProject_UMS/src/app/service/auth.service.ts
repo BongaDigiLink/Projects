@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, tap } from 'rxjs';
-import { Intern } from '../models/intern';
 
 
 @Injectable({
@@ -18,7 +17,7 @@ export class AuthService
   private internUser: boolean = false;
   private mentorUser: boolean = false;
   private userType: string = '';
-  private status: boolean=false;
+  private status: boolean = false;
   private user_id?: number | undefined;
 
   public toEdit(id: number | undefined)
@@ -46,7 +45,7 @@ export class AuthService
     this.userLoggedIn = new BehaviorSubject<boolean>(true);
     sessionStorage.setItem('active_status','ACTIVE');
     console.log((this.userLoggedIn.subscribe((data) => {
-      console.log("Subscribed data: "+data);
+      console.log("Subscribed data: " + data);
     })));
     this.setUserAccess();
   }
@@ -95,7 +94,7 @@ export class AuthService
 
   checkCurrentUser(): boolean
   {
-    console.log(this.getUserId.toString() +' '+sessionStorage.getItem('user_id')?.toString())
+    console.log(this.getUserId.toString() + ' ' + sessionStorage.getItem('user_id')?.toString())
     if(this.getUserId.toString() === sessionStorage.getItem('user_id')?.toString())
     {
       return true;

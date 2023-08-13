@@ -51,7 +51,7 @@ export class MentorService
    */
   public updateInternDetails(id: number, intern: any): Observable<Intern>
   {
-    return this.http.put<Intern>(`${this.apiURL}/edit-intern/`+id, intern);
+    return this.http.put<Intern>(`${this.apiURL}/edit-intern/` + id, intern);
   }
 
   public getInternDetails(email: string): Observable<Intern>
@@ -87,7 +87,7 @@ export class MentorService
    */
   public removeIntern(id: number): Observable<any>
   {
-    return this.http.delete<any>(`${this.apiURL}/delete-account/`+id)
+    return this.http.delete<any>(`${this.apiURL}/delete-account/` + id)
   }
 
   //--------------------------------------Skills Management Routes.
@@ -109,12 +109,12 @@ export class MentorService
 
   public updateSkill(id: number, skill: any): Observable<any>
   {
-    return this.http.put<any>(`${this.apiURL}/update-skill/`+id, skill);
+    return this.http.put<any>(`${this.apiURL}/update-skill/` + id, skill);
   }
 
   public removeSkill(id: number): Observable<void>
   {
-    return this.http.delete<any>(`${this.apiURL}/remove-skill/`+id)
+    return this.http.delete<any>(`${this.apiURL}/remove-skill/` + id)
   }
 
     /**
@@ -132,7 +132,7 @@ export class MentorService
      */
     public getTaskByID(id: number): Observable<Skills>
     {
-      return this.http.get<Skills>(`${this.apiURL}/get-task/`+id);
+      return this.http.get<Skills>(`${this.apiURL}/get-task/` + id);
     }
 
     //Intern method to post to api. create a record.
